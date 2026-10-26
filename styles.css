@@ -1,0 +1,508 @@
+/* ==============================================================================
+   🏛️ ESTILOS DE GALERÍA DE ARTE - OBRA PARA NICKY
+   ============================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap');
+
+:root {
+  --color-gallery-wall: #141215;
+  --color-gold-light: #fef0cd;
+  --color-gold-mid: #d4af37;
+  --color-gold-dark: #8c6d23;
+  --color-rose-deep: #a82346;
+  --color-rose-glow: #ff7597;
+  --color-canvas-base: #faf7f2;
+}
+
+/* Reset y prevención de rebotes en móviles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  background-color: var(--color-gallery-wall);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: #e5e5e5;
+  touch-action: manipulation;
+}
+
+/* 🔦 Iluminación cenital de museo (Foco focal sobre el cuadro) */
+.gallery-wall {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: 
+    radial-gradient(ellipse 65% 55% at 50% 32%, rgba(255, 238, 204, 0.14) 0%, rgba(20, 18, 22, 0.6) 60%, rgba(10, 8, 12, 0.95) 100%),
+    linear-gradient(180deg, #18151a 0%, #110f13 100%);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1rem 1.5rem;
+}
+
+/* Sutiles partículas de polvo de estrellas / ambiente flotante */
+.ambient-glow {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(235, 175, 110, 0.12) 0%, transparent 70%);
+  filter: blur(40px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ==============================================================================
+   🖼️ EL MARCO DE CUADRO DE MUSEO (Realistic Multi-Layer Frame)
+   ============================================================================== */
+
+.museum-frame-container {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 390px;
+  margin: auto 0;
+  perspective: 1000px;
+}
+
+/* Sombra proyectada del cuadro sobre la pared */
+.museum-frame {
+  position: relative;
+  border-radius: 8px;
+  padding: 12px;
+  background: linear-gradient(135deg, 
+    #7a5223 0%, 
+    #caa45a 18%, 
+    #fcedbb 32%, 
+    #b88a38 52%, 
+    #ecd28c 70%, 
+    #694319 88%, 
+    #3f260b 100%
+  );
+  box-shadow: 
+    0 25px 45px -10px rgba(0, 0, 0, 0.85),
+    0 12px 25px -8px rgba(0, 0, 0, 0.7),
+    0 2px 4px rgba(0, 0, 0, 0.6),
+    inset 0 2px 3px rgba(255, 255, 255, 0.6),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.6);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+/* Moldura interna dorada labrada */
+.frame-inner-molding {
+  background: linear-gradient(135deg, 
+    #3c2810 0%, 
+    #8c6d23 25%, 
+    #deb85a 50%, 
+    #6d4e16 75%, 
+    #2c1c0a 100%
+  );
+  padding: 6px;
+  border-radius: 4px;
+  box-shadow: 
+    inset 0 2px 5px rgba(0, 0, 0, 0.8),
+    0 1px 2px rgba(255, 255, 255, 0.3);
+}
+
+/* Passe-partout (Paspartú / Cartulina de museo marfil) */
+.passepartout {
+  background: #fcf9f2;
+  padding: 18px 14px;
+  border-radius: 3px;
+  box-shadow: 
+    inset 0 4px 12px rgba(0, 0, 0, 0.22),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+  position: relative;
+}
+
+/* Corte biselado interior alrededor del lienzo */
+.canvas-bevel {
+  border-radius: 2px;
+  box-shadow: 
+    inset 2px 2px 5px rgba(0, 0, 0, 0.45),
+    inset -1px -1px 3px rgba(255, 255, 255, 0.5);
+  background: #fbf7ee;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ==============================================================================
+   🎨 EL LIENZO (The Canvas)
+   ============================================================================== */
+
+.canvas {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  background-color: var(--color-canvas-base);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* Textura realista de hilo y grano de lienzo al óleo */
+.canvas::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+  background-size: 140px 140px;
+  pointer-events: none;
+  opacity: 0.7;
+  mix-blend-mode: multiply;
+  z-index: 2;
+}
+
+/* Reflejo de luz y viñeta sutil sobre la tela */
+.canvas::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(circle at 45% 25%, rgba(255, 255, 255, 0.4) 0%, transparent 65%),
+    radial-gradient(circle at 50% 50%, transparent 50%, rgba(70, 50, 30, 0.08) 100%);
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* ==============================================================================
+   💌 CONTENIDOS DENTRO DEL LIENZO
+   ============================================================================== */
+
+.canvas-content-wrapper {
+  position: relative;
+  z-index: 4;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+/* Tipografía de arte "TE AMO" */
+.art-te-amo {
+  font-family: 'Alex Brush', cursive;
+  font-size: clamp(3.8rem, 15vw, 5.2rem);
+  line-height: 1.1;
+  color: #991b34;
+  text-shadow: 
+    0 1px 1px rgba(255, 255, 255, 0.9),
+    1px 2px 4px rgba(120, 20, 40, 0.25);
+  animation: gentle-heartbeat 4s ease-in-out infinite;
+  display: inline-block;
+  transform-origin: center;
+  position: relative;
+}
+
+/* Detalle caligráfico o filigrana */
+.art-flourish {
+  width: 90px;
+  height: 16px;
+  margin: 0.5rem auto 0.75rem;
+  opacity: 0.55;
+}
+
+.art-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem;
+  font-style: italic;
+  font-weight: 500;
+  color: #5a4b41;
+  max-width: 250px;
+  line-height: 1.35;
+}
+
+/* Estilo para tipo "imagen" */
+.canvas-image-view {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 1px;
+  transition: transform 0.6s ease;
+}
+
+/* Estilo para tipo "video" */
+.canvas-video-view {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ==============================================================================
+   🏷️ CÉDULA DE MUSEO (Exhibition Plaque)
+   ============================================================================== */
+
+.museum-plaque {
+  position: relative;
+  z-index: 10;
+  margin-top: 1.25rem;
+  background: linear-gradient(180deg, #1f1b20 0%, #171418 100%);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  border-radius: 6px;
+  padding: 0.75rem 1.2rem;
+  max-width: 320px;
+  width: 92%;
+  box-shadow: 
+    0 10px 20px -5px rgba(0, 0, 0, 0.7),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  text-align: left;
+}
+
+.plaque-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 0.35rem;
+  margin-bottom: 0.3rem;
+}
+
+.plaque-title {
+  font-family: 'Cinzel', serif;
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  color: #dfba73;
+  text-transform: uppercase;
+}
+
+.plaque-date {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.8rem;
+  color: #a89f91;
+  font-style: italic;
+}
+
+.plaque-technique {
+  font-size: 0.72rem;
+  color: #8c8378;
+  letter-spacing: 0.02em;
+}
+
+.plaque-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.3rem;
+  padding-top: 0.3rem;
+  border-top: 1px dashed rgba(255, 255, 255, 0.06);
+}
+
+.plaque-hint {
+  font-size: 0.68rem;
+  color: #d18d99;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+/* Sello de cera interactivo / botón de sonido */
+.wax-seal-btn {
+  background: radial-gradient(circle at 35% 35%, #c73652, #80162a);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffe6ec;
+  font-size: 0.8rem;
+  box-shadow: 
+    0 2px 5px rgba(0, 0, 0, 0.5),
+    inset 0 1px 2px rgba(255, 255, 255, 0.4),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+  border: none;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.wax-seal-btn:active {
+  transform: scale(0.9);
+}
+
+/* ==============================================================================
+   💖 PARTÍCULAS Y ANIMACIONES
+   ============================================================================== */
+
+@keyframes gentle-heartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.035);
+  }
+}
+
+/* Partícula flotante de toque */
+.floating-heart-particle {
+  position: absolute;
+  pointer-events: none;
+  z-index: 20;
+  animation: floatUpAndFade 1.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  will-change: transform, opacity;
+  user-select: none;
+}
+
+@keyframes floatUpAndFade {
+  0% {
+    opacity: 0.95;
+    transform: translate(-50%, -50%) scale(0.5) rotate(0deg);
+  }
+  40% {
+    opacity: 1;
+    transform: translate(calc(-50% + var(--dx, 0px)), calc(-50% - 40px)) scale(1.2) rotate(var(--rot, 0deg));
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--dx, 0px) * 1.5), calc(-50% - 90px)) scale(0.8) rotate(calc(var(--rot, 0deg) * 1.5));
+  }
+}
+
+/* ==============================================================================
+   📜 MODAL DE MENSAJE SECRETO (Carta de amor escondida)
+   ============================================================================== */
+
+.secret-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 8, 12, 0.82);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+.secret-modal-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.secret-letter {
+  background: #fdfaf3;
+  color: #2b231d;
+  width: 100%;
+  max-width: 340px;
+  padding: 2rem 1.6rem 1.8rem;
+  border-radius: 10px;
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.75),
+    0 0 0 1px rgba(212, 175, 55, 0.3);
+  position: relative;
+  transform: translateY(20px) scale(0.95);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  text-align: center;
+  border-top: 4px solid #b88a38;
+}
+
+.secret-modal-backdrop.active .secret-letter {
+  transform: translateY(0) scale(1);
+}
+
+.letter-seal-icon {
+  font-size: 2.2rem;
+  margin-bottom: 0.6rem;
+  display: inline-block;
+  animation: gentle-heartbeat 2s ease infinite;
+}
+
+.letter-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.08em;
+  color: #7a5223;
+  margin-bottom: 0.75rem;
+}
+
+.letter-body {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  color: #3f3328;
+  font-style: italic;
+  margin-bottom: 1.5rem;
+}
+
+.letter-close-btn {
+  background: #2b231d;
+  color: #ecd28c;
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  padding: 0.6rem 1.4rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.letter-close-btn:hover {
+  background: #3f3328;
+  border-color: #ecd28c;
+}
+
+/* ==============================================================================
+   🎧 BARRA SUPERIOR DE LA GALERÍA (Minimal Header)
+   ============================================================================== */
+
+.gallery-top-bar {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0.5rem;
+  z-index: 10;
+}
+
+.gallery-brand {
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: #a89f91;
+  text-transform: uppercase;
+}
+
+.sound-toggle-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #cfc6b8;
+  padding: 0.35rem 0.65rem;
+  border-radius: 9999px;
+  font-size: 0.7rem;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: all 0.2s ease;
+}
+
+.sound-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #f7e09e;
+}

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Para Nicky ❤️ | Galería Diaria</title>
+  
+  <!-- SEO & Vista Previa para WhatsApp / iMessage / Redes -->
+  <meta name="description" content="Una obra de arte diaria dedicada a ti.">
+  <meta property="og:title" content="Para Nicky ❤️">
+  <meta property="og:description" content="Una obra de arte cada día solo para ti.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#141215">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌹</text></svg>">
+
+  <!-- Tailwind CSS Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gallery: {
+              wall: '#141215',
+              card: '#1f1b20',
+              accent: '#dfba73',
+              crimson: '#991b34'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Estilos propios de textura, marco de museo y animaciones -->
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body class="bg-[#141215] text-stone-200 antialiased select-none">
+
+  <!-- Pared de la Galería -->
+  <main class="gallery-wall">
+    
+    <!-- Resplandor del Foco Cenital -->
+    <div class="ambient-glow" aria-hidden="true"></div>
+
+    <!-- Barra Superior Sutil -->
+    <header class="gallery-top-bar">
+      <span id="gallery-artist-label" class="gallery-brand">Para Nicky</span>
+      <button id="sound-toggle" class="sound-toggle-btn" type="button" aria-label="Alternar sonido">
+        <span class="sound-icon">🔔</span>
+        <span class="sound-label">Sonido</span>
+      </button>
+    </header>
+
+    <!-- 🖼️ CONTENEDOR DEL MARCO DE CUADRO -->
+    <section class="museum-frame-container" aria-label="Lienzo de hoy">
+      <div class="museum-frame">
+        <div class="frame-inner-molding">
+          <div class="passepartout">
+            <div class="canvas-bevel">
+              
+              <!-- El Lienzo Interactivo -->
+              <div id="canvas" class="canvas" role="region" aria-label="Obra artística interactiva">
+                <!-- El contenido dinámico ("TE AMO", imagen, video o acción) se inyecta aquí -->
+                <div id="canvas-content" class="w-full h-full flex items-center justify-center">
+                  <!-- Fallback inicial inmediato por si tarda JS -->
+                  <div class="canvas-content-wrapper">
+                    <h1 class="art-te-amo">TE AMO</h1>
+                    <div class="art-flourish">
+                      <svg viewBox="0 0 100 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 10C25 3 35 17 50 10C65 3 75 17 95 10" stroke="#991b34" stroke-width="1.8" stroke-linecap="round"/>
+                        <circle cx="50" cy="10" r="2.5" fill="#991b34"/>
+                      </svg>
+                    </div>
+                    <p class="art-subtitle">Hoy, mañana y todos los días.</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 🏷️ CÉDULA DE MUSEO (Plaque de información) -->
+    <footer class="museum-plaque">
+      <div class="plaque-header">
+        <span id="plaque-title" class="plaque-title">DECLARACIÓN N° 1</span>
+        <span id="plaque-date" class="plaque-date">Hoy</span>
+      </div>
+      <div id="plaque-technique" class="plaque-technique">Amor puro sobre lienzo digital</div>
+      
+      <div class="plaque-footer">
+        <span class="plaque-hint">
+          <span>✨</span> Toca el cuadro para sentirlo
+        </span>
+        <button id="seal-btn" class="wax-seal-btn" title="Abrir mensaje secreto" type="button" aria-label="Abrir mensaje secreto">
+          💌
+        </button>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- 📜 MODAL DE MENSAJE SECRETO (Carta de Amor) -->
+  <aside id="secret-modal" class="secret-modal-backdrop" aria-hidden="true" role="dialog">
+    <div class="secret-letter">
+      <div class="letter-seal-icon">💌</div>
+      <h3 class="letter-title">Mensaje del Corazón</h3>
+      <p id="secret-letter-text" class="letter-body">
+        Eres lo más hermoso que me ha pasado en la vida. Gracias por existir ❤️
+      </p>
+      <button id="close-letter-btn" class="letter-close-btn" type="button">
+        GUARDAR EN EL CORAZÓN
+      </button>
+    </div>
+  </aside>
+
+  <!-- Configuración de Obras y Lógica de la Galería -->
+  <script src="./content.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
