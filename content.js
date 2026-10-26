@@ -1,92 +1,81 @@
 // ==============================================================================
-// 🎨 CONFIGURACIÓN DE LA OBRA DIARIA PARA NICKY
+// 🎨 HISTORIAL DIARIO Y CONFIGURACIÓN - "HOLA NICKY" ❤️
 // ==============================================================================
-// Aquí puedes definir lo que Nicky verá cada día al entrar a la página.
-// 
-// ¿CÓMO USARLO?
-// 1. Si quieres fijar una obra específica hoy sin importar la fecha, edita `obraDeHoy` abajo.
-// 2. O si prefieres programar días con anticipación, agrega la fecha en `obrasPorFecha` ("AAAA-MM-DD").
-// 3. Puedes usar 4 tipos de contenido: "texto", "imagen", "video" o "accion".
+// Este archivo guarda la historia completa de todas las sorpresas diarias para Nicky.
+//
+// 📌 REGLA DE ORO PARA AGENTES Y DESARROLLADORES:
+// - ¡NUNCA BORRES NI SOBRESCRIBAS DÍAS ANTERIORES!
+// - Cada nuevo día se agrega como un nuevo objeto al final del arreglo `HISTORIAL_DIAS`.
+// - De este modo, Nicky siempre ve la sorpresa más reciente al entrar ("HOY"), pero
+//   puede presionar "⏪ Anterior" o abrir la "Cápsula de Recuerdos" para revivir
+//   cualquier día anterior que le hayas dedicado.
 // ==============================================================================
 
-const CONFIG_OBRAS = {
-  // Datos que aparecen en la cédula del museo (etiqueta bajo el cuadro)
-  museo: {
-    dedicadoA: "Nicky",
-    artista: "Con todo mi amor",
-    coleccion: "Galería de Momentos",
-    lugar: "Un rincón solo para ti"
-  },
+const CONFIG_MUSEO = {
+  dedicadoA: "Nicky",
+  artista: "Con todo mi amor",
+  coleccion: "Galería de Momentos",
+  lugar: "Un rincón solo para ti"
+};
 
+const HISTORIAL_DIAS = [
   // ----------------------------------------------------------------------------
-  // 🌟 OBRA DE HOY (Si esta activa, se muestra inmediatamente)
+  // 🏛️ DÍA 1: Declaración de Museo
   // ----------------------------------------------------------------------------
-  obraDeHoy: {
-    // Tipo: "texto" | "imagen" | "video" | "accion"
-    tipo: "texto",
-    
-    // Título de la obra de hoy
+  {
+    id: "dia-1",
+    numero: 1,
+    fecha: "2026-10-25",
+    fechaLegible: "25 de Octubre, 2026",
+    icono: "🏛️",
+    badge: "Galería de Museo",
     titulo: "Declaración N° 1",
-    
-    // Contenido principal
+    experiencia: "museo", // Tipo de interfaz: Galería con marco realista
+    tipo: "texto",
     textoPrincipal: "TE AMO",
-    
-    // Subtítulo o dedicatoria
     subtitulo: "Hoy, mañana y todos los días de mi vida.",
-    
-    // Técnica artística (aparece en la ficha del museo)
     tecnica: "Amor puro sobre lienzo digital",
-    
-    // Mensaje secreto que se revela al tocar el cuadro
     mensajeSecreto: "Eres lo más hermoso que me ha pasado en la vida. Gracias por existir ❤️",
-    
-    // Música / Sonido ambiente: true para activar sintetizador de campanitas mágicas al tocar
     efectosSonoros: true,
-    
-    // Color de acento de hoy (opcional: 'rose', 'gold', 'crimson', 'emerald', 'lavender')
     temaColor: "rose"
   },
 
   // ----------------------------------------------------------------------------
-  // 📅 CALENDARIO DE OBRAS PROGRAMADAS (Opcional)
-  // Puedes programar días específicos con formato "AAAA-MM-DD".
-  // Si la fecha actual coincide con una de estas, se mostrará automáticamente.
+  // 🎟️ DÍA 2: Tarjeta Mágica de Raspar (Scratch-off Golden Ticket)
   // ----------------------------------------------------------------------------
-  obrasPorFecha: {
-    /*
-    // EJEMPLO 1: Un día con una Foto / Imagen
-    "2026-10-26": {
-      tipo: "imagen",
-      titulo: "Nuestra Mejor Sonrisa",
-      imagenUrl: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=1200&q=80",
-      pieDeFoto: "Mirarte sonreír ilumina todo mi mundo.",
-      tecnica: "Fotografía y recuerdos eternos",
-      mensajeSecreto: "Te acuerdas de ese día? Siempre estás en mi mente.",
-      temaColor: "gold"
+  {
+    id: "dia-2",
+    numero: 2,
+    fecha: "2026-10-26",
+    fechaLegible: "26 de Octubre, 2026",
+    icono: "🎟️",
+    badge: "Ticket Dorado de Amor",
+    titulo: "Raspa y Gana tu Sorpresa",
+    experiencia: "raspa-y-gana", // Tipo de interfaz: Tarjeta interactiva de raspar
+    subtitulo: "Desliza tu dedo sobre el billete dorado para rasparlo y descubrir tu sorpresa",
+    instruccion: "Frota la zona dorada con tu dedo",
+    tecnica: "Foil dorado interactivo y confeti de amor",
+    premio: {
+      badge: "✨ VALE OFICIAL DE AMOR CANJEABLE ✨",
+      titulo: "UNA CITA MÁGICA Y CONSENTIMIENTO TOTAL",
+      descripcion: "Válido por: Tu comida favorita + Un masaje relajante infinito + Todos los besos y abrazos que quieras hoy y siempre 💕",
+      validez: "Vigencia: Ilimitada • Canjeable cuando tú quieras",
+      codigo: "NICKY-AMOR-2026-INFINITO"
     },
-
-    // EJEMPLO 2: Un día con un Video (mp4 directo o link embed de YouTube)
-    "2026-10-27": {
-      tipo: "video",
-      titulo: "Canción para Ti",
-      videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
-      descripcion: "Escucha esto pensando en nosotros.",
-      tecnica: "Melodía y fotogramas",
-      mensajeSecreto: "Esta canción me recuerda a ti.",
-      temaColor: "lavender"
-    },
-
-    // EJEMPLO 3: Un día con una Acción Interactiva
-    "2026-10-28": {
-      tipo: "accion",
-      titulo: "Un Vale Especial",
-      textoPrincipal: "🎟️ Vale por un abrazo infinito y tu comida favorita",
-      instruccion: "Toca el boleto para canjearlo",
-      recompensa: "¡Canjeado exitosamente! Válido cuando tú quieras 💖",
-      tecnica: "Promesa interactiva",
-      mensajeSecreto: "Te mereces todos los mimos del mundo.",
-      temaColor: "emerald"
-    }
-    */
+    mensajeSecreto: "Te mereces el universo entero, mi vida. Este vale no tiene fecha de vencimiento y puedes cobrarlo cuantas veces quieras. Te amo con todo mi ser ❤️",
+    efectosSonoros: true,
+    temaColor: "gold"
   }
+];
+
+// Compatibilidad retroactiva por si algún script antiguo accede a CONFIG_OBRAS
+const CONFIG_OBRAS = {
+  museo: CONFIG_MUSEO,
+  obraDeHoy: HISTORIAL_DIAS[HISTORIAL_DIAS.length - 1],
+  obrasPorFecha: {}
 };
+
+// Exportar al objeto global de ventana
+window.CONFIG_MUSEO = CONFIG_MUSEO;
+window.HISTORIAL_DIAS = HISTORIAL_DIAS;
+window.CONFIG_OBRAS = CONFIG_OBRAS;

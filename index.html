@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Para Nicky ❤️ | Galería Diaria</title>
+  <title>Para Nicky ❤️ | Cada Día una Sorpresa</title>
   
   <!-- SEO & Vista Previa para WhatsApp / iMessage / Redes -->
-  <meta name="description" content="Una obra de arte diaria dedicada a ti.">
+  <meta name="description" content="Una sorpresa diaria dedicada a ti.">
   <meta property="og:title" content="Para Nicky ❤️">
-  <meta property="og:description" content="Una obra de arte cada día solo para ti.">
+  <meta property="og:description" content="Una sorpresa nueva cada día solo para ti.">
   <meta property="og:type" content="website">
   <meta name="theme-color" content="#141215">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -34,82 +34,213 @@
     }
   </script>
 
-  <!-- Estilos propios de textura, marco de museo y animaciones -->
+  <!-- Estilos propios de textura, marco de museo, raspa y animaciones -->
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body class="bg-[#141215] text-stone-200 antialiased select-none">
 
-  <!-- Pared de la Galería -->
+  <!-- Pared Principal -->
   <main class="gallery-wall">
     
     <!-- Resplandor del Foco Cenital -->
-    <div class="ambient-glow" aria-hidden="true"></div>
+    <div id="ambient-glow" class="ambient-glow" aria-hidden="true"></div>
 
     <!-- Barra Superior Sutil -->
     <header class="gallery-top-bar">
       <span id="gallery-artist-label" class="gallery-brand">Para Nicky</span>
-      <button id="sound-toggle" class="sound-toggle-btn" type="button" aria-label="Alternar sonido">
-        <span class="sound-icon">🔔</span>
-        <span class="sound-label">Sonido</span>
-      </button>
+      <div class="top-bar-actions">
+        <button id="open-capsule-btn" class="capsule-top-btn" type="button" aria-label="Abrir cápsula de recuerdos">
+          <span class="capsule-icon">⏳</span>
+          <span class="capsule-label">Recuerdos</span>
+          <span id="capsule-count-badge" class="capsule-count">2</span>
+        </button>
+        <button id="sound-toggle" class="sound-toggle-btn" type="button" aria-label="Alternar sonido">
+          <span class="sound-icon">🔔</span>
+          <span class="sound-label">Sonido</span>
+        </button>
+      </div>
     </header>
 
-    <!-- 🖼️ CONTENEDOR DEL MARCO DE CUADRO -->
-    <section class="museum-frame-container" aria-label="Lienzo de hoy">
-      <div class="museum-frame">
-        <div class="frame-inner-molding">
-          <div class="passepartout">
-            <div class="canvas-bevel">
-              
-              <!-- El Lienzo Interactivo -->
-              <div id="canvas" class="canvas" role="region" aria-label="Obra artística interactiva">
-                <!-- El contenido dinámico ("TE AMO", imagen, video o acción) se inyecta aquí -->
-                <div id="canvas-content" class="w-full h-full flex items-center justify-center">
-                  <!-- Fallback inicial inmediato por si tarda JS -->
-                  <div class="canvas-content-wrapper">
-                    <h1 class="art-te-amo">TE AMO</h1>
-                    <div class="art-flourish">
-                      <svg viewBox="0 0 100 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M5 10C25 3 35 17 50 10C65 3 75 17 95 10" stroke="#991b34" stroke-width="1.8" stroke-linecap="round"/>
-                        <circle cx="50" cy="10" r="2.5" fill="#991b34"/>
-                      </svg>
+    <!-- 🎭 ESCENARIO PRINCIPAL (Cambia dinámicamente según el día) -->
+    <div id="stage-container" class="stage-container">
+
+      <!-- ====================================================================== -->
+      <!-- 🏛️ ESCENA DÍA 1: GALERÍA DE MUSEO                                      -->
+      <!-- ====================================================================== -->
+      <section id="scene-museo" class="scene-view" aria-label="Galería de Museo">
+        <div class="museum-frame-container">
+          <div class="museum-frame">
+            <div class="frame-inner-molding">
+              <div class="passepartout">
+                <div class="canvas-bevel">
+                  
+                  <!-- El Lienzo Interactivo -->
+                  <div id="canvas" class="canvas" role="region" aria-label="Obra artística interactiva">
+                    <div id="canvas-content" class="w-full h-full flex items-center justify-center">
+                      <div class="canvas-content-wrapper">
+                        <h1 class="art-te-amo">TE AMO</h1>
+                        <div class="art-flourish">
+                          <svg viewBox="0 0 100 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 10C25 3 35 17 50 10C65 3 75 17 95 10" stroke="#991b34" stroke-width="1.8" stroke-linecap="round"/>
+                            <circle cx="50" cy="10" r="2.5" fill="#991b34"/>
+                          </svg>
+                        </div>
+                        <p class="art-subtitle">Hoy, mañana y todos los días.</p>
+                      </div>
                     </div>
-                    <p class="art-subtitle">Hoy, mañana y todos los días.</p>
                   </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cédula de Museo (Plaque de información Día 1) -->
+        <footer class="museum-plaque">
+          <div class="plaque-header">
+            <span id="plaque-title" class="plaque-title">DECLARACIÓN N° 1</span>
+            <span id="plaque-date" class="plaque-date">25 de Octubre, 2026</span>
+          </div>
+          <div id="plaque-technique" class="plaque-technique">Amor puro sobre lienzo digital</div>
+          
+          <div class="plaque-footer">
+            <span class="plaque-hint">
+              <span>✨</span> Toca el cuadro para sentirlo
+            </span>
+            <button id="seal-btn" class="wax-seal-btn" title="Abrir mensaje secreto" type="button" aria-label="Abrir mensaje secreto">
+              💌
+            </button>
+          </div>
+        </footer>
+      </section>
+
+      <!-- ====================================================================== -->
+      <!-- 🎟️ ESCENA DÍA 2: TARJETA MÁGICA DE RASPAR (Scratch Card)               -->
+      <!-- ====================================================================== -->
+      <section id="scene-scratch" class="scene-view hidden" aria-label="Tarjeta de raspar interactiva">
+        <div class="ticket-wrapper">
+          <div class="golden-ticket">
+            <!-- Detalles decorativos del ticket -->
+            <div class="ticket-edge-notch ticket-notch-left" aria-hidden="true"></div>
+            <div class="ticket-edge-notch ticket-notch-right" aria-hidden="true"></div>
+            
+            <div class="ticket-inner-border">
+              <!-- Encabezado del Ticket -->
+              <div class="ticket-header">
+                <div class="ticket-badge">✨ TICKET DORADO DE AMOR ✨</div>
+                <div class="ticket-serial">SERIE N° 002-2026 • EDICIÓN NICKY</div>
+              </div>
+
+              <!-- Área de Raspar (Lienzo Scratch) -->
+              <div class="scratch-card-box">
+                <!-- Capa Revelada (Lo que está debajo del foil) -->
+                <div id="scratch-prize" class="scratch-prize-content">
+                  <div class="prize-tag">🎟️ VALE OFICIAL CANJEABLE</div>
+                  <h2 class="prize-headline">CITA MÁGICA Y CONSENTIMIENTO TOTAL</h2>
+                  <p class="prize-details">
+                    Válido por: <strong>Tu comida favorita</strong> + <strong>Masaje infinito</strong> + <strong>Todos los besos y mimos que quieras</strong> 💕
+                  </p>
+                  <div class="prize-footer-stamp">
+                    <span class="stamp-seal">★ CANJE ILIMITADO ★</span>
+                    <span class="stamp-barcode">|||||||||||||||||||||||</span>
+                  </div>
+                </div>
+
+                <!-- Canvas de Foil Dorado para Raspar con el Dedo -->
+                <canvas id="scratch-canvas" class="scratch-canvas" width="340" height="230"></canvas>
+              </div>
+
+              <!-- Indicador de Progreso y Guía -->
+              <div class="scratch-status-bar">
+                <div class="scratch-hint-text">
+                  <span id="scratch-instruction-text">✨ Frota el ticket con tu dedo para raspar</span>
+                </div>
+                <div class="scratch-progress-track">
+                  <div id="scratch-progress-bar" class="scratch-progress-fill" style="width: 0%;"></div>
                 </div>
               </div>
 
             </div>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- 🏷️ CÉDULA DE MUSEO (Plaque de información) -->
-    <footer class="museum-plaque">
-      <div class="plaque-header">
-        <span id="plaque-title" class="plaque-title">DECLARACIÓN N° 1</span>
-        <span id="plaque-date" class="plaque-date">Hoy</span>
-      </div>
-      <div id="plaque-technique" class="plaque-technique">Amor puro sobre lienzo digital</div>
-      
-      <div class="plaque-footer">
-        <span class="plaque-hint">
-          <span>✨</span> Toca el cuadro para sentirlo
-        </span>
-        <button id="seal-btn" class="wax-seal-btn" title="Abrir mensaje secreto" type="button" aria-label="Abrir mensaje secreto">
-          💌
-        </button>
-      </div>
-    </footer>
+        <!-- Cédula de Museo para el Día 2 -->
+        <footer class="museum-plaque">
+          <div class="plaque-header">
+            <span class="plaque-title">TICKET N° 2</span>
+            <span class="plaque-date">Hoy</span>
+          </div>
+          <div class="plaque-technique">Foil dorado interactivo y confeti de amor</div>
+          
+          <div class="plaque-footer">
+            <span class="plaque-hint">
+              <span>🎟️</span> Raspa la tarjeta para cobrarlo
+            </span>
+            <button id="seal-btn-scratch" class="wax-seal-btn" title="Abrir mensaje secreto" type="button" aria-label="Abrir mensaje secreto">
+              💌
+            </button>
+          </div>
+        </footer>
+      </section>
+
+    </div>
+
+    <!-- ======================================================================== -->
+    <!-- ⏳ BARRA FLOTANTE DE REBOBINADO (REWIND HUD)                             -->
+    <!-- ======================================================================== -->
+    <nav class="rewind-nav-bar" aria-label="Navegación temporal entre sorpresas">
+      <button id="btn-prev-day" class="rewind-btn" type="button" aria-label="Ver día anterior">
+        <span class="rewind-icon">⏪</span>
+        <span class="rewind-btn-text">Anterior</span>
+      </button>
+
+      <button id="btn-capsule-pill" class="rewind-day-pill" type="button" aria-label="Abrir menú de días">
+        <span class="pill-sparkle">✨</span>
+        <span id="pill-text" class="pill-text">Día 2 • Hoy</span>
+        <span class="pill-arrow">▲</span>
+      </button>
+
+      <button id="btn-next-day" class="rewind-btn" type="button" aria-label="Ver día siguiente" disabled>
+        <span class="rewind-btn-text">Siguiente</span>
+        <span class="rewind-icon">⏩</span>
+      </button>
+    </nav>
 
   </main>
 
-  <!-- 📜 MODAL DE MENSAJE SECRETO (Carta de Amor) -->
+  <!-- ========================================================================== -->
+  <!-- 📜 CAJÓN DE RECUERDOS (CÁPSULA DEL TIEMPO / ALMACÉN DE DÍAS)               -->
+  <!-- ========================================================================== -->
+  <div id="capsule-drawer" class="capsule-drawer-backdrop" aria-hidden="true">
+    <div class="capsule-sheet">
+      <div class="capsule-drag-handle" aria-hidden="true"></div>
+      
+      <header class="capsule-header">
+        <div class="capsule-title-group">
+          <span class="capsule-emoji">💌</span>
+          <div>
+            <h2 class="capsule-title">Cápsula de Recuerdos</h2>
+            <p class="capsule-subtitle">Revive cada sorpresa que he preparado para ti</p>
+          </div>
+        </div>
+        <button id="close-capsule-btn" class="capsule-close-btn" type="button" aria-label="Cerrar cápsula">✕</button>
+      </header>
+
+      <!-- Lista dinámica de días -->
+      <div id="capsule-days-list" class="capsule-days-list" role="list">
+        <!-- Renderizado dinámico desde app.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================== -->
+  <!-- 💌 MODAL DE MENSAJE SECRETO (Carta de Amor)                                -->
+  <!-- ========================================================================== -->
   <aside id="secret-modal" class="secret-modal-backdrop" aria-hidden="true" role="dialog">
     <div class="secret-letter">
       <div class="letter-seal-icon">💌</div>
-      <h3 class="letter-title">Mensaje del Corazón</h3>
+      <h3 id="secret-letter-title" class="letter-title">Mensaje del Corazón</h3>
       <p id="secret-letter-text" class="letter-body">
         Eres lo más hermoso que me ha pasado en la vida. Gracias por existir ❤️
       </p>

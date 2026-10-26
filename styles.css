@@ -1,8 +1,8 @@
 /* ==============================================================================
-   🏛️ ESTILOS DE GALERÍA DE ARTE - OBRA PARA NICKY
+   🏛️ ESTILOS DE GALERÍA DE ARTE & SORPRESAS DIARIAS - PARA NICKY
    ============================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
 
 :root {
   --color-gallery-wall: #141215;
@@ -12,6 +12,7 @@
   --color-rose-deep: #a82346;
   --color-rose-glow: #ff7597;
   --color-canvas-base: #faf7f2;
+  --safe-bottom: env(safe-area-inset-bottom, 1rem);
 }
 
 /* Reset y prevención de rebotes en móviles */
@@ -32,7 +33,7 @@ html, body {
   touch-action: manipulation;
 }
 
-/* 🔦 Iluminación cenital de museo (Foco focal sobre el cuadro) */
+/* 🔦 Iluminación cenital de museo (Foco focal sobre el contenido) */
 .gallery-wall {
   min-height: 100vh;
   min-height: 100dvh;
@@ -44,7 +45,7 @@ html, body {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 1.25rem 1rem 1.5rem;
+  padding: 1rem 1rem calc(5.5rem + var(--safe-bottom));
 }
 
 /* Sutiles partículas de polvo de estrellas / ambiente flotante */
@@ -53,28 +54,141 @@ html, body {
   top: 15%;
   left: 50%;
   transform: translateX(-50%);
-  width: 320px;
-  height: 320px;
-  background: radial-gradient(circle, rgba(235, 175, 110, 0.12) 0%, transparent 70%);
+  width: 340px;
+  height: 340px;
+  background: radial-gradient(circle, rgba(235, 175, 110, 0.14) 0%, transparent 70%);
   filter: blur(40px);
   pointer-events: none;
   z-index: 1;
+  transition: background 0.8s ease;
 }
 
 /* ==============================================================================
-   🖼️ EL MARCO DE CUADRO DE MUSEO (Realistic Multi-Layer Frame)
+   🎧 BARRA SUPERIOR DE LA GALERÍA (Minimal Header)
+   ============================================================================== */
+
+.gallery-top-bar {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.25rem 0.5rem 0.75rem;
+  z-index: 15;
+}
+
+.gallery-brand {
+  font-family: 'Cinzel', serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  color: #d4af37;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.top-bar-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.capsule-top-btn {
+  background: rgba(212, 175, 55, 0.12);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  color: #ecd28c;
+  padding: 0.35rem 0.65rem;
+  border-radius: 9999px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: all 0.2s ease;
+}
+
+.capsule-top-btn:active,
+.capsule-top-btn:hover {
+  background: rgba(212, 175, 55, 0.22);
+  border-color: #ecd28c;
+  transform: translateY(-1px);
+}
+
+.capsule-count {
+  background: #991b34;
+  color: #fff;
+  font-size: 0.62rem;
+  font-weight: 700;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sound-toggle-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #cfc6b8;
+  padding: 0.35rem 0.65rem;
+  border-radius: 9999px;
+  font-size: 0.7rem;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: all 0.2s ease;
+}
+
+.sound-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #f7e09e;
+}
+
+/* ==============================================================================
+   🎭 CONTENEDOR DE ESCENARIOS Y TRANSICIÓN
+   ============================================================================== */
+
+.stage-container {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto 0;
+  position: relative;
+  min-height: 480px;
+}
+
+.scene-view {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.scene-view.hidden {
+  display: none !important;
+}
+
+/* ==============================================================================
+   🖼️ EL MARCO DE CUADRO DE MUSEO (Día 1)
    ============================================================================== */
 
 .museum-frame-container {
   position: relative;
   z-index: 10;
   width: 100%;
-  max-width: 390px;
-  margin: auto 0;
+  max-width: 380px;
   perspective: 1000px;
 }
 
-/* Sombra proyectada del cuadro sobre la pared */
 .museum-frame {
   position: relative;
   border-radius: 8px;
@@ -97,7 +211,6 @@ html, body {
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
 }
 
-/* Moldura interna dorada labrada */
 .frame-inner-molding {
   background: linear-gradient(135deg, 
     #3c2810 0%, 
@@ -113,7 +226,6 @@ html, body {
     0 1px 2px rgba(255, 255, 255, 0.3);
 }
 
-/* Passe-partout (Paspartú / Cartulina de museo marfil) */
 .passepartout {
   background: #fcf9f2;
   padding: 18px 14px;
@@ -124,7 +236,6 @@ html, body {
   position: relative;
 }
 
-/* Corte biselado interior alrededor del lienzo */
 .canvas-bevel {
   border-radius: 2px;
   box-shadow: 
@@ -134,10 +245,6 @@ html, body {
   overflow: hidden;
   position: relative;
 }
-
-/* ==============================================================================
-   🎨 EL LIENZO (The Canvas)
-   ============================================================================== */
 
 .canvas {
   position: relative;
@@ -153,7 +260,6 @@ html, body {
   user-select: none;
 }
 
-/* Textura realista de hilo y grano de lienzo al óleo */
 .canvas::before {
   content: "";
   position: absolute;
@@ -166,7 +272,6 @@ html, body {
   z-index: 2;
 }
 
-/* Reflejo de luz y viñeta sutil sobre la tela */
 .canvas::after {
   content: "";
   position: absolute;
@@ -177,10 +282,6 @@ html, body {
   pointer-events: none;
   z-index: 3;
 }
-
-/* ==============================================================================
-   💌 CONTENIDOS DENTRO DEL LIENZO
-   ============================================================================== */
 
 .canvas-content-wrapper {
   position: relative;
@@ -195,7 +296,6 @@ html, body {
   text-align: center;
 }
 
-/* Tipografía de arte "TE AMO" */
 .art-te-amo {
   font-family: 'Alex Brush', cursive;
   font-size: clamp(3.8rem, 15vw, 5.2rem);
@@ -210,7 +310,6 @@ html, body {
   position: relative;
 }
 
-/* Detalle caligráfico o filigrana */
 .art-flourish {
   width: 90px;
   height: 16px;
@@ -228,20 +327,217 @@ html, body {
   line-height: 1.35;
 }
 
-/* Estilo para tipo "imagen" */
-.canvas-image-view {
+/* ==============================================================================
+   🎟️ DÍA 2: BILLETE DORADO INTERACTIVO DE RASPAR (Golden Scratch Ticket)
+   ============================================================================== */
+
+.ticket-wrapper {
+  position: relative;
+  z-index: 10;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 1px;
-  transition: transform 0.6s ease;
+  max-width: 380px;
 }
 
-/* Estilo para tipo "video" */
-.canvas-video-view {
+.golden-ticket {
+  background: linear-gradient(135deg, #241d17 0%, #17131b 50%, #1e1814 100%);
+  border: 2px solid #deb85a;
+  border-radius: 14px;
+  padding: 12px;
+  position: relative;
+  box-shadow: 
+    0 25px 45px -10px rgba(0, 0, 0, 0.9),
+    0 0 30px rgba(212, 175, 55, 0.2),
+    inset 0 1px 2px rgba(255, 255, 255, 0.4),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+}
+
+/* Muescas decorativas del boleto */
+.ticket-edge-notch {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 36px;
+  background: #141215;
+  border: 2px solid #deb85a;
+  z-index: 8;
+}
+
+.ticket-notch-left {
+  left: -12px;
+  border-radius: 0 18px 18px 0;
+  border-left: none;
+}
+
+.ticket-notch-right {
+  right: -12px;
+  border-radius: 18px 0 0 18px;
+  border-right: none;
+}
+
+.ticket-inner-border {
+  border: 1px dashed rgba(212, 175, 55, 0.5);
+  border-radius: 8px;
+  padding: 1rem 0.85rem;
+  position: relative;
+  background: radial-gradient(circle at 50% 20%, rgba(212, 175, 55, 0.08) 0%, transparent 70%);
+}
+
+.ticket-header {
+  text-align: center;
+  margin-bottom: 0.85rem;
+}
+
+.ticket-badge {
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  font-weight: 700;
+  color: #fcedbb;
+  text-shadow: 0 0 10px rgba(236, 210, 140, 0.4);
+  text-transform: uppercase;
+}
+
+.ticket-serial {
+  font-family: 'Plus Jakarta Sans', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: #9c8e7e;
+  margin-top: 0.2rem;
+}
+
+/* Área de Raspar */
+.scratch-card-box {
+  position: relative;
+  width: 100%;
+  min-height: 230px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 
+    inset 0 2px 6px rgba(0, 0, 0, 0.6),
+    0 1px 2px rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+}
+
+/* Capa oculta con el premio */
+.scratch-prize-content {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, #fffcf5 0%, #f6edd9 100%);
+  color: #2b231d;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.15rem 1rem 0.85rem;
+  text-align: center;
+  user-select: none;
+}
+
+.prize-tag {
+  font-family: 'Cinzel', serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #991b34;
+  background: rgba(153, 27, 52, 0.08);
+  padding: 0.25rem 0.6rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(153, 27, 52, 0.25);
+}
+
+.prize-headline {
+  font-family: 'Cinzel', serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #7a5223;
+  margin: 0.35rem 0 0.25rem;
+  line-height: 1.25;
+}
+
+.prize-details {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.08rem;
+  line-height: 1.4;
+  color: #42352c;
+  font-style: italic;
+  max-width: 290px;
+}
+
+.prize-details strong {
+  color: #80162a;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.prize-footer-stamp {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.4rem;
+  border-top: 1px dashed rgba(122, 82, 35, 0.25);
+  font-size: 0.62rem;
+  color: #7a5223;
+}
+
+.stamp-seal {
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  color: #991b34;
+  border: 1px solid #991b34;
+  padding: 0.15rem 0.4rem;
+  border-radius: 3px;
+  transform: rotate(-3deg);
+}
+
+.stamp-barcode {
+  letter-spacing: 2px;
+  font-family: monospace;
+  opacity: 0.6;
+}
+
+/* Canvas de foil dorado por encima */
+.scratch-canvas {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  cursor: pointer;
+  touch-action: none; /* Crucial para prevenir scroll en iPhone/Android al frotar */
+  z-index: 5;
+  transition: opacity 0.5s ease;
+}
+
+/* Barra de progreso de raspado */
+.scratch-status-bar {
+  margin-top: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.scratch-hint-text {
+  font-size: 0.72rem;
+  color: #dfba73;
+  text-align: center;
+  font-weight: 500;
+}
+
+.scratch-progress-track {
+  width: 100%;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+  overflow: hidden;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.scratch-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #b88a38, #fcedbb);
+  transition: width 0.15s ease;
 }
 
 /* ==============================================================================
@@ -256,7 +552,7 @@ html, body {
   border: 1px solid rgba(212, 175, 55, 0.25);
   border-radius: 6px;
   padding: 0.75rem 1.2rem;
-  max-width: 320px;
+  max-width: 340px;
   width: 92%;
   box-shadow: 
     0 10px 20px -5px rgba(0, 0, 0, 0.7),
@@ -315,19 +611,18 @@ html, body {
   gap: 0.35rem;
 }
 
-/* Sello de cera interactivo / botón de sonido */
 .wax-seal-btn {
   background: radial-gradient(circle at 35% 35%, #c73652, #80162a);
-  width: 28px;
-  height: 28px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #ffe6ec;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   box-shadow: 
-    0 2px 5px rgba(0, 0, 0, 0.5),
+    0 2px 6px rgba(0, 0, 0, 0.5),
     inset 0 1px 2px rgba(255, 255, 255, 0.4),
     inset 0 -1px 2px rgba(0, 0, 0, 0.6);
   cursor: pointer;
@@ -340,41 +635,292 @@ html, body {
 }
 
 /* ==============================================================================
-   💖 PARTÍCULAS Y ANIMACIONES
+   ⏳ BARRA FLOTANTE DE REBOBINADO (REWIND HUD)
    ============================================================================== */
 
-@keyframes gentle-heartbeat {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.035);
-  }
+.rewind-nav-bar {
+  position: fixed;
+  bottom: max(0.9rem, var(--safe-bottom));
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 2rem);
+  max-width: 400px;
+  z-index: 40;
+  background: rgba(23, 19, 26, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 9999px;
+  box-shadow: 
+    0 12px 30px -4px rgba(0, 0, 0, 0.8),
+    0 0 16px rgba(212, 175, 55, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.35rem 0.5rem;
 }
 
-/* Partícula flotante de toque */
-.floating-heart-particle {
-  position: absolute;
+.rewind-btn {
+  background: transparent;
+  border: none;
+  color: #dfba73;
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  padding: 0.45rem 0.75rem;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.rewind-btn:not(:disabled):hover,
+.rewind-btn:not(:disabled):active {
+  background: rgba(212, 175, 55, 0.16);
+  color: #fcedbb;
+  transform: scale(1.03);
+}
+
+.rewind-btn:disabled {
+  opacity: 0.28;
+  cursor: not-allowed;
+}
+
+.rewind-day-pill {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.18) 0%, rgba(153, 27, 52, 0.18) 100%);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  color: #fcedbb;
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 0.45rem 0.95rem;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.rewind-day-pill:hover,
+.rewind-day-pill:active {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.28) 0%, rgba(153, 27, 52, 0.28) 100%);
+  border-color: #fcedbb;
+  transform: translateY(-1px);
+}
+
+.pill-sparkle {
+  font-size: 0.8rem;
+  animation: gentle-heartbeat 2s ease infinite;
+}
+
+.pill-arrow {
+  font-size: 0.55rem;
+  opacity: 0.75;
+}
+
+/* ==============================================================================
+   📜 CAJÓN DE RECUERDOS (CÁPSULA DEL TIEMPO / DRAWER)
+   ============================================================================== */
+
+.capsule-drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 6, 10, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 90;
+  opacity: 0;
   pointer-events: none;
-  z-index: 20;
-  animation: floatUpAndFade 1.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  will-change: transform, opacity;
-  user-select: none;
+  transition: opacity 0.3s ease;
 }
 
-@keyframes floatUpAndFade {
-  0% {
-    opacity: 0.95;
-    transform: translate(-50%, -50%) scale(0.5) rotate(0deg);
-  }
-  40% {
-    opacity: 1;
-    transform: translate(calc(-50% + var(--dx, 0px)), calc(-50% - 40px)) scale(1.2) rotate(var(--rot, 0deg));
-  }
-  100% {
-    opacity: 0;
-    transform: translate(calc(-50% + var(--dx, 0px) * 1.5), calc(-50% - 90px)) scale(0.8) rotate(calc(var(--rot, 0deg) * 1.5));
-  }
+.capsule-drawer-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.capsule-sheet {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 100%);
+  width: 100%;
+  max-width: 440px;
+  background: #1b171f;
+  border-top: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: 24px 24px 0 0;
+  padding: 0.85rem 1.25rem calc(2rem + var(--safe-bottom));
+  box-shadow: 0 -15px 40px rgba(0, 0, 0, 0.85);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.capsule-drawer-backdrop.active .capsule-sheet {
+  transform: translate(-50%, 0);
+}
+
+.capsule-drag-handle {
+  width: 40px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 9999px;
+  margin: 0 auto 0.85rem;
+}
+
+.capsule-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 1rem;
+}
+
+.capsule-title-group {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.capsule-emoji {
+  font-size: 1.6rem;
+}
+
+.capsule-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #dfba73;
+}
+
+.capsule-subtitle {
+  font-size: 0.72rem;
+  color: #a89f91;
+}
+
+.capsule-close-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  color: #ddd;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: background 0.2s ease;
+}
+
+.capsule-close-btn:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.capsule-days-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  overflow-y: auto;
+  max-height: 55vh;
+  padding-right: 0.25rem;
+}
+
+/* Tarjeta individual de un día */
+.day-card-item {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 0.75rem 0.95rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.day-card-item:hover,
+.day-card-item:active {
+  background: rgba(212, 175, 55, 0.09);
+  border-color: rgba(212, 175, 55, 0.35);
+  transform: translateX(2px);
+}
+
+.day-card-item.active {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.16) 0%, rgba(153, 27, 52, 0.12) 100%);
+  border: 1px solid #dfba73;
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.15);
+}
+
+.day-card-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.day-card-icon {
+  font-size: 1.6rem;
+  width: 42px;
+  height: 42px;
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.day-card-number {
+  font-family: 'Cinzel', serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #dfba73;
+}
+
+.day-card-title {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #eee;
+}
+
+.day-card-date {
+  font-size: 0.68rem;
+  color: #8c8378;
+}
+
+.day-card-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.35rem;
+}
+
+.badge-today {
+  background: #991b34;
+  color: #fff;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 0.18rem 0.5rem;
+  border-radius: 9999px;
+  box-shadow: 0 0 8px rgba(153, 27, 52, 0.6);
+}
+
+.badge-active-dot {
+  font-size: 0.68rem;
+  color: #dfba73;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 
 /* ==============================================================================
@@ -384,7 +930,7 @@ html, body {
 .secret-modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(10, 8, 12, 0.82);
+  background: rgba(10, 8, 12, 0.85);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   z-index: 100;
@@ -410,7 +956,7 @@ html, body {
   padding: 2rem 1.6rem 1.8rem;
   border-radius: 10px;
   box-shadow: 
-    0 25px 50px -12px rgba(0, 0, 0, 0.75),
+    0 25px 50px -12px rgba(0, 0, 0, 0.8),
     0 0 0 1px rgba(212, 175, 55, 0.3);
   position: relative;
   transform: translateY(20px) scale(0.95);
@@ -466,43 +1012,57 @@ html, body {
 }
 
 /* ==============================================================================
-   🎧 BARRA SUPERIOR DE LA GALERÍA (Minimal Header)
+   💖 ANIMACIONES & CONFETI
    ============================================================================== */
 
-.gallery-top-bar {
-  width: 100%;
-  max-width: 400px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 0.5rem;
-  z-index: 10;
+@keyframes gentle-heartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.04);
+  }
 }
 
-.gallery-brand {
-  font-family: 'Cinzel', serif;
-  font-size: 0.75rem;
-  letter-spacing: 0.2em;
-  color: #a89f91;
-  text-transform: uppercase;
+.floating-heart-particle {
+  position: absolute;
+  pointer-events: none;
+  z-index: 25;
+  animation: floatUpAndFade 1.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  will-change: transform, opacity;
+  user-select: none;
 }
 
-.sound-toggle-btn {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #cfc6b8;
-  padding: 0.35rem 0.65rem;
-  border-radius: 9999px;
-  font-size: 0.7rem;
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-  cursor: pointer;
-  backdrop-filter: blur(4px);
-  transition: all 0.2s ease;
+@keyframes floatUpAndFade {
+  0% {
+    opacity: 0.95;
+    transform: translate(-50%, -50%) scale(0.5) rotate(0deg);
+  }
+  40% {
+    opacity: 1;
+    transform: translate(calc(-50% + var(--dx, 0px)), calc(-50% - 40px)) scale(1.2) rotate(var(--rot, 0deg));
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--dx, 0px) * 1.5), calc(-50% - 90px)) scale(0.8) rotate(calc(var(--rot, 0deg) * 1.5));
+  }
 }
 
-.sound-toggle-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: #f7e09e;
+/* Confeti de celebración de raspar */
+.confetti-particle {
+  position: fixed;
+  pointer-events: none;
+  z-index: 110;
+  animation: confettiFall 2.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes confettiFall {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) rotate(0deg) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--cf-x, 0px), var(--cf-y, 300px)) rotate(var(--cf-rot, 360deg)) scale(0.4);
+  }
 }
