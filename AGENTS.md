@@ -29,6 +29,14 @@ Cada día (o en cada actualización), el usuario le presenta una sorpresa nueva,
 - **Carta Secreta del Día 2:** Mensaje accesible mediante el botón de sello de cera (`💌`):
   > *"Te mereces el universo entero, mi vida. Este vale no tiene fecha de vencimiento y puedes cobrarlo cuantas veces quieras. Te amo con todo mi ser ❤️"*
 
+### 🫂 Día 3: Frasco de Besos & Abrazos Infinitos ("Dispensador de Mimos")
+- **Experiencia:** Refugio íntimo de cariño, 100% emocional y cero cosas materiales o pagas. Un frasco de cristal iluminado con luciérnagas y corazones animados en su interior.
+- **Mecánica 1 (Sacar un Mimo):** Tocar el frasco o pulsar "Sacar un Mimo" extrae una tarjeta de cariño única (*El Abrazo Refugio*, *Beso Suave en la Frente*, *Abrazo de Oso Apapachador*, *Lluvia de Besitos*, *Caricias en el Cabello*, *Mimo Silencioso de Cama*, etc.) con sonido dulce de beso y partículas flotantes.
+- **Mecánica 2 (Abrazo Sostenido "Hold-to-Hug"):** Mantener presionado el corazón central simula un abrazo en tiempo real: sintetiza latidos de corazón ("lub-dub") con Web Audio, vibración háptica suave en el teléfono y un anillo radial SVG que se carga durante 2.4 segundos. Al llegar al 100%, estalla una lluvia de confeti de abrazos (`🫂`, `💋`, `❤️`, `💖`, `✨`), acorde de celebración y confirmación afectuosa.
+- **Contador Dinámico:** Registra cuántos mimos ha recibido Nicky en la sesión con contador acumulativo.
+- **Carta Secreta del Día 3:** Mensaje accesible mediante el sello de cera (`💌`):
+  > *"Hoy no quiero invitarte a ningún lugar ni darte nada que se compre con dinero. Hoy quiero regalarte lo más valioso y sincero que tengo: mis brazos cuando necesites calma, mis besos para recordarte lo hermosa que eres, y mi amor incondicional para cuidarte siempre. Te amo con toda mi alma ❤️"*
+
 ---
 
 ## ⏳ Arquitectura del Sistema de "Rewind" (Rebobinado)

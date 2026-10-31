@@ -65,6 +65,87 @@ const HISTORIAL_DIAS = [
     mensajeSecreto: "Te mereces el universo entero, mi vida. Este vale no tiene fecha de vencimiento y puedes cobrarlo cuantas veces quieras. Te amo con todo mi ser ❤️",
     efectosSonoros: true,
     temaColor: "gold"
+  },
+
+  // ----------------------------------------------------------------------------
+  // 🫂 DÍA 3: Frasco de Besos & Abrazos Infinitos
+  // ----------------------------------------------------------------------------
+  {
+    id: "dia-3",
+    numero: 3,
+    fecha: "2026-10-30",
+    fechaLegible: "30 de Octubre, 2026",
+    icono: "🫂",
+    badge: "Frasco de Amor Infinito",
+    titulo: "Frasco de Besos & Abrazos",
+    experiencia: "frasco-abrazos", // Tipo de interfaz: Dispensador táctil de besos y abrazos
+    subtitulo: "Hoy nada comprado con dinero: solo mis brazos, mis besos y mi cariño infinito para ti.",
+    tecnica: "Ternura ilimitada, presencia y calor de hogar",
+    mimos: [
+      {
+        icono: "🫂",
+        titulo: "El Abrazo Refugio",
+        descripcion: "Apoya tu cabecita en mi pecho, respira profundo y deja que yo te cuide y te mime un rato.",
+        tipo: "abrazo"
+      },
+      {
+        icono: "🌸",
+        titulo: "Beso Suave en la Frente",
+        descripcion: "Un beso tierno para borrar cualquier preocupación, cansancio o estrés que hayas tenido hoy.",
+        tipo: "beso"
+      },
+      {
+        icono: "🐻",
+        titulo: "Abrazo de Oso Apapachador",
+        descripcion: "De esos apretaditos que te juntan todas las piezas, te reinician el corazón y te hacen suspirar de alivio.",
+        tipo: "abrazo"
+      },
+      {
+        icono: "💋",
+        titulo: "Lluvia de Besitos en la Cara",
+        descripcion: "10 besitos rápidos seguidos en los cachetes y la nariz hasta hacerte sonreír.",
+        tipo: "beso"
+      },
+      {
+        icono: "🤍",
+        titulo: "Mimo Silencioso de Cama",
+        descripcion: "Estar acostados tapaditos en silencio, abrazados piel con piel, sintiendo que no hace falta nada más en el mundo.",
+        tipo: "abrazo"
+      },
+      {
+        icono: "💆‍♀️",
+        titulo: "Caricias en el Cabello",
+        descripcion: "Pasar mis dedos suavemente por tu pelo hasta que te dé sueño y te quedes en paz absoluta.",
+        tipo: "mimo"
+      },
+      {
+        icono: "🦥",
+        titulo: "Abrazo de Koala",
+        descripcion: "Subirte a upa o rodearme con tus brazos y quedarte pegadita a mí todo el tiempo que quieras.",
+        tipo: "abrazo"
+      },
+      {
+        icono: "✨",
+        titulo: "Beso en los Ojos Cerrados",
+        descripcion: "Un beso suave en cada párpado para que descanses tranquila sabiendo que estoy cuidándote.",
+        tipo: "beso"
+      },
+      {
+        icono: "🕊️",
+        titulo: "Abrazo de Paz Profunda",
+        descripcion: "Un abrazo largo sin apuro, donde el mundo exterior se apaga y solo existimos tú y yo.",
+        tipo: "abrazo"
+      },
+      {
+        icono: "💖",
+        titulo: "Beso en la Mano Mirándote",
+        descripcion: "Tomar tu manito, darle un beso tierno en los nudillos y recordarte lo hermosa que eres.",
+        tipo: "beso"
+      }
+    ],
+    mensajeSecreto: "Hoy no quiero invitarte a ningún lugar ni darte nada que se compre con dinero. Hoy quiero regalarte lo más valioso y sincero que tengo: mis brazos cuando necesites calma, mis besos para recordarte lo hermosa que eres, y mi amor incondicional para cuidarte siempre. Te amo con toda mi alma ❤️",
+    efectosSonoros: true,
+    temaColor: "warm-rose"
   }
 ];
 

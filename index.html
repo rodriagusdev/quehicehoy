@@ -184,6 +184,138 @@
         </footer>
       </section>
 
+      <!-- ====================================================================== -->
+      <!-- 🫂 ESCENA DÍA 3: FRASCO DE BESOS & ABRAZOS INFINITOS                    -->
+      <!-- ====================================================================== -->
+      <section id="scene-frasco" class="scene-view hidden" aria-label="Frasco de Besos y Abrazos">
+        <div class="jar-experience-wrapper">
+          
+          <!-- Tarjeta Contenedora Principal -->
+          <div class="jar-card">
+            
+            <!-- Encabezado / Badge de la dinámica -->
+            <div class="jar-header">
+              <span class="jar-badge">🫂 CERO COSAS MATERIALES • 100% AMOR</span>
+              <h2 class="jar-headline">Frasco de Besos & Abrazos</h2>
+              <p class="jar-subtext">Hoy solo quiero cuidarte, mimarte y llenarte de besos infinitos.</p>
+            </div>
+
+            <!-- Frasco Mágico Iluminado Interactivo -->
+            <div class="jar-visual-container">
+              <div id="jar-clickable" class="jar-glass-bottle" role="button" tabindex="0" aria-label="Tocar el frasco para sacar un mimo">
+                
+                <!-- Tapa vintage del frasco con cordel -->
+                <div class="jar-lid">
+                  <div class="jar-lid-top"></div>
+                  <div class="jar-lid-ribbon"></div>
+                </div>
+
+                <!-- Cuerpo de cristal del frasco -->
+                <div class="jar-body">
+                  <!-- Reflejo de cristal -->
+                  <div class="jar-glass-glare"></div>
+
+                  <!-- Luciérnagas / Corazones flotantes internos -->
+                  <div class="jar-internal-lights" aria-hidden="true">
+                    <span class="jar-sparkle-item sp-1">✨</span>
+                    <span class="jar-sparkle-item sp-2">💋</span>
+                    <span class="jar-sparkle-item sp-3">💖</span>
+                    <span class="jar-sparkle-item sp-4">🤍</span>
+                    <span class="jar-sparkle-item sp-5">🫂</span>
+                    <span class="jar-sparkle-item sp-6">🌸</span>
+                  </div>
+
+                  <!-- Etiqueta de papel antiguo en el frasco -->
+                  <div class="jar-label-tag">
+                    <span class="tag-title">BESOS & ABRAZOS</span>
+                    <span class="tag-subtitle">Uso libre e infinito • Para Nicky</span>
+                  </div>
+                </div>
+
+                <!-- Base del frasco con brillo suave -->
+                <div class="jar-shadow"></div>
+              </div>
+
+              <!-- Botón rápido para sacar mimo -->
+              <button id="btn-draw-kiss" class="jar-draw-btn" type="button">
+                <span>💌</span> Sacar un Mimo del Frasco
+              </button>
+            </div>
+
+            <!-- Tarjeta donde aparece el mimo revelado -->
+            <div id="jar-note-display" class="jar-note-container" aria-live="polite">
+              <div class="jar-note-card">
+                <div class="note-top-deco">
+                  <span id="note-icon" class="note-icon">🫂</span>
+                  <span id="note-badge" class="note-badge">Abrazo Especial</span>
+                </div>
+                <h3 id="note-title" class="note-title">El Abrazo Refugio</h3>
+                <p id="note-desc" class="note-desc">
+                  Apoya tu cabecita en mi pecho, respira profundo y deja que yo te cuide y te mime un rato.
+                </p>
+                <div class="note-footer-action">
+                  <button id="btn-another-kiss" class="btn-another-kiss" type="button">
+                    <span>✨</span> Dame otro mimo
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Mecánica 2: El Abrazo Sostenido (Mantener Presionado) -->
+            <div class="hug-hold-section">
+              <div class="hug-hold-header">
+                <span class="hug-hold-title">¿Necesitas sentirme cerquita ahora mismo?</span>
+                <span class="hug-hold-sub">Mantén presionado el corazón durante unos segundos</span>
+              </div>
+
+              <div class="hug-button-container">
+                <!-- SVG Anillo de Progreso Circular -->
+                <svg class="hug-progress-ring" viewBox="0 0 120 120" aria-hidden="true">
+                  <circle class="ring-bg" cx="60" cy="60" r="52"></circle>
+                  <circle id="hug-progress-circle" class="ring-fill" cx="60" cy="60" r="52"></circle>
+                </svg>
+
+                <button id="btn-hug-hold" class="hug-hold-btn" type="button" aria-label="Mantener presionado para recibir un súper abrazo">
+                  <span id="hug-btn-icon" class="hug-btn-icon">❤️</span>
+                  <span class="hug-pulse-ring" aria-hidden="true"></span>
+                </button>
+              </div>
+
+              <!-- Estado del abrazo mientras se mantiene presionado -->
+              <div id="hug-status-text" class="hug-status-text">
+                Apoya tu dedo y no lo sueltes...
+              </div>
+
+              <!-- Contador de mimos entregados hoy -->
+              <div class="mimos-counter-badge">
+                <span class="counter-label">Mimos recibidos hoy:</span>
+                <span id="mimos-count" class="counter-number">1</span>
+                <span class="counter-infinity">de ∞</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Cédula de Museo para el Día 3 -->
+        <footer class="museum-plaque">
+          <div class="plaque-header">
+            <span class="plaque-title">DISPENSADOR N° 3</span>
+            <span class="plaque-date">Hoy</span>
+          </div>
+          <div class="plaque-technique">Ternura ilimitada, presencia y calor de hogar</div>
+          
+          <div class="plaque-footer">
+            <span class="plaque-hint">
+              <span>🫂</span> Besos y abrazos sin fin para ti
+            </span>
+            <button id="seal-btn-frasco" class="wax-seal-btn" title="Abrir mensaje secreto" type="button" aria-label="Abrir mensaje secreto">
+              💌
+            </button>
+          </div>
+        </footer>
+      </section>
+
     </div>
 
     <!-- ======================================================================== -->

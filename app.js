@@ -101,7 +101,7 @@
     } catch (e) {}
   }
 
-  // Acorde triunfal de celebración al revelar el cupón
+  // Acorde triunfal de celebración al revelar el cupón o abrazo
   function playCelebrationChord() {
     if (!audioEnabled) return;
     initAudio();
@@ -130,6 +130,70 @@
     } catch (e) {}
   }
 
+  // Latido del corazón cálido sintetizado para el abrazo sostenido
+  function playHeartbeatSound() {
+    if (!audioEnabled) return;
+    initAudio();
+    if (!audioCtx) return;
+
+    try {
+      const now = audioCtx.currentTime;
+
+      // Primer latido (lub)
+      const osc1 = audioCtx.createOscillator();
+      const gain1 = audioCtx.createGain();
+      osc1.type = 'sine';
+      osc1.frequency.setValueAtTime(85, now);
+      osc1.frequency.exponentialRampToValueAtTime(45, now + 0.09);
+      gain1.gain.setValueAtTime(0.12, now);
+      gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.09);
+      osc1.connect(gain1);
+      gain1.connect(audioCtx.destination);
+      osc1.start(now);
+      osc1.stop(now + 0.1);
+
+      // Segundo latido (dub)
+      const osc2 = audioCtx.createOscillator();
+      const gain2 = audioCtx.createGain();
+      osc2.type = 'sine';
+      osc2.frequency.setValueAtTime(72, now + 0.13);
+      osc2.frequency.exponentialRampToValueAtTime(38, now + 0.22);
+      gain2.gain.setValueAtTime(0.08, now + 0.13);
+      gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
+      osc2.connect(gain2);
+      gain2.connect(audioCtx.destination);
+      osc2.start(now + 0.13);
+      osc2.stop(now + 0.23);
+    } catch (e) {}
+  }
+
+  // Sonido dulce de beso / extracción de mimo del frasco
+  function playKissSound() {
+    if (!audioEnabled) return;
+    initAudio();
+    if (!audioCtx) return;
+
+    try {
+      const now = audioCtx.currentTime;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(650, now);
+      osc.frequency.exponentialRampToValueAtTime(1150, now + 0.07);
+
+      gain.gain.setValueAtTime(0, now);
+      gain.gain.linearRampToValueAtTime(0.06, now + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.2);
+
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      osc.start(now);
+      osc.stop(now + 0.22);
+    } catch (e) {}
+  }
+
   // ----------------------------------------------------------------------------
   // GESTOR DE DÍAS Y NAVEGACIÓN (REWIND ENGINE)
   // ----------------------------------------------------------------------------
@@ -146,16 +210,24 @@
     // 1. Alternar vistas en el DOM
     const sceneMuseo = document.getElementById('scene-museo');
     const sceneScratch = document.getElementById('scene-scratch');
+    const sceneFrasco = document.getElementById('scene-frasco');
 
-    if (day.experiencia === 'raspa-y-gana') {
-      if (sceneMuseo) sceneMuseo.classList.add('hidden');
+    if (sceneMuseo) sceneMuseo.classList.add('hidden');
+    if (sceneScratch) sceneScratch.classList.add('hidden');
+    if (sceneFrasco) sceneFrasco.classList.add('hidden');
+
+    if (day.experiencia === 'frasco-abrazos') {
+      if (sceneFrasco) {
+        sceneFrasco.classList.remove('hidden');
+        initFrascoAbrazos(day);
+      }
+    } else if (day.experiencia === 'raspa-y-gana') {
       if (sceneScratch) {
         sceneScratch.classList.remove('hidden');
         initScratchCard(day);
       }
     } else {
       // Por defecto escena museo (Día 1 u otros de galería)
-      if (sceneScratch) sceneScratch.classList.add('hidden');
       if (sceneMuseo) {
         sceneMuseo.classList.remove('hidden');
         renderMuseumScene(day);
@@ -179,6 +251,8 @@
     if (ambientGlow) {
       if (day.temaColor === 'gold') {
         ambientGlow.style.background = 'radial-gradient(circle, rgba(235, 185, 90, 0.18) 0%, transparent 70%)';
+      } else if (day.temaColor === 'warm-rose') {
+        ambientGlow.style.background = 'radial-gradient(circle, rgba(244, 114, 182, 0.22) 0%, transparent 70%)';
       } else {
         ambientGlow.style.background = 'radial-gradient(circle, rgba(235, 110, 140, 0.16) 0%, transparent 70%)';
       }
@@ -444,8 +518,8 @@
   // ----------------------------------------------------------------------------
   // LLUVIA DE CONFETI Y CORAZONES DE CELEBRACIÓN
   // ----------------------------------------------------------------------------
-  function launchConfettiBurst() {
-    const symbols = ['💖', '✨', '🎟️', '🌸', '💕', '⭐', '🌹', '💛'];
+  function launchConfettiBurst(customSymbols) {
+    const symbols = customSymbols || ['💖', '✨', '🎟️', '🌸', '💕', '⭐', '🌹', '💛'];
     const count = 35;
 
     for (let i = 0; i < count; i++) {
@@ -473,6 +547,237 @@
       setTimeout(() => {
         if (p.parentNode) p.parentNode.removeChild(p);
       }, 2300);
+    }
+  }
+
+  // ----------------------------------------------------------------------------
+  // DÍA 3: FRASCO DE BESOS & ABRAZOS INFINITOS (Engine)
+  // ----------------------------------------------------------------------------
+  let frascoInitialized = false;
+  let currentMimoIndex = 0;
+  let mimosGivenCount = 1;
+  let isHoldingHug = false;
+  let hugStartTime = 0;
+  let hugHeartbeatTimer = null;
+  let hugAnimFrame = null;
+  const HUG_TOTAL_DURATION = 2300; // ms para completar el abrazo
+  const RING_CIRCUMFERENCE = 326.72; // 2 * PI * 52
+
+  function initFrascoAbrazos(day) {
+    const mimosList = day.mimos || [];
+    const elNoteDisplay = document.getElementById('jar-note-display');
+    const elIcon = document.getElementById('note-icon');
+    const elBadge = document.getElementById('note-badge');
+    const elTitle = document.getElementById('note-title');
+    const elDesc = document.getElementById('note-desc');
+    const elCounter = document.getElementById('mimos-count');
+    const jarClickable = document.getElementById('jar-clickable');
+    const btnDrawKiss = document.getElementById('btn-draw-kiss');
+    const btnAnotherKiss = document.getElementById('btn-another-kiss');
+    const btnHugHold = document.getElementById('btn-hug-hold');
+    const progressCircle = document.getElementById('hug-progress-circle');
+    const statusText = document.getElementById('hug-status-text');
+
+    // Inicializar primer mimo en la tarjeta si aún no tiene
+    function displayMimo(mimo, triggerAnimation = true) {
+      if (!mimo) return;
+      if (elIcon) elIcon.textContent = mimo.icono || '🫂';
+      if (elBadge) {
+        elBadge.textContent = mimo.tipo === 'abrazo' ? 'Abrazo Especial' : (mimo.tipo === 'beso' ? 'Beso Incondicional' : 'Mimo del Alma');
+      }
+      if (elTitle) elTitle.textContent = mimo.titulo || 'Mimo para ti';
+      if (elDesc) elDesc.textContent = mimo.descripcion || '';
+
+      if (triggerAnimation && elNoteDisplay) {
+        elNoteDisplay.style.animation = 'none';
+        void elNoteDisplay.offsetWidth; // Reflow
+        elNoteDisplay.style.animation = 'noteSlidePop 0.45s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards';
+      }
+    }
+
+    // Sacar siguiente mimo
+    function drawNextMimo(userAction = true) {
+      if (mimosList.length === 0) return;
+      currentMimoIndex = (currentMimoIndex + 1) % mimosList.length;
+      const mimo = mimosList[currentMimoIndex];
+      displayMimo(mimo, true);
+
+      if (userAction) {
+        mimosGivenCount++;
+        if (elCounter) elCounter.textContent = mimosGivenCount;
+        playKissSound();
+
+        // Lanzar partículas desde el frasco
+        const jarRect = jarClickable ? jarClickable.getBoundingClientRect() : null;
+        if (jarRect) {
+          spawnJarParticles(jarRect.left + jarRect.width / 2, jarRect.top + jarRect.height / 2);
+        }
+      }
+    }
+
+    // Partículas que flotan desde el frasco al sacar un mimo
+    function spawnJarParticles(centerX, centerY) {
+      const jarSymbols = ['💋', '💖', '✨', '🌸', '🫂', '🤍'];
+      for (let i = 0; i < 7; i++) {
+        const p = document.createElement('span');
+        p.className = 'floating-heart-particle';
+        p.textContent = jarSymbols[Math.floor(Math.random() * jarSymbols.length)];
+
+        const dx = (Math.random() - 0.5) * 120;
+        const rot = (Math.random() - 0.5) * 50;
+        const size = 1.1 + Math.random() * 0.7;
+
+        p.style.position = 'fixed';
+        p.style.left = `${centerX}px`;
+        p.style.top = `${centerY}px`;
+        p.style.fontSize = `${size}rem`;
+        p.style.setProperty('--dx', `${dx}px`);
+        p.style.setProperty('--rot', `${rot}deg`);
+
+        document.body.appendChild(p);
+
+        setTimeout(() => {
+          if (p.parentNode) p.parentNode.removeChild(p);
+        }, 1600);
+      }
+    }
+
+    // Mostrar el primer mimo inicial sin contar como acción nueva
+    if (!frascoInitialized && mimosList.length > 0) {
+      displayMimo(mimosList[0], false);
+    }
+
+    // Si ya vinculamos eventos, no repetir
+    if (frascoInitialized) return;
+    frascoInitialized = true;
+
+    if (jarClickable) {
+      jarClickable.addEventListener('click', () => drawNextMimo(true));
+      jarClickable.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          drawNextMimo(true);
+        }
+      });
+    }
+
+    if (btnDrawKiss) {
+      btnDrawKiss.addEventListener('click', () => drawNextMimo(true));
+    }
+
+    if (btnAnotherKiss) {
+      btnAnotherKiss.addEventListener('click', () => drawNextMimo(true));
+    }
+
+    // --------------------------------------------------------------------------
+    // LÓGICA DE ABRAZO SOSTENIDO (Hold to Hug)
+    // --------------------------------------------------------------------------
+    function updateProgressRing(fraction) {
+      if (!progressCircle) return;
+      const offset = RING_CIRCUMFERENCE * (1 - fraction);
+      progressCircle.style.strokeDashoffset = offset;
+    }
+
+    function onHugHeartbeat() {
+      playHeartbeatSound();
+      if (navigator.vibrate) {
+        try { navigator.vibrate(40); } catch(e) {}
+      }
+    }
+
+    function stepHugAnimation() {
+      if (!isHoldingHug) return;
+      const elapsed = Date.now() - hugStartTime;
+      const progress = Math.min(elapsed / HUG_TOTAL_DURATION, 1);
+      updateProgressRing(progress);
+
+      if (statusText) {
+        if (progress < 0.28) {
+          statusText.textContent = 'Sintiendo tu calorcito... 💓';
+        } else if (progress < 0.65) {
+          statusText.textContent = 'Abrazándote bien fuerte... 🤗';
+        } else if (progress < 0.95) {
+          statusText.textContent = 'Llenando tu corazón de amor y paz... ✨';
+        }
+      }
+
+      if (progress >= 1) {
+        completeHugHold();
+      } else {
+        hugAnimFrame = requestAnimationFrame(stepHugAnimation);
+      }
+    }
+
+    function startHugHold(e) {
+      if (e) e.preventDefault();
+      if (isHoldingHug) return;
+      isHoldingHug = true;
+      hugStartTime = Date.now();
+
+      if (btnHugHold) btnHugHold.classList.add('holding');
+
+      // Primer latido instantáneo
+      onHugHeartbeat();
+
+      // Latidos regulares cada 680ms
+      hugHeartbeatTimer = setInterval(onHugHeartbeat, 680);
+
+      // Iniciar animación de anillo
+      hugAnimFrame = requestAnimationFrame(stepHugAnimation);
+    }
+
+    function cancelHugHold() {
+      if (!isHoldingHug) return;
+      isHoldingHug = false;
+
+      if (btnHugHold) btnHugHold.classList.remove('holding');
+      if (hugHeartbeatTimer) clearInterval(hugHeartbeatTimer);
+      if (hugAnimFrame) cancelAnimationFrame(hugAnimFrame);
+
+      // Retroceder anillo suavemente
+      updateProgressRing(0);
+
+      if (statusText) {
+        statusText.textContent = '¡No te sueltes tan rápido! Mantén presionado 🤗';
+      }
+    }
+
+    function completeHugHold() {
+      isHoldingHug = false;
+      if (btnHugHold) btnHugHold.classList.remove('holding');
+      if (hugHeartbeatTimer) clearInterval(hugHeartbeatTimer);
+      if (hugAnimFrame) cancelAnimationFrame(hugAnimFrame);
+
+      updateProgressRing(1);
+
+      playCelebrationChord();
+      if (navigator.vibrate) {
+        try { navigator.vibrate([60, 50, 90]); } catch(e) {}
+      }
+
+      launchConfettiBurst(['🫂', '💋', '❤️', '💖', '✨', '🌸', '🤍', '🧸']);
+
+      if (statusText) {
+        statusText.textContent = '¡ABRAZO ENORME ENTREGADO! Te tengo en mis brazos 💕';
+      }
+
+      mimosGivenCount++;
+      if (elCounter) elCounter.textContent = mimosGivenCount;
+
+      setTimeout(() => {
+        updateProgressRing(0);
+        if (statusText && !isHoldingHug) {
+          statusText.textContent = 'Apoya tu dedo y no lo sueltes...';
+        }
+      }, 4000);
+    }
+
+    if (btnHugHold) {
+      // Pointer Events (soporta touch y mouse sin conflicto)
+      btnHugHold.addEventListener('pointerdown', startHugHold);
+      btnHugHold.addEventListener('pointerup', cancelHugHold);
+      btnHugHold.addEventListener('pointercancel', cancelHugHold);
+      btnHugHold.addEventListener('pointerleave', cancelHugHold);
     }
   }
 
@@ -657,11 +962,13 @@
     // 2. Sellos de Cera (abren la carta de amor)
     const sealBtn1 = document.getElementById('seal-btn');
     const sealBtn2 = document.getElementById('seal-btn-scratch');
+    const sealBtn3 = document.getElementById('seal-btn-frasco');
     const closeLetterBtn = document.getElementById('close-letter-btn');
     const secretModal = document.getElementById('secret-modal');
 
     if (sealBtn1) sealBtn1.addEventListener('click', (e) => { e.stopPropagation(); showSecretModal(); });
     if (sealBtn2) sealBtn2.addEventListener('click', (e) => { e.stopPropagation(); showSecretModal(); });
+    if (sealBtn3) sealBtn3.addEventListener('click', (e) => { e.stopPropagation(); showSecretModal(); });
     if (closeLetterBtn) closeLetterBtn.addEventListener('click', hideSecretModal);
 
     if (secretModal) {

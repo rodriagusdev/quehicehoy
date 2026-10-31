@@ -1066,3 +1066,531 @@ html, body {
     transform: translate(var(--cf-x, 0px), var(--cf-y, 300px)) rotate(var(--cf-rot, 360deg)) scale(0.4);
   }
 }
+
+/* ==============================================================================
+   🫂 ESCENA DÍA 3: FRASCO DE BESOS & ABRAZOS INFINITOS
+   ============================================================================== */
+
+.jar-experience-wrapper {
+  width: 100%;
+  max-width: 410px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.jar-card {
+  width: 100%;
+  background: linear-gradient(160deg, rgba(32, 24, 34, 0.88) 0%, rgba(18, 14, 20, 0.96) 100%);
+  border: 1px solid rgba(244, 114, 182, 0.28);
+  border-radius: 26px;
+  padding: 1.5rem 1.25rem;
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.6),
+    0 0 35px rgba(244, 114, 182, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(14px);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.jar-card::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 220px;
+  height: 120px;
+  background: radial-gradient(circle, rgba(244, 114, 182, 0.22) 0%, transparent 70%);
+  filter: blur(25px);
+  pointer-events: none;
+}
+
+.jar-header {
+  margin-bottom: 1.25rem;
+}
+
+.jar-badge {
+  display: inline-block;
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.16em;
+  color: #fbcfe8;
+  background: rgba(244, 114, 182, 0.15);
+  border: 1px solid rgba(244, 114, 182, 0.35);
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+
+.jar-headline {
+  font-family: 'Cinzel', serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  background: linear-gradient(135deg, #fff1f2 0%, #fbcfe8 50%, #fda4af 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.35rem;
+}
+
+.jar-subtext {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem;
+  font-style: italic;
+  color: #d1b5c4;
+  line-height: 1.35;
+}
+
+/* Frasco de Cristal */
+.jar-visual-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0.5rem 0 1.25rem;
+}
+
+.jar-glass-bottle {
+  width: 140px;
+  height: 175px;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.jar-glass-bottle:hover,
+.jar-glass-bottle:focus-visible {
+  transform: scale(1.05) translateY(-3px);
+}
+
+.jar-glass-bottle:active {
+  transform: scale(0.97);
+}
+
+/* Tapa del frasco */
+.jar-lid {
+  width: 76px;
+  height: 18px;
+  background: linear-gradient(180deg, #b8860b 0%, #8b6508 100%);
+  border-radius: 6px 6px 3px 3px;
+  border: 1px solid rgba(255, 235, 170, 0.4);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  position: relative;
+  z-index: 5;
+}
+
+.jar-lid-ribbon {
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 86px;
+  height: 6px;
+  background: #a82346;
+  border-radius: 3px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Cuerpo de vidrio */
+.jar-body {
+  width: 130px;
+  height: 150px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.14) 0%, rgba(244, 114, 182, 0.08) 50%, rgba(255, 255, 255, 0.04) 100%);
+  border: 2px solid rgba(255, 255, 255, 0.32);
+  border-top: none;
+  border-radius: 8px 8px 38px 38px;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(6px);
+  box-shadow: 
+    inset 0 0 22px rgba(244, 114, 182, 0.18),
+    inset 0 -10px 20px rgba(255, 235, 170, 0.1),
+    0 12px 24px rgba(0, 0, 0, 0.45);
+  margin-top: -1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Reflejo diagonal de cristal */
+.jar-glass-glare {
+  position: absolute;
+  top: 0;
+  left: 12px;
+  width: 18px;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.05) 80%);
+  transform: skewX(-12deg);
+  pointer-events: none;
+}
+
+/* Luciérnagas / Corazones flotantes internos */
+.jar-internal-lights {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.jar-sparkle-item {
+  position: absolute;
+  font-size: 1rem;
+  opacity: 0.85;
+  filter: drop-shadow(0 0 6px rgba(244, 114, 182, 0.8));
+  animation: floatInsideJar 3.5s ease-in-out infinite alternate;
+}
+
+.sp-1 { top: 20%; left: 22%; animation-duration: 2.8s; font-size: 0.9rem; }
+.sp-2 { top: 38%; right: 20%; animation-duration: 3.4s; font-size: 1.1rem; }
+.sp-3 { bottom: 24%; left: 30%; animation-duration: 3.8s; font-size: 1.15rem; }
+.sp-4 { top: 58%; right: 32%; animation-duration: 2.5s; font-size: 0.85rem; }
+.sp-5 { bottom: 18%; right: 22%; animation-duration: 3.1s; font-size: 1.2rem; }
+.sp-6 { top: 15%; right: 35%; animation-duration: 4.2s; font-size: 0.8rem; }
+
+@keyframes floatInsideJar {
+  0% { transform: translateY(0px) scale(0.9); }
+  50% { transform: translateY(-8px) scale(1.1); }
+  100% { transform: translateY(5px) scale(0.95); }
+}
+
+/* Etiqueta de papel kraft en el frasco */
+.jar-label-tag {
+  background: #fbf7ee;
+  border: 1px dashed #b8860b;
+  border-radius: 6px;
+  padding: 0.35rem 0.55rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  z-index: 4;
+  max-width: 104px;
+}
+
+.tag-title {
+  display: block;
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem;
+  font-weight: 700;
+  color: #7a283e;
+  letter-spacing: 0.08em;
+}
+
+.tag-subtitle {
+  display: block;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.44rem;
+  color: #6b5547;
+  letter-spacing: 0.02em;
+}
+
+.jar-shadow {
+  width: 100px;
+  height: 12px;
+  background: radial-gradient(ellipse, rgba(0,0,0,0.6) 0%, transparent 75%);
+  margin-top: 4px;
+}
+
+/* Botón Sacar Mimo */
+.jar-draw-btn {
+  margin-top: 0.85rem;
+  background: linear-gradient(135deg, #be185d 0%, #9d174d 50%, #831843 100%);
+  color: #fff1f2;
+  font-family: 'Cinzel', serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  padding: 0.65rem 1.35rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(251, 207, 232, 0.4);
+  box-shadow: 
+    0 8px 18px rgba(190, 24, 93, 0.35),
+    0 0 12px rgba(244, 114, 182, 0.2);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  transition: all 0.25s ease;
+}
+
+.jar-draw-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 12px 22px rgba(190, 24, 93, 0.5),
+    0 0 20px rgba(244, 114, 182, 0.4);
+  background: linear-gradient(135deg, #db2777 0%, #be185d 100%);
+}
+
+.jar-draw-btn:active {
+  transform: translateY(1px);
+}
+
+/* ==============================================================================
+   💌 TARJETA DE MIMO REVELADO (Note Card)
+   ============================================================================== */
+.jar-note-container {
+  width: 100%;
+  margin: 0.5rem 0 1rem;
+  animation: noteSlidePop 0.45s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+}
+
+@keyframes noteSlidePop {
+  0% {
+    opacity: 0;
+    transform: translateY(18px) scale(0.92);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.jar-note-card {
+  background: linear-gradient(175deg, #fefbf6 0%, #faefe2 100%);
+  border: 1px solid #dfc7a8;
+  border-radius: 16px;
+  padding: 1.15rem 1rem;
+  box-shadow: 
+    0 10px 25px rgba(0, 0, 0, 0.4),
+    0 0 15px rgba(212, 175, 55, 0.15);
+  position: relative;
+  color: #3b2c20;
+}
+
+.jar-note-card::after {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border: 1px dashed rgba(184, 134, 11, 0.35);
+  border-radius: 12px;
+  pointer-events: none;
+}
+
+.note-top-deco {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-bottom: 0.35rem;
+}
+
+.note-icon {
+  font-size: 1.5rem;
+}
+
+.note-badge {
+  font-family: 'Cinzel', serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  color: #991b34;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.note-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #651a2a;
+  margin-bottom: 0.45rem;
+}
+
+.note-desc {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem;
+  line-height: 1.4;
+  font-style: italic;
+  color: #4a382e;
+  margin-bottom: 0.75rem;
+  padding: 0 0.5rem;
+}
+
+.btn-another-kiss {
+  background: #3c2a33;
+  color: #fbcfe8;
+  font-family: 'Cinzel', serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  padding: 0.45rem 1.1rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(244, 114, 182, 0.4);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all 0.2s ease;
+}
+
+.btn-another-kiss:hover {
+  background: #503342;
+  border-color: #fbcfe8;
+  color: #ffffff;
+}
+
+/* ==============================================================================
+   🫂 SECCIÓN ABRAZO SOSTENIDO (Hold-to-Hug)
+   ============================================================================== */
+.hug-hold-section {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(244, 114, 182, 0.16);
+  border-radius: 20px;
+  padding: 1.15rem 1rem;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hug-hold-header {
+  margin-bottom: 0.85rem;
+}
+
+.hug-hold-title {
+  display: block;
+  font-family: 'Cinzel', serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #ffe4e6;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.2rem;
+}
+
+.hug-hold-sub {
+  display: block;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.72rem;
+  color: #c9a7b8;
+}
+
+.hug-button-container {
+  position: relative;
+  width: 110px;
+  height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.25rem 0 0.6rem;
+}
+
+.hug-progress-ring {
+  position: absolute;
+  width: 110px;
+  height: 110px;
+  transform: rotate(-90deg);
+  pointer-events: none;
+}
+
+.ring-bg {
+  stroke: rgba(255, 255, 255, 0.08);
+  stroke-width: 6;
+  fill: none;
+}
+
+.ring-fill {
+  stroke: #f472b6;
+  stroke-width: 6;
+  fill: none;
+  stroke-linecap: round;
+  stroke-dasharray: 326.72;
+  stroke-dashoffset: 326.72; /* Inicialmente vacío */
+  transition: stroke-dashoffset 0.1s linear, stroke 0.3s ease;
+  filter: drop-shadow(0 0 6px rgba(244, 114, 182, 0.8));
+}
+
+.hug-hold-btn {
+  width: 78px;
+  height: 78px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #ec4899 0%, #be185d 60%, #831843 100%);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 
+    0 8px 22px rgba(190, 24, 93, 0.5),
+    inset 0 2px 6px rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  outline: none;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hug-hold-btn:active,
+.hug-hold-btn.holding {
+  transform: scale(0.94);
+  box-shadow: 
+    0 0 35px rgba(244, 114, 182, 0.8),
+    inset 0 2px 8px rgba(255, 255, 255, 0.6);
+}
+
+.hug-btn-icon {
+  font-size: 2.2rem;
+  transition: transform 0.2s ease;
+}
+
+.hug-hold-btn.holding .hug-btn-icon {
+  animation: heartThump 0.55s ease infinite alternate;
+}
+
+@keyframes heartThump {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.22); }
+}
+
+.hug-pulse-ring {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px solid rgba(244, 114, 182, 0.45);
+  animation: pulseAura 2s ease-out infinite;
+  pointer-events: none;
+}
+
+@keyframes pulseAura {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  100% { transform: scale(1.35); opacity: 0; }
+}
+
+.hug-status-text {
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  color: #fbcfe8;
+  min-height: 1.2rem;
+  transition: all 0.2s ease;
+}
+
+.mimos-counter-badge {
+  margin-top: 0.75rem;
+  padding-top: 0.65rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  font-size: 0.72rem;
+  color: #d8b4c6;
+}
+
+.counter-number {
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  color: #f472b6;
+  font-size: 0.9rem;
+}
+
+.counter-infinity {
+  color: #9d8392;
+  font-size: 0.8rem;
+}
+
