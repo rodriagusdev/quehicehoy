@@ -261,11 +261,16 @@
     // 4. Actualizar estado en la lista del cajón de recuerdos
     updateCapsuleListActive();
 
-    // 5. Actualizar URL con deep-link sin recargar la página
+    // 5. Actualizar URL con deep-link sin recargar la página (solo para días pasados, para que al recargar siempre abra el día más reciente)
     try {
       const url = new URL(window.location);
-      url.searchParams.set('dia', day.numero);
-      window.history.replaceState({}, '', url);
+      if (isLatest) {
+        url.searchParams.delete('dia');
+      } else {
+        url.searchParams.set('dia', day.numero);
+      }
+      const newRelativePathQuery = url.pathname + (url.search ? url.search : '') + url.hash;
+      window.history.replaceState({}, '', newRelativePathQuery);
     } catch (e) {}
 
     playRomanticChime();
