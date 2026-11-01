@@ -37,6 +37,15 @@ Cada día (o en cada actualización), el usuario le presenta una sorpresa nueva,
 - **Carta Secreta del Día 3:** Mensaje accesible mediante el sello de cera (`💌`):
   > *"Hoy no quiero invitarte a ningún lugar ni darte nada que se compre con dinero. Hoy quiero regalarte lo más valioso y sincero que tengo: mis brazos cuando necesites calma, mis besos para recordarte lo hermosa que eres, y mi amor incondicional para cuidarte siempre. Te amo con toda mi alma ❤️"*
 
+### 🎃 Día 4: Noche de Halloween ("El Caldero Encantado de Amor")
+- **Experiencia:** Noche mágica de brujas, tierna y misteriosa. Un caldero de hierro humeante con líquido resplandeciente, burbujas mágicas animadas, murciélagos (`🦇`) y fantasmitas (`👻`) flotantes.
+- **Mecánica 1 (Revolver el Caldero / Hechizo de Amor):** Tocar el caldero o pulsar "Revolver la Poción" sintetiza un burbujeo de poción y campanitas misteriosas con Web Audio, cambia el color del líquido encantado y desprende una tarjeta de hechizo (*Protección Contra Sustos*, *Embrujo de Besitos de Calabaza*, *Fantasmita de Mimos*, *El Oráculo del Destino*, *Refugio a la Luz de las Velas*, etc.).
+- **Mecánica 2 (¿Dulce o Travesura?):**
+  - Botón `🍬 ¡Dulce!`: Desata lluvia de caramelos y chocolates flotantes con frases empalagosas de amor.
+  - Botón `🎃 ¡Travesura!`: Sonido fantasmagórico, vibración háptica juguetona y lluvia de murciélagos con piropos de que el usuario está irremediablemente embrujado por Nicky.
+- **Carta Secreta del Día 4:** Mensaje accesible mediante el sello de calabaza (`🎃`):
+  > *"Dicen que en Halloween los espíritus buscan un refugio en el mundo terrenal, pero yo ya encontré el mío hace tiempo: tu sonrisa y tus abrazos. No hay truco ni brujería en este mundo que se compare con la magia que siento cada vez que estoy contigo. Si alguna vez te da miedo la oscuridad, acuérdate de que siempre voy a estar acá para cuidarte, abrazarte bien fuerte y recordarte que eres mi persona favorita en todo el universo. Feliz noche de Halloween, mi brujita hermosa. Te amo eternamente ❤️🎃"*
+
 ---
 
 ## ⏳ Arquitectura del Sistema de "Rewind" (Rebobinado)

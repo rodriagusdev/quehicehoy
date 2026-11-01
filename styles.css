@@ -1594,3 +1594,569 @@ html, body {
   font-size: 0.8rem;
 }
 
+/* ==============================================================================
+   🎃 ESCENA DÍA 4: EL CALDERO ENCANTADO DE HALLOWEEN
+   ============================================================================== */
+
+.halloween-experience-wrapper {
+  width: 100%;
+  max-width: 410px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.halloween-card {
+  width: 100%;
+  background: linear-gradient(165deg, rgba(32, 18, 50, 0.92) 0%, rgba(16, 10, 26, 0.98) 100%);
+  border: 1px solid rgba(168, 85, 247, 0.35);
+  border-radius: 26px;
+  padding: 1.5rem 1.25rem;
+  box-shadow: 
+    0 20px 45px rgba(0, 0, 0, 0.75),
+    0 0 35px rgba(168, 85, 247, 0.2),
+    0 0 25px rgba(249, 115, 22, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(14px);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.halloween-card::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 240px;
+  height: 120px;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.28) 0%, rgba(249, 115, 22, 0.18) 50%, transparent 70%);
+  filter: blur(28px);
+  pointer-events: none;
+}
+
+.halloween-header {
+  margin-bottom: 1.25rem;
+}
+
+.halloween-badge {
+  display: inline-block;
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.16em;
+  color: #fed7aa;
+  background: rgba(249, 115, 22, 0.16);
+  border: 1px solid rgba(249, 115, 22, 0.42);
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  box-shadow: 0 0 12px rgba(249, 115, 22, 0.2);
+}
+
+.halloween-headline {
+  font-family: 'Cinzel', serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  background: linear-gradient(135deg, #fff7ed 0%, #fed7aa 40%, #fb923c 70%, #c084fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.35rem;
+}
+
+.halloween-subtext {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem;
+  font-style: italic;
+  color: #d8b4e2;
+  line-height: 1.35;
+}
+
+/* Murciélagos y fantasmas ambientales */
+.spooky-ambience {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.spooky-bat {
+  position: absolute;
+  font-size: 1.25rem;
+  filter: drop-shadow(0 0 5px rgba(168, 85, 247, 0.6));
+  animation: batFlutter 4s ease-in-out infinite alternate;
+}
+
+.bat-1 { top: 18px; left: 24px; animation-duration: 3.2s; }
+.bat-2 { top: 32px; right: 28px; animation-duration: 4.5s; font-size: 1rem; }
+
+.spooky-ghost {
+  position: absolute;
+  top: 60px;
+  right: 18px;
+  font-size: 1.3rem;
+  opacity: 0.8;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
+  animation: ghostFloat 3.8s ease-in-out infinite alternate;
+}
+
+@keyframes batFlutter {
+  0% { transform: translateY(0) rotate(-6deg) scale(0.9); }
+  50% { transform: translateY(-12px) rotate(8deg) scale(1.1); }
+  100% { transform: translateY(6px) rotate(-10deg) scale(0.95); }
+}
+
+@keyframes ghostFloat {
+  0% { transform: translateY(0) scale(0.95); opacity: 0.5; }
+  50% { transform: translateY(-15px) scale(1.05); opacity: 0.9; }
+  100% { transform: translateY(4px) scale(0.9); opacity: 0.6; }
+}
+
+/* Contenedor del Caldero */
+.cauldron-visual-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0.5rem 0 1.25rem;
+  position: relative;
+}
+
+.magic-cauldron {
+  width: 145px;
+  height: 165px;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.magic-cauldron:hover,
+.magic-cauldron:focus-visible {
+  transform: scale(1.06) translateY(-4px);
+}
+
+.magic-cauldron:active {
+  transform: scale(0.96);
+}
+
+/* Vapor y Burbujas del Caldero */
+.cauldron-steam-container {
+  position: absolute;
+  top: -24px;
+  width: 110px;
+  height: 40px;
+  pointer-events: none;
+}
+
+.cauldron-bubble {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, #34d399 0%, #a855f7 60%, transparent 80%);
+  animation: bubblePop 2.2s ease-in infinite;
+  opacity: 0;
+}
+
+.b-1 { width: 14px; height: 14px; left: 25%; bottom: 6px; animation-delay: 0s; }
+.b-2 { width: 18px; height: 18px; left: 52%; bottom: 8px; animation-delay: 0.6s; }
+.b-3 { width: 11px; height: 11px; left: 70%; bottom: 4px; animation-delay: 1.2s; }
+.b-4 { width: 16px; height: 16px; left: 38%; bottom: 10px; animation-delay: 1.7s; }
+
+@keyframes bubblePop {
+  0% { transform: translateY(0) scale(0.4); opacity: 0.2; }
+  50% { transform: translateY(-16px) scale(1.1); opacity: 0.9; }
+  85% { transform: translateY(-28px) scale(1.3); opacity: 0.6; }
+  100% { transform: translateY(-34px) scale(0.2); opacity: 0; }
+}
+
+.cauldron-steam {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.4) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(8px);
+  animation: steamRise 3s ease-out infinite;
+}
+
+.s-1 { left: 30%; bottom: 10px; animation-delay: 0.3s; }
+.s-2 { left: 55%; bottom: 10px; animation-delay: 1.5s; }
+
+@keyframes steamRise {
+  0% { transform: translateY(0) scale(0.6); opacity: 0; }
+  40% { opacity: 0.6; }
+  100% { transform: translateY(-42px) scale(1.8); opacity: 0; }
+}
+
+/* Borde y Líquido del Caldero */
+.cauldron-rim {
+  width: 124px;
+  height: 26px;
+  background: #251e2b;
+  border: 3px solid #4a3b54;
+  border-radius: 50%;
+  position: relative;
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+}
+
+.cauldron-potion-liquid {
+  width: 108px;
+  height: 18px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 50% 50%, #34d399 0%, #10b981 35%, #8b5cf6 75%, #4c1d95 100%);
+  box-shadow: 
+    inset 0 0 10px rgba(52, 211, 153, 0.9),
+    0 0 16px rgba(52, 211, 153, 0.7);
+  animation: potionGlow 3s ease-in-out infinite alternate;
+  transition: background 0.6s ease, box-shadow 0.6s ease;
+}
+
+@keyframes potionGlow {
+  0% { filter: brightness(1) drop-shadow(0 0 4px rgba(52, 211, 153, 0.6)); }
+  50% { filter: brightness(1.3) drop-shadow(0 0 12px rgba(168, 85, 247, 0.8)); }
+  100% { filter: brightness(1.1) drop-shadow(0 0 8px rgba(249, 115, 22, 0.7)); }
+}
+
+/* Cuerpo de hierro fundido */
+.cauldron-body {
+  width: 136px;
+  height: 98px;
+  background: radial-gradient(ellipse at 35% 30%, #3a3044 0%, #201a28 50%, #130f18 100%);
+  border: 2px solid #574663;
+  border-top: none;
+  border-radius: 12px 12px 64px 64px;
+  margin-top: -12px;
+  position: relative;
+  z-index: 5;
+  box-shadow: 
+    inset 0 -12px 20px rgba(0, 0, 0, 0.8),
+    inset 0 10px 15px rgba(168, 85, 247, 0.2),
+    0 14px 28px rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cauldron-shine {
+  position: absolute;
+  top: 15px;
+  left: 18px;
+  width: 22px;
+  height: 48px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, transparent 70%);
+  border-radius: 50%;
+  transform: rotate(-18deg);
+  pointer-events: none;
+}
+
+.cauldron-emblem {
+  font-size: 1.8rem;
+  filter: drop-shadow(0 0 8px rgba(249, 115, 22, 0.8));
+  user-select: none;
+  margin-top: 6px;
+}
+
+/* Patas y fuego */
+.cauldron-legs {
+  width: 110px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  position: relative;
+  z-index: 4;
+  margin-top: -8px;
+}
+
+.cauldron-leg {
+  width: 14px;
+  height: 22px;
+  background: #18131d;
+  border: 1.5px solid #4a3b54;
+  border-radius: 4px;
+  transform: skewX(-14deg);
+}
+
+.leg-right {
+  transform: skewX(14deg);
+}
+
+.cauldron-fire {
+  display: flex;
+  gap: 0.2rem;
+  align-items: center;
+  margin-top: 2px;
+}
+
+.fire-flame {
+  font-size: 0.95rem;
+  animation: flameFlicker 1.8s ease-in-out infinite alternate;
+}
+
+.fl-1 { animation-delay: 0s; }
+.fl-2 { animation-delay: 0.4s; font-size: 0.75rem; }
+.fl-3 { animation-delay: 0.8s; }
+
+@keyframes flameFlicker {
+  0% { transform: scale(0.9) translateY(0); filter: drop-shadow(0 0 3px #f97316); }
+  100% { transform: scale(1.15) translateY(-3px); filter: drop-shadow(0 0 8px #ef4444); }
+}
+
+/* Botón Revolver Poción */
+.btn-stir-cauldron {
+  margin-top: 0.85rem;
+  background: linear-gradient(135deg, #7e22ce 0%, #9333ea 50%, #c026d3 100%);
+  color: #faf5ff;
+  font-family: 'Cinzel', serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  padding: 0.65rem 1.35rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(216, 180, 254, 0.45);
+  box-shadow: 
+    0 8px 18px rgba(126, 34, 206, 0.4),
+    0 0 14px rgba(168, 85, 247, 0.25);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  transition: all 0.25s ease;
+}
+
+.btn-stir-cauldron:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 12px 22px rgba(126, 34, 206, 0.55),
+    0 0 22px rgba(168, 85, 247, 0.45);
+  background: linear-gradient(135deg, #9333ea 0%, #a855f7 100%);
+}
+
+.btn-stir-cauldron:active {
+  transform: translateY(1px);
+}
+
+/* ==============================================================================
+   🔮 TARJETA DE HECHIZO REVELADO (Spell Card)
+   ============================================================================== */
+.spell-note-container {
+  width: 100%;
+  margin: 0.5rem 0 1rem;
+  animation: spellSlidePop 0.45s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+}
+
+@keyframes spellSlidePop {
+  0% {
+    opacity: 0;
+    transform: translateY(18px) scale(0.92);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.spell-note-card {
+  background: linear-gradient(175deg, #261935 0%, #1d1228 100%);
+  border: 1.5px solid rgba(249, 115, 22, 0.4);
+  border-radius: 18px;
+  padding: 1.15rem 1rem;
+  box-shadow: 
+    0 10px 25px rgba(0, 0, 0, 0.55),
+    0 0 18px rgba(249, 115, 22, 0.15),
+    inset 0 0 14px rgba(168, 85, 247, 0.12);
+  position: relative;
+  color: #f5f3ff;
+}
+
+.spell-note-card::after {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border: 1px dashed rgba(249, 115, 22, 0.3);
+  border-radius: 14px;
+  pointer-events: none;
+}
+
+.spell-top-deco {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-bottom: 0.35rem;
+}
+
+.spell-icon {
+  font-size: 1.5rem;
+  filter: drop-shadow(0 0 6px rgba(249, 115, 22, 0.7));
+}
+
+.spell-badge {
+  font-family: 'Cinzel', serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  color: #fdba74;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.spell-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fed7aa;
+  margin-bottom: 0.45rem;
+}
+
+.spell-desc {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem;
+  line-height: 1.4;
+  font-style: italic;
+  color: #e9d5ff;
+  margin-bottom: 0.75rem;
+  padding: 0 0.5rem;
+}
+
+.btn-another-spell {
+  background: #3b1d54;
+  color: #fed7aa;
+  font-family: 'Cinzel', serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  padding: 0.45rem 1.1rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(249, 115, 22, 0.45);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all 0.2s ease;
+}
+
+.btn-another-spell:hover {
+  background: #532577;
+  border-color: #fed7aa;
+  color: #ffffff;
+}
+
+/* ==============================================================================
+   🍬 MECÁNICA DULCE O TRAVESURA (Trick or Treat)
+   ============================================================================== */
+.trick-or-treat-section {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(249, 115, 22, 0.22);
+  border-radius: 20px;
+  padding: 1.15rem 1rem;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tot-title {
+  display: block;
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fed7aa;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.2rem;
+}
+
+.tot-sub {
+  display: block;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.72rem;
+  color: #c4b5fd;
+  margin-bottom: 0.75rem;
+}
+
+.tot-buttons-grid {
+  display: flex;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 290px;
+  justify-content: center;
+  margin-bottom: 0.75rem;
+}
+
+.btn-tot-treat,
+.btn-tot-trick {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: 14px;
+  cursor: pointer;
+  outline: none;
+  font-family: 'Cinzel', serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.btn-tot-treat {
+  background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
+  color: #fff7ed;
+  border: 1px solid rgba(254, 215, 170, 0.5);
+  box-shadow: 0 4px 14px rgba(234, 88, 12, 0.35);
+}
+
+.btn-tot-treat:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(234, 88, 12, 0.55);
+}
+
+.btn-tot-trick {
+  background: linear-gradient(135deg, #6b21a8 0%, #4c1d95 100%);
+  color: #faf5ff;
+  border: 1px solid rgba(192, 132, 252, 0.5);
+  box-shadow: 0 4px 14px rgba(107, 33, 168, 0.35);
+}
+
+.btn-tot-trick:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(107, 33, 168, 0.55);
+}
+
+.btn-tot-treat:active,
+.btn-tot-trick:active {
+  transform: scale(0.95);
+}
+
+.tot-btn-emoji {
+  font-size: 1.15rem;
+}
+
+.tot-message-box {
+  background: rgba(18, 12, 26, 0.75);
+  border: 1px dashed rgba(168, 85, 247, 0.3);
+  border-radius: 12px;
+  padding: 0.6rem 0.85rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem;
+  font-style: italic;
+  color: #fed7aa;
+  min-height: 2.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 1.35;
+  width: 100%;
+}
+
+

@@ -194,6 +194,94 @@
     } catch (e) {}
   }
 
+  // Sonido de burbujeo mágico del caldero de Halloween
+  function playCauldronBubbleSound() {
+    if (!audioEnabled) return;
+    initAudio();
+    if (!audioCtx) return;
+
+    try {
+      const now = audioCtx.currentTime;
+      for (let i = 0; i < 4; i++) {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        const startTime = now + i * 0.07;
+        const startFreq = 260 + Math.random() * 200;
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(startFreq, startTime);
+        osc.frequency.exponentialRampToValueAtTime(startFreq + 350, startTime + 0.06);
+
+        gain.gain.setValueAtTime(0, startTime);
+        gain.gain.linearRampToValueAtTime(0.05, startTime + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.06);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.start(startTime);
+        osc.stop(startTime + 0.07);
+      }
+    } catch (e) {}
+  }
+
+  // Campanita misteriosa y mágica de Halloween
+  function playSpookyMagicChime() {
+    if (!audioEnabled) return;
+    initAudio();
+    if (!audioCtx) return;
+
+    try {
+      const notes = [587.33, 698.46, 830.61, 987.77, 1174.66]; // D5, F5, G#5, B5, D6
+      notes.forEach((freq, idx) => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        const startTime = audioCtx.currentTime + idx * 0.07;
+
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(freq, startTime);
+
+        gain.gain.setValueAtTime(0, startTime);
+        gain.gain.linearRampToValueAtTime(0.06, startTime + 0.03);
+        gain.gain.exponentialRampToValueAtTime(0.0001, startTime + 1.2);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.start(startTime);
+        osc.stop(startTime + 1.25);
+      });
+    } catch (e) {}
+  }
+
+  // Sonido de fantasma juguetón / travesura
+  function playGhostBooSound() {
+    if (!audioEnabled) return;
+    initAudio();
+    if (!audioCtx) return;
+
+    try {
+      const now = audioCtx.currentTime;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(320, now);
+      osc.frequency.exponentialRampToValueAtTime(540, now + 0.15);
+      osc.frequency.exponentialRampToValueAtTime(280, now + 0.35);
+
+      gain.gain.setValueAtTime(0, now);
+      gain.gain.linearRampToValueAtTime(0.07, now + 0.08);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.38);
+
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      osc.start(now);
+      osc.stop(now + 0.4);
+    } catch (e) {}
+  }
+
   // ----------------------------------------------------------------------------
   // GESTOR DE DÍAS Y NAVEGACIÓN (REWIND ENGINE)
   // ----------------------------------------------------------------------------
@@ -211,12 +299,19 @@
     const sceneMuseo = document.getElementById('scene-museo');
     const sceneScratch = document.getElementById('scene-scratch');
     const sceneFrasco = document.getElementById('scene-frasco');
+    const sceneHalloween = document.getElementById('scene-halloween');
 
     if (sceneMuseo) sceneMuseo.classList.add('hidden');
     if (sceneScratch) sceneScratch.classList.add('hidden');
     if (sceneFrasco) sceneFrasco.classList.add('hidden');
+    if (sceneHalloween) sceneHalloween.classList.add('hidden');
 
-    if (day.experiencia === 'frasco-abrazos') {
+    if (day.experiencia === 'halloween-caldero') {
+      if (sceneHalloween) {
+        sceneHalloween.classList.remove('hidden');
+        initHalloweenCaldero(day);
+      }
+    } else if (day.experiencia === 'frasco-abrazos') {
       if (sceneFrasco) {
         sceneFrasco.classList.remove('hidden');
         initFrascoAbrazos(day);
@@ -249,7 +344,9 @@
     // 3. Ambient Glow adaptado al color del día
     const ambientGlow = document.getElementById('ambient-glow');
     if (ambientGlow) {
-      if (day.temaColor === 'gold') {
+      if (day.temaColor === 'halloween') {
+        ambientGlow.style.background = 'radial-gradient(circle, rgba(168, 85, 247, 0.24) 0%, rgba(249, 115, 22, 0.18) 45%, transparent 70%)';
+      } else if (day.temaColor === 'gold') {
         ambientGlow.style.background = 'radial-gradient(circle, rgba(235, 185, 90, 0.18) 0%, transparent 70%)';
       } else if (day.temaColor === 'warm-rose') {
         ambientGlow.style.background = 'radial-gradient(circle, rgba(244, 114, 182, 0.22) 0%, transparent 70%)';
@@ -786,6 +883,159 @@
     }
   }
 
+  // ----------------------------------------------------------------------------
+  // DÍA 4: EL CALDERO ENCANTADO DE HALLOWEEN (Engine)
+  // ----------------------------------------------------------------------------
+  let halloweenInitialized = false;
+  let currentSpellIndex = 0;
+  const LIQUID_COLORS = [
+    'radial-gradient(ellipse at 50% 50%, #34d399 0%, #10b981 35%, #8b5cf6 75%, #4c1d95 100%)',
+    'radial-gradient(ellipse at 50% 50%, #f97316 0%, #ea580c 40%, #7e22ce 80%, #3b0764 100%)',
+    'radial-gradient(ellipse at 50% 50%, #ec4899 0%, #db2777 40%, #9333ea 75%, #4c1d95 100%)',
+    'radial-gradient(ellipse at 50% 50%, #38bdf8 0%, #0284c7 35%, #8b5cf6 75%, #312e81 100%)'
+  ];
+  let liquidColorIndex = 0;
+
+  function initHalloweenCaldero(day) {
+    const hechizosList = day.hechizos || [];
+    const elNoteDisplay = document.getElementById('spell-note-display');
+    const elIcon = document.getElementById('spell-icon');
+    const elBadge = document.getElementById('spell-badge');
+    const elTitle = document.getElementById('spell-title');
+    const elDesc = document.getElementById('spell-desc');
+    const elLiquid = document.getElementById('cauldron-liquid');
+    const cauldronClickable = document.getElementById('cauldron-clickable');
+    const btnStirCauldron = document.getElementById('btn-stir-cauldron');
+    const btnAnotherSpell = document.getElementById('btn-another-spell');
+    const btnTreat = document.getElementById('btn-tot-treat');
+    const btnTrick = document.getElementById('btn-tot-trick');
+    const totMsgBox = document.getElementById('tot-message-box');
+
+    function displaySpell(spell, triggerAnimation = true) {
+      if (!spell) return;
+      if (elIcon) elIcon.textContent = spell.icono || '🎃';
+      if (elBadge) elBadge.textContent = 'Hechizo de Amor';
+      if (elTitle) elTitle.textContent = spell.titulo || 'Hechizo Mágico';
+      if (elDesc) elDesc.textContent = spell.descripcion || '';
+
+      if (triggerAnimation && elNoteDisplay) {
+        elNoteDisplay.style.animation = 'none';
+        void elNoteDisplay.offsetWidth; // Reflow
+        elNoteDisplay.style.animation = 'spellSlidePop 0.45s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards';
+      }
+    }
+
+    function stirCauldron(userAction = true) {
+      if (hechizosList.length === 0) return;
+      currentSpellIndex = (currentSpellIndex + 1) % hechizosList.length;
+      const spell = hechizosList[currentSpellIndex];
+      displaySpell(spell, true);
+
+      // Cambiar color del líquido resplandeciente
+      liquidColorIndex = (liquidColorIndex + 1) % LIQUID_COLORS.length;
+      if (elLiquid) {
+        elLiquid.style.background = LIQUID_COLORS[liquidColorIndex];
+      }
+
+      if (userAction) {
+        playCauldronBubbleSound();
+        setTimeout(playSpookyMagicChime, 150);
+
+        if (navigator.vibrate) {
+          try { navigator.vibrate(35); } catch (e) {}
+        }
+
+        // Partículas mágicas desde el caldero
+        const rect = cauldronClickable ? cauldronClickable.getBoundingClientRect() : null;
+        if (rect) {
+          spawnCauldronParticles(rect.left + rect.width / 2, rect.top + 30);
+        }
+      }
+    }
+
+    function spawnCauldronParticles(centerX, centerY) {
+      const magicSymbols = ['🎃', '✨', '🔮', '🦇', '🍬', '💜', '🧡', '👻'];
+      for (let i = 0; i < 7; i++) {
+        const p = document.createElement('span');
+        p.className = 'floating-heart-particle';
+        p.textContent = magicSymbols[Math.floor(Math.random() * magicSymbols.length)];
+
+        const dx = (Math.random() - 0.5) * 140;
+        const rot = (Math.random() - 0.5) * 60;
+        const size = 1.1 + Math.random() * 0.7;
+
+        p.style.position = 'fixed';
+        p.style.left = `${centerX}px`;
+        p.style.top = `${centerY}px`;
+        p.style.fontSize = `${size}rem`;
+        p.style.setProperty('--dx', `${dx}px`);
+        p.style.setProperty('--rot', `${rot}deg`);
+
+        document.body.appendChild(p);
+
+        setTimeout(() => {
+          if (p.parentNode) p.parentNode.removeChild(p);
+        }, 1600);
+      }
+    }
+
+    // Inicializar primer hechizo
+    if (!halloweenInitialized && hechizosList.length > 0) {
+      displaySpell(hechizosList[0], false);
+    }
+
+    if (halloweenInitialized) return;
+    halloweenInitialized = true;
+
+    if (cauldronClickable) {
+      cauldronClickable.addEventListener('click', () => stirCauldron(true));
+      cauldronClickable.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          stirCauldron(true);
+        }
+      });
+    }
+
+    if (btnStirCauldron) {
+      btnStirCauldron.addEventListener('click', () => stirCauldron(true));
+    }
+
+    if (btnAnotherSpell) {
+      btnAnotherSpell.addEventListener('click', () => stirCauldron(true));
+    }
+
+    // Mecánica Dulce
+    if (btnTreat) {
+      btnTreat.addEventListener('click', () => {
+        const dulces = day.dulces || ["🍬 ¡Eres la persona más dulce del mundo entero!"];
+        const msg = dulces[Math.floor(Math.random() * dulces.length)];
+        if (totMsgBox) totMsgBox.textContent = msg;
+
+        playRomanticChime();
+        if (navigator.vibrate) {
+          try { navigator.vibrate(30); } catch (e) {}
+        }
+        launchConfettiBurst(['🍬', '🍭', '🍫', '💖', '✨', '🧁', '🧡']);
+      });
+    }
+
+    // Mecánica Travesura
+    if (btnTrick) {
+      btnTrick.addEventListener('click', () => {
+        const travesuras = day.travesuras || ["🎃 ¡Buuu! Estoy perdidamente embrujado de ti."];
+        const msg = travesuras[Math.floor(Math.random() * travesuras.length)];
+        if (totMsgBox) totMsgBox.textContent = msg;
+
+        playGhostBooSound();
+        if (navigator.vibrate) {
+          try { navigator.vibrate([40, 40, 60]); } catch (e) {}
+        }
+        launchConfettiBurst(['🦇', '🎃', '👻', '🕸️', '✨', '🕷️', '💜']);
+      });
+    }
+  }
+
   // Partículas táctiles en el lienzo de museo
   const HEART_SYMBOLS = ['❤️', '✨', '💖', '💕', '🌸', '💫'];
 
@@ -968,12 +1218,14 @@
     const sealBtn1 = document.getElementById('seal-btn');
     const sealBtn2 = document.getElementById('seal-btn-scratch');
     const sealBtn3 = document.getElementById('seal-btn-frasco');
+    const sealBtn4 = document.getElementById('seal-btn-halloween');
     const closeLetterBtn = document.getElementById('close-letter-btn');
     const secretModal = document.getElementById('secret-modal');
 
     if (sealBtn1) sealBtn1.addEventListener('click', (e) => { e.stopPropagation(); showSecretModal(); });
     if (sealBtn2) sealBtn2.addEventListener('click', (e) => { e.stopPropagation(); showSecretModal(); });
     if (sealBtn3) sealBtn3.addEventListener('click', (e) => { e.stopPropagation(); showSecretModal(); });
+    if (sealBtn4) sealBtn4.addEventListener('click', (e) => { e.stopPropagation(); showSecretModal(); });
     if (closeLetterBtn) closeLetterBtn.addEventListener('click', hideSecretModal);
 
     if (secretModal) {

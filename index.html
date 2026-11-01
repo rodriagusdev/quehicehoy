@@ -40,7 +40,7 @@
   <meta http-equiv="Expires" content="0">
 
   <!-- Estilos propios de textura, marco de museo, raspa y animaciones -->
-  <link rel="stylesheet" href="./styles.css?v=3.0">
+  <link rel="stylesheet" href="./styles.css?v=4.0">
 </head>
 <body class="bg-[#141215] text-stone-200 antialiased select-none">
 
@@ -321,6 +321,138 @@
         </footer>
       </section>
 
+      <!-- ====================================================================== -->
+      <!-- 🎃 ESCENA DÍA 4: EL CALDERO ENCANTADO DE HALLOWEEN                      -->
+      <!-- ====================================================================== -->
+      <section id="scene-halloween" class="scene-view hidden" aria-label="Caldero Encantado de Halloween">
+        <div class="halloween-experience-wrapper">
+          
+          <!-- Tarjeta Mágica de Halloween -->
+          <div class="halloween-card">
+            
+            <!-- Encabezado / Badge -->
+            <div class="halloween-header">
+              <span class="halloween-badge">🎃 NOCHE DE BRUJAS • HECHIZO DE AMOR</span>
+              <h2 class="halloween-headline">El Caldero Encantado</h2>
+              <p class="halloween-subtext">Una poción mágica para mi brujita favorita.</p>
+            </div>
+
+            <!-- Caldero Mágico Interactivo -->
+            <div class="cauldron-visual-container">
+              
+              <!-- Decoración ambiental de murciélagos y fantasmitas -->
+              <div class="spooky-ambience" aria-hidden="true">
+                <span class="spooky-bat bat-1">🦇</span>
+                <span class="spooky-bat bat-2">🦇</span>
+                <span class="spooky-ghost">👻</span>
+              </div>
+
+              <!-- El Caldero -->
+              <div id="cauldron-clickable" class="magic-cauldron" role="button" tabindex="0" aria-label="Tocar el caldero para revolver la poción">
+                
+                <!-- Vapor y Burbujas Místicas -->
+                <div class="cauldron-steam-container" aria-hidden="true">
+                  <div class="cauldron-bubble b-1"></div>
+                  <div class="cauldron-bubble b-2"></div>
+                  <div class="cauldron-bubble b-3"></div>
+                  <div class="cauldron-bubble b-4"></div>
+                  <div class="cauldron-steam s-1"></div>
+                  <div class="cauldron-steam s-2"></div>
+                </div>
+
+                <!-- Borde superior del caldero con líquido resplandeciente -->
+                <div class="cauldron-rim">
+                  <div id="cauldron-liquid" class="cauldron-potion-liquid"></div>
+                </div>
+
+                <!-- Cuerpo de hierro del caldero -->
+                <div class="cauldron-body">
+                  <div class="cauldron-shine"></div>
+                  <div class="cauldron-emblem">🎃</div>
+                </div>
+
+                <!-- Patas del caldero y fuego mágico debajo -->
+                <div class="cauldron-legs">
+                  <div class="cauldron-leg leg-left"></div>
+                  <div class="cauldron-fire">
+                    <span class="fire-flame fl-1">🔥</span>
+                    <span class="fire-flame fl-2">✨</span>
+                    <span class="fire-flame fl-3">🔥</span>
+                  </div>
+                  <div class="cauldron-leg leg-right"></div>
+                </div>
+
+              </div>
+
+              <!-- Botón Revolver Caldero -->
+              <button id="btn-stir-cauldron" class="btn-stir-cauldron" type="button">
+                <span>🪄</span> Revolver la Poción
+              </button>
+            </div>
+
+            <!-- Tarjeta donde aparece el Hechizo Revelado -->
+            <div id="spell-note-display" class="spell-note-container" aria-live="polite">
+              <div class="spell-note-card">
+                <div class="spell-top-deco">
+                  <span id="spell-icon" class="spell-icon">🦇</span>
+                  <span id="spell-badge" class="spell-badge">Hechizo de Protección</span>
+                </div>
+                <h3 id="spell-title" class="spell-title">Protección Contra Sustos</h3>
+                <p id="spell-desc" class="spell-desc">
+                  Si vemos una película espeluznante o escuchas un ruido en la oscuridad, tienes pase libre para saltar a mis brazos y esconder tu carita en mi cuello.
+                </p>
+                <div class="spell-footer-action">
+                  <button id="btn-another-spell" class="btn-another-spell" type="button">
+                    <span>🔮</span> Revelar otro hechizo
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Mecánica 2: Dulce o Truco (Trick or Treat) -->
+            <div class="trick-or-treat-section">
+              <span class="tot-title">¿DULCE O TRAVESURA? 🍬🎃</span>
+              <p class="tot-sub">Elige tu destino en esta noche de brujas</p>
+              
+              <div class="tot-buttons-grid">
+                <button id="btn-tot-treat" class="btn-tot-treat" type="button">
+                  <span class="tot-btn-emoji">🍬</span>
+                  <span class="tot-btn-text">¡Dulce!</span>
+                </button>
+                <button id="btn-tot-trick" class="btn-tot-trick" type="button">
+                  <span class="tot-btn-emoji">🎃</span>
+                  <span class="tot-btn-text">¡Travesura!</span>
+                </button>
+              </div>
+
+              <!-- Mensaje emergente de dulce/travesura -->
+              <div id="tot-message-box" class="tot-message-box" aria-live="polite">
+                Toca un botón para recibir tu dulce o travesura...
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Cédula de Museo para el Día 4 -->
+        <footer class="museum-plaque">
+          <div class="plaque-header">
+            <span class="plaque-title">HECHIZO N° 4</span>
+            <span class="plaque-date">Hoy • Halloween</span>
+          </div>
+          <div class="plaque-technique">Poción mágica de amor, misterio y mimos nocturnos</div>
+          
+          <div class="plaque-footer">
+            <span class="plaque-hint">
+              <span>🎃</span> Toca el caldero para hechizar la noche
+            </span>
+            <button id="seal-btn-halloween" class="wax-seal-btn" title="Abrir mensaje secreto" type="button" aria-label="Abrir mensaje secreto">
+              🎃
+            </button>
+          </div>
+        </footer>
+      </section>
+
     </div>
 
     <!-- ======================================================================== -->
@@ -388,7 +520,7 @@
   </aside>
 
   <!-- Configuración de Obras y Lógica de la Galería (con cache-busting) -->
-  <script src="./content.js?v=3.0"></script>
-  <script src="./app.js?v=3.0"></script>
+  <script src="./content.js?v=4.0"></script>
+  <script src="./app.js?v=4.0"></script>
 </body>
 </html>
