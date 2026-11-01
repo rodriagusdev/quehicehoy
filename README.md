@@ -4,6 +4,13 @@ Una experiencia web interactiva estilo **museo y cápsula de recuerdos**, diseñ
 
 ---
 
+## 👩‍❤️‍👨 Reglas de Tono y Preferencias de Nicky
+- 🇦🇷 **Español Argentino:** Toda redacción debe ser en **español Argentino / Rioplatense** (*vos sos, mirá, tenés, bancar, che mi amor*, etc.).
+- 🚫🧉 **No toma mate:** Nunca incluir referencias a tomar mate.
+- 🌌 **Color favorito:** **Azul oscuro como de noche estrellada** (midnight blue / noche profunda con estrellas).
+
+---
+
 ## 🎨 ¿Qué contiene la experiencia?
 
 ### 🌟 Sistema de Rebobinado ("Rewind") y Cápsula del Tiempo

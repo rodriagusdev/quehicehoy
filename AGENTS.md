@@ -12,6 +12,13 @@ Cada día (o en cada actualización), el usuario le presenta una sorpresa nueva,
 
 ---
 
+## 👩‍❤️‍👨 Perfil y Preferencias de Nicky (Reglas Críticas de Tono y Diseño)
+- 🇦🇷 **Español Argentino:** El idioma y redacción a usar SIEMPRE es **español Argentino / Rioplatense** con voseo auténtico y afectuoso (*vos sos, mirá lo que somos, te amo con locura, bancarnos, che mi amor*, etc.). Evitar modismos neutros o de otros países.
+- 🚫🧉 **NO toma mate:** **Nunca** hacer referencias a tomar mate, rondas de mate o cebar mates (¡no le gusta/no toma mate!).
+- 🌌 **Color favorito:** Su color favorito es el **azul oscuro como de noche estrellada** (azul noche profundo / medianoche con destellos de estrellas, ej: `#0b132b`, `#1c2541`, midnight blue cósmico). Tenerlo siempre presente para futuros temas, paletas y experiencias visuales.
+
+---
+
 ## 📅 Registro de Días Existentes
 
 ### 🏛️ Día 1: Galería de Museo ("Declaración N° 1")
