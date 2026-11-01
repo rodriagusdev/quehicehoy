@@ -40,7 +40,7 @@
   <meta http-equiv="Expires" content="0">
 
   <!-- Estilos propios de textura, marco de museo, raspa y animaciones -->
-  <link rel="stylesheet" href="./styles.css?v=4.0">
+  <link rel="stylesheet" href="./styles.css?v=5.0">
 </head>
 <body class="bg-[#141215] text-stone-200 antialiased select-none">
 
@@ -453,6 +453,117 @@
         </footer>
       </section>
 
+      <!-- ====================================================================== -->
+      <!-- 🥂 ESCENA DÍA 5: ANIVERSARIO 2 AÑOS Y 10 MESES (Álbum de 1 a 3)       -->
+      <!-- ====================================================================== -->
+      <section id="scene-aniversario" class="scene-view hidden" aria-label="Álbum de Aniversario en 3 Momentos">
+        <div class="anniversary-experience-wrapper">
+          
+          <div class="anniversary-card">
+            
+            <!-- Encabezado de Aniversario -->
+            <div class="anniversary-header">
+              <span class="anniversary-badge">🥂 2 AÑOS Y 10 MESES • 34 MESES JUNTOS</span>
+              <h2 class="anniversary-headline">Nuestra Historia en 3 Momentos</h2>
+              <p class="anniversary-subtext">34 meses caminando a la par... Tocá del 1 al 3 para revivirla.</p>
+            </div>
+
+            <!-- Selector Interactivo de Pasos (1 al 3) -->
+            <div class="story-stepper-container" role="tablist" aria-label="Línea de tiempo de nuestra historia">
+              <div class="stepper-track-line" aria-hidden="true">
+                <div id="stepper-progress-fill" class="stepper-progress-fill" style="width: 0%;"></div>
+              </div>
+
+              <button id="step-btn-1" class="step-pill-btn active" role="tab" aria-selected="true" type="button">
+                <span class="step-pill-number">1</span>
+                <span class="step-pill-label">Comienzo</span>
+              </button>
+
+              <button id="step-btn-2" class="step-pill-btn" role="tab" aria-selected="false" type="button">
+                <span class="step-pill-number">2</span>
+                <span class="step-pill-label">Creciendo</span>
+              </button>
+
+              <button id="step-btn-3" class="step-pill-btn" role="tab" aria-selected="false" type="button">
+                <span class="step-pill-number">3</span>
+                <span class="step-pill-label">¡Hoy! 🎉</span>
+              </button>
+            </div>
+
+            <!-- Marco Polaroid 3D Interactivo -->
+            <div class="polaroid-wrapper">
+              <div id="polaroid-frame" class="polaroid-frame" role="button" tabindex="0" aria-label="Tocar la foto para sentir amor y destellos">
+                
+                <!-- Cinta Washi Tape decorativa superior -->
+                <div class="washi-tape" aria-hidden="true"></div>
+
+                <!-- Marco de la foto con revelado suave -->
+                <div class="polaroid-photo-container">
+                  <img id="polaroid-img" class="polaroid-img" src="./assets/images/1_1_11.jpg" alt="Recuerdo de nuestro amor" loading="eager">
+                  <div class="polaroid-vignette" aria-hidden="true"></div>
+                </div>
+
+                <!-- Pie de Foto Manuscrito -->
+                <div class="polaroid-caption">
+                  <span id="polaroid-caption-text" class="polaroid-caption-text">El comienzo de la historia más linda</span>
+                  <span id="polaroid-date-tag" class="polaroid-date-tag">Momento 1 de 3</span>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Tarjeta de Dedicatoria del Momento -->
+            <div id="moment-note-display" class="moment-note-container" aria-live="polite">
+              <div class="moment-note-card">
+                <h3 id="moment-title" class="moment-title">Mirá lo que éramos y todo lo que empezó acá</h3>
+                <p id="moment-message" class="moment-message">
+                  Parece que fue ayer cuando empezamos a escribir esto juntos. Desde las primeras miradas y las primeras risas supe que con vos todo iba a ser distinto. Gracias por regalarme este comienzo tan perfecto.
+                </p>
+              </div>
+            </div>
+
+            <!-- Barra de Navegación de Momentos (Anterior / Siguiente) -->
+            <div class="story-nav-controls">
+              <button id="btn-prev-moment" class="story-nav-btn" type="button" disabled aria-label="Momento anterior">
+                <span>◀</span> Anterior
+              </button>
+              
+              <button id="btn-next-moment" class="story-nav-btn highlight" type="button" aria-label="Siguiente momento">
+                <span id="next-moment-label">Siguiente Momento ▶</span>
+              </button>
+            </div>
+
+            <!-- Banner de Celebración de Aniversario (aparece en el paso 3) -->
+            <div id="anniversary-celebration-box" class="anniversary-celebration-box hidden">
+              <div class="celebration-badge">🥂 ¡BRINDIS POR NUESTROS 2 AÑOS Y 10 MESES! 🥂</div>
+              <p class="celebration-quote">"34 meses de risas, mates, abrazos y un amor que no para de crecer. Sos lo mejor que me pasó en la vida, Nicky."</p>
+              <button id="btn-re-celebrate" class="btn-re-celebrate" type="button">
+                <span>✨</span> ¡Lanzar Más Confeti de Aniversario! 🍾
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Cédula de Museo para el Día 5 -->
+        <footer class="museum-plaque">
+          <div class="plaque-header">
+            <span class="plaque-title">ANIVERSARIO • 2 AÑOS Y 10 MESES</span>
+            <span class="plaque-date">1 de Noviembre, 2026</span>
+          </div>
+          <div class="plaque-technique">Fotografía, complicidad y 34 meses de amor incondicional</div>
+          
+          <div class="plaque-footer">
+            <span class="plaque-hint">
+              <span>🥂</span> Tocá la foto o el sello para nuestra carta
+            </span>
+            <button id="seal-btn-aniversario" class="wax-seal-btn" title="Abrir mensaje secreto" type="button" aria-label="Abrir mensaje secreto">
+              🥂
+            </button>
+          </div>
+        </footer>
+      </section>
+
     </div>
 
     <!-- ======================================================================== -->
@@ -520,7 +631,7 @@
   </aside>
 
   <!-- Configuración de Obras y Lógica de la Galería (con cache-busting) -->
-  <script src="./content.js?v=4.0"></script>
-  <script src="./app.js?v=4.0"></script>
+  <script src="./content.js?v=5.0"></script>
+  <script src="./app.js?v=5.0"></script>
 </body>
 </html>

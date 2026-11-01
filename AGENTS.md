@@ -46,6 +46,15 @@ Cada día (o en cada actualización), el usuario le presenta una sorpresa nueva,
 - **Carta Secreta del Día 4:** Mensaje accesible mediante el sello de calabaza (`🎃`):
   > *"Dicen que en Halloween los espíritus buscan un refugio en el mundo terrenal, pero yo ya encontré el mío hace tiempo: tu sonrisa y tus abrazos. No hay truco ni brujería en este mundo que se compare con la magia que siento cada vez que estoy contigo. Si alguna vez te da miedo la oscuridad, acuérdate de que siempre voy a estar acá para cuidarte, abrazarte bien fuerte y recordarte que eres mi persona favorita en todo el universo. Feliz noche de Halloween, mi brujita hermosa. Te amo eternamente ❤️🎃"*
 
+### 🥂 Día 5: Aniversario 2 Años y 10 Meses ("Nuestra Historia en 3 Momentos")
+- **Experiencia:** Celebración de aniversario (¡34 meses juntos!). Álbum fotográfico interactivo estilo Polaroid 3D con las fotos reales de la pareja (`assets/images/1_1_11.jpg`, `2_1_11.jpg`, `3_1_11.jpg`), cinta washi tape, revelado suave y textos en español argentino ("che mi amor", "bancándonos", "sos todo").
+- **Mecánica Interactiva del 1 al 3:**
+  - Selector con línea de progreso `[ 1 ]` (El Comienzo), `[ 2 ]` (Creciendo y bancándonos), `[ 3 ]` (¡Hoy: 2 años y 10 meses!).
+  - Al tocar la Polaroid en cualquier momento, genera partículas de chispas y corazones (`🥂`, `💖`, `✨`, `⭐`, `❤️`) con campanitas armónicas.
+  - Al llegar al Paso 3, detona una fiesta de aniversario: acorde triunfal de celebración, vibración háptica rítmica, explosión de confeti y copas de brindis (`🥂`, `💖`, `💍`, `✨`, `🎉`, `🍾`), junto con el banner festivo de los 34 meses.
+- **Carta Secreta del Día 5:** Mensaje accesible mediante el sello de brindis (`🥂`):
+  > *"Felices 2 años y 10 meses, amor de mi vida. No te das una idea de lo feliz que me hace tenerte al lado todos los días. Sos mi compañera de vida, mi refugio y lo más lindo que me pasó en el universo. Gracias por cada beso, por cada charla hasta tarde, por bancarme siempre y por hacerme sentir el tipo más afortunado del planeta. Te amo con todo mi corazón y con toda mi alma, hoy y siempre ❤️🥂"*
+
 ---
 
 ## ⏳ Arquitectura del Sistema de "Rewind" (Rebobinado)

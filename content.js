@@ -227,6 +227,54 @@ const HISTORIAL_DIAS = [
     mensajeSecreto: "Dicen que en Halloween los espíritus buscan un refugio en el mundo terrenal, pero yo ya encontré el mío hace tiempo: tu sonrisa y tus abrazos. No hay truco ni brujería en este mundo que se compare con la magia que siento cada vez que estoy contigo. Si alguna vez te da miedo la oscuridad, acuérdate de que siempre voy a estar acá para cuidarte, abrazarte bien fuerte y recordarte que eres mi persona favorita en todo el universo. Feliz noche de Halloween, mi brujita hermosa. Te amo eternamente ❤️🎃",
     efectosSonoros: true,
     temaColor: "halloween"
+  },
+
+  // ----------------------------------------------------------------------------
+  // 🥂 DÍA 5: Aniversario 2 Años y 10 Meses - Nuestra Historia en 3 Momentos
+  // ----------------------------------------------------------------------------
+  {
+    id: "dia-5",
+    numero: 5,
+    fecha: "2026-11-01",
+    fechaLegible: "1 de Noviembre, 2026",
+    icono: "🥂",
+    badge: "2 Años y 10 Meses Juntos",
+    titulo: "Nuestra Historia en 3 Momentos",
+    experiencia: "album-aniversario", // Tipo de interfaz: Álbum Polaroid interactivo de 1 a 3
+    subtitulo: "34 meses caminando a la par... Tocá del 1 al 3 para revivir nuestra historia.",
+    tecnica: "Fotografía, complicidad y 2 años y 10 meses de amor incondicional",
+    momentos: [
+      {
+        numero: 1,
+        etiqueta: "1. Donde arrancó todo",
+        foto: "./assets/images/1_1_11.jpg",
+        pieFoto: "El comienzo de la historia más linda",
+        titulo: "Mirá lo que éramos y todo lo que empezó acá",
+        mensaje: "Parece que fue ayer cuando empezamos a escribir esto juntos. Desde las primeras miradas, las primeras charlas y esas sonrisas cómplices, supe que con vos todo iba a ser distinto. Gracias por regalarme este comienzo tan perfecto.",
+        fechaMomento: "El punto de partida"
+      },
+      {
+        numero: 2,
+        etiqueta: "2. Creciendo a la par",
+        foto: "./assets/images/2_1_11.jpg",
+        pieFoto: "Compañeros de vida en cada paso",
+        titulo: "Cada momento al lado tuyo es un golazo",
+        mensaje: "Pasaron los meses y cada día me enamoro un poco más de vos. De tu forma de mirarme, de tus mates, de tus abrazos que me reinician la vida y de cómo nos bancamos en cada una. No hay equipo más lindo ni mejor refugio que estar con vos.",
+        fechaMomento: "Construyendo nuestro mundo"
+      },
+      {
+        numero: 3,
+        etiqueta: "3. ¡Felices 2 años y 10 meses!",
+        foto: "./assets/images/3_1_11.jpg",
+        pieFoto: "34 meses juntos y una vida por delante",
+        titulo: "¡Felices 2 años y 10 meses, amor de mi vida!",
+        mensaje: "¡2 años y 10 meses, mi reina hermosa! 34 meses eligiéndote todos los días. Sos mi hogar, mi cable a tierra y la mujer de mi vida. Brindo por todo lo que construimos, por cada risa compartida y por el futuro hermoso que nos espera. Te amo con el alma entera ❤️🥂",
+        fechaMomento: "Hoy y para siempre"
+      }
+    ],
+    mensajeSecreto: "Felices 2 años y 10 meses, amor de mi vida. No te das una idea de lo feliz que me hace tenerte al lado todos los días. Sos mi compañera de vida, mi refugio y lo más lindo que me pasó en el universo. Gracias por cada beso, por cada charla hasta tarde, por bancarme siempre y por hacerme sentir el tipo más afortunado del planeta. Te amo con todo mi corazón y con toda mi alma, hoy y siempre ❤️🥂",
+    efectosSonoros: true,
+    temaColor: "anniversary"
   }
 ];
 

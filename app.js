@@ -300,13 +300,20 @@
     const sceneScratch = document.getElementById('scene-scratch');
     const sceneFrasco = document.getElementById('scene-frasco');
     const sceneHalloween = document.getElementById('scene-halloween');
+    const sceneAniversario = document.getElementById('scene-aniversario');
 
     if (sceneMuseo) sceneMuseo.classList.add('hidden');
     if (sceneScratch) sceneScratch.classList.add('hidden');
     if (sceneFrasco) sceneFrasco.classList.add('hidden');
     if (sceneHalloween) sceneHalloween.classList.add('hidden');
+    if (sceneAniversario) sceneAniversario.classList.add('hidden');
 
-    if (day.experiencia === 'halloween-caldero') {
+    if (day.experiencia === 'album-aniversario') {
+      if (sceneAniversario) {
+        sceneAniversario.classList.remove('hidden');
+        initAlbumAniversario(day);
+      }
+    } else if (day.experiencia === 'halloween-caldero') {
       if (sceneHalloween) {
         sceneHalloween.classList.remove('hidden');
         initHalloweenCaldero(day);
@@ -344,7 +351,9 @@
     // 3. Ambient Glow adaptado al color del día
     const ambientGlow = document.getElementById('ambient-glow');
     if (ambientGlow) {
-      if (day.temaColor === 'halloween') {
+      if (day.temaColor === 'anniversary') {
+        ambientGlow.style.background = 'radial-gradient(circle, rgba(245, 158, 11, 0.24) 0%, rgba(244, 63, 94, 0.16) 45%, transparent 70%)';
+      } else if (day.temaColor === 'halloween') {
         ambientGlow.style.background = 'radial-gradient(circle, rgba(168, 85, 247, 0.24) 0%, rgba(249, 115, 22, 0.18) 45%, transparent 70%)';
       } else if (day.temaColor === 'gold') {
         ambientGlow.style.background = 'radial-gradient(circle, rgba(235, 185, 90, 0.18) 0%, transparent 70%)';
@@ -1036,6 +1045,192 @@
     }
   }
 
+  // ----------------------------------------------------------------------------
+  // 🥂 DÍA 5: ANIVERSARIO 2 AÑOS Y 10 MESES - ÁLBUM POLAROID (Engine)
+  // ----------------------------------------------------------------------------
+  let aniversarioInitialized = false;
+  let currentMomentStep = 0; // 0 = Momento 1, 1 = Momento 2, 2 = Momento 3
+
+  function initAlbumAniversario(day) {
+    const momentos = day.momentos || [];
+    const polaroidFrame = document.getElementById('polaroid-frame');
+    const polaroidImg = document.getElementById('polaroid-img');
+    const captionText = document.getElementById('polaroid-caption-text');
+    const dateTag = document.getElementById('polaroid-date-tag');
+    const noteDisplay = document.getElementById('moment-note-display');
+    const noteTitle = document.getElementById('moment-title');
+    const noteMsg = document.getElementById('moment-message');
+    const progressFill = document.getElementById('stepper-progress-fill');
+    const btnPrev = document.getElementById('btn-prev-moment');
+    const btnNext = document.getElementById('btn-next-moment');
+    const nextLabel = document.getElementById('next-moment-label');
+    const celebrationBox = document.getElementById('anniversary-celebration-box');
+    const btnReCelebrate = document.getElementById('btn-re-celebrate');
+    const stepBtns = [
+      document.getElementById('step-btn-1'),
+      document.getElementById('step-btn-2'),
+      document.getElementById('step-btn-3')
+    ];
+
+    function showMoment(stepIndex, userAction = true) {
+      if (stepIndex < 0 || stepIndex >= momentos.length) return;
+      currentMomentStep = stepIndex;
+      const m = momentos[currentMomentStep];
+
+      // 1. Actualizar foto con transición de opacidad
+      if (polaroidImg) {
+        polaroidImg.style.opacity = '0';
+        polaroidImg.style.transform = 'scale(0.96)';
+        setTimeout(() => {
+          polaroidImg.src = m.foto;
+          polaroidImg.style.opacity = '1';
+          polaroidImg.style.transform = 'scale(1)';
+        }, 120);
+      }
+
+      // 2. Actualizar textos
+      if (captionText) captionText.textContent = m.pieFoto || '';
+      if (dateTag) dateTag.textContent = `Momento ${m.numero} de 3 • ${m.fechaMomento || ''}`;
+      if (noteTitle) noteTitle.textContent = m.titulo || '';
+      if (noteMsg) noteMsg.textContent = m.mensaje || '';
+
+      // Animación de la tarjeta descriptiva
+      if (noteDisplay) {
+        noteDisplay.style.animation = 'none';
+        void noteDisplay.offsetWidth; // Reflow
+        noteDisplay.style.animation = 'momentSlidePop 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards';
+      }
+
+      // 3. Actualizar stepper (1 al 3)
+      stepBtns.forEach((btn, idx) => {
+        if (!btn) return;
+        if (idx === currentMomentStep) {
+          btn.classList.add('active');
+          btn.setAttribute('aria-selected', 'true');
+        } else {
+          btn.classList.remove('active');
+          btn.setAttribute('aria-selected', 'false');
+        }
+      });
+
+      // Línea de progreso (0%, 50%, 100%)
+      if (progressFill) {
+        const percent = (currentMomentStep / (momentos.length - 1)) * 100;
+        progressFill.style.width = `${percent}%`;
+      }
+
+      // 4. Actualizar botones de navegación
+      if (btnPrev) {
+        btnPrev.disabled = currentMomentStep === 0;
+      }
+
+      if (nextLabel) {
+        if (currentMomentStep === 2) {
+          nextLabel.textContent = '🎉 ¡Festejar Nuestro Aniversario!';
+          if (btnNext) btnNext.classList.add('highlight');
+        } else {
+          nextLabel.textContent = 'Siguiente Momento ▶';
+        }
+      }
+
+      // 5. Clímax en el Paso 3 (2 años y 10 meses)
+      if (currentMomentStep === 2) {
+        if (celebrationBox) celebrationBox.classList.remove('hidden');
+        if (userAction) {
+          playCelebrationChord();
+          if (navigator.vibrate) {
+            try { navigator.vibrate([70, 50, 90, 50, 120]); } catch (e) {}
+          }
+          launchConfettiBurst(['🥂', '💖', '💍', '✨', '🎉', '🍾', '❤️', '⭐', '🌹']);
+        }
+      } else {
+        if (celebrationBox) celebrationBox.classList.add('hidden');
+        if (userAction) {
+          playRomanticChime();
+        }
+      }
+    }
+
+    // Partículas al tocar la foto polaroid
+    function spawnPhotoParticles(centerX, centerY) {
+      const symbols = ['🥂', '💖', '✨', '⭐', '❤️', '🥰'];
+      for (let i = 0; i < 7; i++) {
+        const p = document.createElement('span');
+        p.className = 'floating-heart-particle';
+        p.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+
+        const dx = (Math.random() - 0.5) * 120;
+        const rot = (Math.random() - 0.5) * 50;
+        const size = 1.1 + Math.random() * 0.7;
+
+        p.style.position = 'fixed';
+        p.style.left = `${centerX}px`;
+        p.style.top = `${centerY}px`;
+        p.style.fontSize = `${size}rem`;
+        p.style.setProperty('--dx', `${dx}px`);
+        p.style.setProperty('--rot', `${rot}deg`);
+
+        document.body.appendChild(p);
+
+        setTimeout(() => {
+          if (p.parentNode) p.parentNode.removeChild(p);
+        }, 1600);
+      }
+    }
+
+    // Mostrar momento actual
+    showMoment(currentMomentStep, false);
+
+    if (aniversarioInitialized) return;
+    aniversarioInitialized = true;
+
+    // Clics en los botones 1, 2, 3
+    stepBtns.forEach((btn, idx) => {
+      if (btn) {
+        btn.addEventListener('click', () => showMoment(idx, true));
+      }
+    });
+
+    // Clic en foto Polaroid
+    if (polaroidFrame) {
+      polaroidFrame.addEventListener('click', () => {
+        playRomanticChime();
+        const rect = polaroidFrame.getBoundingClientRect();
+        spawnPhotoParticles(rect.left + rect.width / 2, rect.top + rect.height / 2);
+      });
+    }
+
+    // Navegación anterior / siguiente
+    if (btnPrev) {
+      btnPrev.addEventListener('click', () => {
+        if (currentMomentStep > 0) showMoment(currentMomentStep - 1, true);
+      });
+    }
+
+    if (btnNext) {
+      btnNext.addEventListener('click', () => {
+        if (currentMomentStep < momentos.length - 1) {
+          showMoment(currentMomentStep + 1, true);
+        } else {
+          // Si ya está en el paso 3 y pulsa festejar, detona más fiesta
+          playCelebrationChord();
+          if (navigator.vibrate) {
+            try { navigator.vibrate([70, 50, 90, 50, 120]); } catch (e) {}
+          }
+          launchConfettiBurst(['🥂', '💖', '💍', '✨', '🎉', '🍾', '❤️', '⭐', '🌹']);
+        }
+      });
+    }
+
+    // Botón de re-celebrar
+    if (btnReCelebrate) {
+      btnReCelebrate.addEventListener('click', () => {
+        playCelebrationChord();
+        launchConfettiBurst(['🥂', '💖', '💍', '✨', '🎉', '🍾', '❤️', '⭐', '🌹']);
+      });
+    }
+  }
+
   // Partículas táctiles en el lienzo de museo
   const HEART_SYMBOLS = ['❤️', '✨', '💖', '💕', '🌸', '💫'];
 
@@ -1219,6 +1414,7 @@
     const sealBtn2 = document.getElementById('seal-btn-scratch');
     const sealBtn3 = document.getElementById('seal-btn-frasco');
     const sealBtn4 = document.getElementById('seal-btn-halloween');
+    const sealBtn5 = document.getElementById('seal-btn-aniversario');
     const closeLetterBtn = document.getElementById('close-letter-btn');
     const secretModal = document.getElementById('secret-modal');
 
@@ -1226,6 +1422,7 @@
     if (sealBtn2) sealBtn2.addEventListener('click', (e) => { e.stopPropagation(); showSecretModal(); });
     if (sealBtn3) sealBtn3.addEventListener('click', (e) => { e.stopPropagation(); showSecretModal(); });
     if (sealBtn4) sealBtn4.addEventListener('click', (e) => { e.stopPropagation(); showSecretModal(); });
+    if (sealBtn5) sealBtn5.addEventListener('click', (e) => { e.stopPropagation(); showSecretModal(); });
     if (closeLetterBtn) closeLetterBtn.addEventListener('click', hideSecretModal);
 
     if (secretModal) {

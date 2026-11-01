@@ -2159,4 +2159,425 @@ html, body {
   width: 100%;
 }
 
+/* ==============================================================================
+   🥂 ESCENA DÍA 5: ANIVERSARIO 2 AÑOS Y 10 MESES (Álbum de 1 a 3)
+   ============================================================================== */
+
+.anniversary-experience-wrapper {
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.anniversary-card {
+  width: 100%;
+  background: linear-gradient(165deg, rgba(35, 27, 23, 0.94) 0%, rgba(18, 14, 13, 0.98) 100%);
+  border: 1px solid rgba(245, 158, 11, 0.32);
+  border-radius: 26px;
+  padding: 1.5rem 1.25rem;
+  box-shadow: 
+    0 20px 45px rgba(0, 0, 0, 0.75),
+    0 0 35px rgba(245, 158, 11, 0.18),
+    0 0 20px rgba(244, 63, 94, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(14px);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.anniversary-card::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 250px;
+  height: 120px;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.25) 0%, rgba(244, 63, 94, 0.15) 50%, transparent 70%);
+  filter: blur(28px);
+  pointer-events: none;
+}
+
+.anniversary-header {
+  margin-bottom: 1.15rem;
+}
+
+.anniversary-badge {
+  display: inline-block;
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  color: #fef3c7;
+  background: rgba(245, 158, 11, 0.18);
+  border: 1px solid rgba(245, 158, 11, 0.45);
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.22);
+}
+
+.anniversary-headline {
+  font-family: 'Cinzel', serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 35%, #fde68a 60%, #f59e0b 85%, #fb7185 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.35rem;
+}
+
+.anniversary-subtext {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem;
+  font-style: italic;
+  color: #e5d7c8;
+  line-height: 1.35;
+}
+
+/* Selector Interactivo de Pasos (1 al 3) */
+.story-stepper-container {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.75rem 0 1.25rem;
+  padding: 0 1rem;
+  width: 100%;
+}
+
+.stepper-track-line {
+  position: absolute;
+  top: 19px;
+  left: 2.2rem;
+  right: 2.2rem;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.12);
+  z-index: 1;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.stepper-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #f59e0b 0%, #f43f5e 100%);
+  transition: width 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 0 8px rgba(245, 158, 11, 0.8);
+}
+
+.step-pill-btn {
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  transition: transform 0.25s ease;
+}
+
+.step-pill-number {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #231b17;
+  border: 2px solid rgba(245, 158, 11, 0.35);
+  color: #fde68a;
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.step-pill-btn:hover .step-pill-number {
+  transform: scale(1.08);
+  border-color: #f59e0b;
+}
+
+.step-pill-btn.active .step-pill-number {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 60%, #b45309 100%);
+  color: #ffffff;
+  border-color: #fffbeb;
+  transform: scale(1.15);
+  box-shadow: 
+    0 0 16px rgba(245, 158, 11, 0.8),
+    0 6px 14px rgba(0, 0, 0, 0.5);
+}
+
+.step-pill-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.05em;
+  color: #bfaea0;
+  transition: color 0.2s ease;
+}
+
+.step-pill-btn.active .step-pill-label {
+  color: #fde68a;
+  font-weight: 700;
+}
+
+/* Marco Polaroid 3D */
+.polaroid-wrapper {
+  margin: 0.25rem auto 0.75rem;
+  display: flex;
+  justify-content: center;
+}
+
+.polaroid-frame {
+  width: 290px;
+  background: #faf7f2;
+  padding: 12px 12px 16px 12px;
+  border-radius: 6px;
+  box-shadow: 
+    0 16px 36px rgba(0, 0, 0, 0.65),
+    0 2px 8px rgba(0, 0, 0, 0.25);
+  position: relative;
+  cursor: pointer;
+  transform: rotate(-1.5deg);
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease;
+  user-select: none;
+}
+
+.polaroid-frame:hover,
+.polaroid-frame:focus-visible {
+  transform: rotate(0deg) scale(1.03) translateY(-4px);
+  box-shadow: 
+    0 22px 42px rgba(0, 0, 0, 0.75),
+    0 0 24px rgba(245, 158, 11, 0.3);
+}
+
+.polaroid-frame:active {
+  transform: scale(0.98);
+}
+
+/* Cinta Washi Tape */
+.washi-tape {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%) rotate(2deg);
+  width: 78px;
+  height: 22px;
+  background: rgba(245, 158, 11, 0.5);
+  backdrop-filter: blur(2px);
+  border-left: 2px dashed rgba(255, 255, 255, 0.5);
+  border-right: 2px dashed rgba(255, 255, 255, 0.5);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  z-index: 10;
+}
+
+.polaroid-photo-container {
+  width: 100%;
+  height: 270px;
+  overflow: hidden;
+  background: #1c1819;
+  position: relative;
+  border-radius: 3px;
+}
+
+.polaroid-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: opacity 0.3s ease, transform 0.4s ease;
+}
+
+.polaroid-vignette {
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.25);
+  pointer-events: none;
+}
+
+/* Pie de foto de la Polaroid */
+.polaroid-caption {
+  margin-top: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.polaroid-caption-text {
+  font-family: 'Alex Brush', cursive;
+  font-size: 1.55rem;
+  color: #2b211c;
+  line-height: 1.2;
+}
+
+.polaroid-date-tag {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  color: #8a7366;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* Dedicatoria del Momento */
+.moment-note-container {
+  width: 100%;
+  margin: 0.5rem 0 0.85rem;
+  animation: momentSlidePop 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+}
+
+@keyframes momentSlidePop {
+  0% {
+    opacity: 0;
+    transform: translateY(14px) scale(0.94);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.moment-note-card {
+  background: linear-gradient(175deg, rgba(38, 29, 25, 0.9) 0%, rgba(24, 18, 16, 0.96) 100%);
+  border: 1px solid rgba(245, 158, 11, 0.28);
+  border-radius: 16px;
+  padding: 1.15rem 1rem;
+  box-shadow: 
+    0 10px 25px rgba(0, 0, 0, 0.55),
+    0 0 15px rgba(245, 158, 11, 0.12);
+  text-align: center;
+}
+
+.moment-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fde68a;
+  margin-bottom: 0.45rem;
+}
+
+.moment-message {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem;
+  line-height: 1.45;
+  font-style: italic;
+  color: #f3e5d8;
+  padding: 0 0.4rem;
+}
+
+/* Controles de Navegación */
+.story-nav-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.85rem;
+  width: 100%;
+}
+
+.story-nav-btn {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  color: #fde68a;
+  font-family: 'Cinzel', serif;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  padding: 0.65rem 0.95rem;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+}
+
+.story-nav-btn:hover:not(:disabled) {
+  background: rgba(245, 158, 11, 0.2);
+  border-color: #fde68a;
+  color: #ffffff;
+}
+
+.story-nav-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #8c7c72;
+}
+
+.story-nav-btn.highlight {
+  background: linear-gradient(135deg, #d97706 0%, #b45309 50%, #9a3412 100%);
+  color: #fffbeb;
+  border-color: #fde68a;
+  box-shadow: 0 4px 14px rgba(217, 119, 6, 0.45);
+}
+
+.story-nav-btn.highlight:hover {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  box-shadow: 0 6px 18px rgba(245, 158, 11, 0.6);
+}
+
+/* Banner de Celebración de Aniversario */
+.anniversary-celebration-box {
+  margin-top: 1.15rem;
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.16) 0%, rgba(244, 63, 94, 0.14) 100%);
+  border: 1px dashed rgba(245, 158, 11, 0.5);
+  border-radius: 18px;
+  padding: 1.1rem 1rem;
+  animation: celebrationPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes celebrationPop {
+  0% { transform: scale(0.9); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.celebration-badge {
+  font-family: 'Cinzel', serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #fef08a;
+  margin-bottom: 0.35rem;
+}
+
+.celebration-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-style: italic;
+  color: #fef3c7;
+  line-height: 1.35;
+  margin-bottom: 0.75rem;
+}
+
+.btn-re-celebrate {
+  background: linear-gradient(135deg, #e11d48 0%, #be123c 100%);
+  color: #ffffff;
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  padding: 0.55rem 1.15rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(254, 205, 211, 0.5);
+  box-shadow: 0 4px 14px rgba(225, 29, 72, 0.4);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-re-celebrate:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(225, 29, 72, 0.6);
+}
+
+
 
