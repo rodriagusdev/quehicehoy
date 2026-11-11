@@ -275,6 +275,58 @@ const HISTORIAL_DIAS = [
     mensajeSecreto: "Felices 2 años y 10 meses, amor de mi vida. No te das una idea de lo feliz que me hace tenerte al lado todos los días. Sos mi compañera de vida, mi refugio y lo más lindo que me pasó en el universo. Gracias por cada beso, por cada charla hasta tarde, por bancarme siempre y por hacerme sentir el tipo más afortunado del planeta. Te amo con todo mi corazón y con toda mi alma, hoy y siempre ❤️🥂",
     efectosSonoros: true,
     temaColor: "anniversary"
+  },
+
+  // ----------------------------------------------------------------------------
+  // 🌌 DÍA 6: 500+ KM DE DISTANCIA - El Mismo Cielo Estrellado
+  // ----------------------------------------------------------------------------
+  {
+    id: "dia-6",
+    numero: 6,
+    fecha: "2026-11-10",
+    fechaLegible: "10 de Noviembre, 2026",
+    icono: "🌌",
+    badge: "500+ KM • EL MISMO CIELO",
+    titulo: "El Puente de Estrellas",
+    experiencia: "cielo-distancia", // Interfaz interactiva de constelación estelar a 500+ km
+    subtitulo: "Nos separan más de 500 km, pero levantá la mirada: estamos bajo el mismo cielo azul noche.",
+    tecnica: "Noche estrellada, señales cósmicas y amor a prueba de kilómetros",
+    kmDistancia: "500+",
+    mensajesEstelares: [
+      {
+        icono: "💫",
+        titulo: "El Mismo Cielo",
+        texto: "Mirá para arriba un segundo: esa misma luna y las estrellas que ves vos desde allá, las estoy mirando yo acá pensando en vos."
+      },
+      {
+        icono: "🚀",
+        titulo: "500 km No Son Nada",
+        texto: "Son más de 500 kilómetros de ruta, pero en mi cabeza y en mi corazón estás acá al lado mío todo el día."
+      },
+      {
+        icono: "💌",
+        titulo: "Beso Teledirigido",
+        texto: "Acaba de salir un beso volando a la velocidad de la luz. Calculo que en 0.2 segundos te impacta en los labios."
+      },
+      {
+        icono: "🫂",
+        titulo: "Abrazo Satelital",
+        texto: "Cerrá los ojos e imaginate que te estoy envolviendo fuerte en mis brazos. Ninguna distancia nos puede quitar eso."
+      },
+      {
+        icono: "✨",
+        titulo: "Un Día Menos",
+        texto: "Cada hora que pasa es un pasito más cerca de volver a tenerte enfrente, abrazarte y no soltarte por horas."
+      },
+      {
+        icono: "🌌",
+        titulo: "Noche Estrellada Para Vos",
+        texto: "Elegí el azul más profundo del universo para recordarte que sos la estrella que más brilla en mi vida, che hermosa."
+      }
+    ],
+    mensajeSecreto: "Che mi amor, sé que hoy nos separan más de 500 kilómetros y que la distancia a veces se hace sentir, pero quiero que te acuerdes siempre de algo: no hay ruta, mapa ni kilómetros en este planeta que puedan alejarte de mí. Cada vez que me extrañes, mirá este cielo azul noche... estamos respirando el mismo aire, compartiendo las mismas estrellas y latiendo al mismo ritmo. Falta menos para vernos y llenarte de besos. Te amo con toda mi alma, hoy más que nunca ❤️🌌",
+    efectosSonoros: true,
+    temaColor: "midnight-stars"
   }
 ];
 

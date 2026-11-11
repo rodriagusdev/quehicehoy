@@ -282,6 +282,63 @@
     } catch (e) {}
   }
 
+  // Sonido de estrella fugaz cruzando la distancia
+  function playStarlightWhoosh() {
+    if (!audioEnabled) return;
+    initAudio();
+    if (!audioCtx) return;
+
+    try {
+      const now = audioCtx.currentTime;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(320, now);
+      osc.frequency.exponentialRampToValueAtTime(1400, now + 0.3);
+      osc.frequency.exponentialRampToValueAtTime(750, now + 0.55);
+
+      gain.gain.setValueAtTime(0, now);
+      gain.gain.linearRampToValueAtTime(0.06, now + 0.12);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.58);
+
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      osc.start(now);
+      osc.stop(now + 0.6);
+    } catch (e) {}
+  }
+
+  // Campanitas celestiales cósmicas
+  function playCosmicChime() {
+    if (!audioEnabled) return;
+    initAudio();
+    if (!audioCtx) return;
+
+    try {
+      const notes = [659.25, 830.61, 987.77, 1318.51, 1661.22]; // E5, G#5, B5, E6, G#6
+      notes.forEach((freq, idx) => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        const startTime = audioCtx.currentTime + idx * 0.08;
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, startTime);
+
+        gain.gain.setValueAtTime(0, startTime);
+        gain.gain.linearRampToValueAtTime(0.06, startTime + 0.03);
+        gain.gain.exponentialRampToValueAtTime(0.0001, startTime + 1.4);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.start(startTime);
+        osc.stop(startTime + 1.45);
+      });
+    } catch (e) {}
+  }
+
   // ----------------------------------------------------------------------------
   // GESTOR DE DÍAS Y NAVEGACIÓN (REWIND ENGINE)
   // ----------------------------------------------------------------------------
@@ -301,14 +358,21 @@
     const sceneFrasco = document.getElementById('scene-frasco');
     const sceneHalloween = document.getElementById('scene-halloween');
     const sceneAniversario = document.getElementById('scene-aniversario');
+    const sceneDistancia = document.getElementById('scene-distancia');
 
     if (sceneMuseo) sceneMuseo.classList.add('hidden');
     if (sceneScratch) sceneScratch.classList.add('hidden');
     if (sceneFrasco) sceneFrasco.classList.add('hidden');
     if (sceneHalloween) sceneHalloween.classList.add('hidden');
     if (sceneAniversario) sceneAniversario.classList.add('hidden');
+    if (sceneDistancia) sceneDistancia.classList.add('hidden');
 
-    if (day.experiencia === 'album-aniversario') {
+    if (day.experiencia === 'cielo-distancia') {
+      if (sceneDistancia) {
+        sceneDistancia.classList.remove('hidden');
+        initCieloDistancia(day);
+      }
+    } else if (day.experiencia === 'album-aniversario') {
       if (sceneAniversario) {
         sceneAniversario.classList.remove('hidden');
         initAlbumAniversario(day);
@@ -351,7 +415,9 @@
     // 3. Ambient Glow adaptado al color del día
     const ambientGlow = document.getElementById('ambient-glow');
     if (ambientGlow) {
-      if (day.temaColor === 'anniversary') {
+      if (day.temaColor === 'midnight-stars') {
+        ambientGlow.style.background = 'radial-gradient(circle, rgba(56, 189, 248, 0.25) 0%, rgba(30, 58, 138, 0.3) 40%, rgba(7, 11, 25, 0.75) 75%, transparent 90%)';
+      } else if (day.temaColor === 'anniversary') {
         ambientGlow.style.background = 'radial-gradient(circle, rgba(245, 158, 11, 0.24) 0%, rgba(244, 63, 94, 0.16) 45%, transparent 70%)';
       } else if (day.temaColor === 'halloween') {
         ambientGlow.style.background = 'radial-gradient(circle, rgba(168, 85, 247, 0.24) 0%, rgba(249, 115, 22, 0.18) 45%, transparent 70%)';
@@ -1231,6 +1297,246 @@
     }
   }
 
+  // ----------------------------------------------------------------------------
+  // 🌌 DÍA 6: 500+ KM DE DISTANCIA (Engine)
+  // ----------------------------------------------------------------------------
+  let distanciaInitialized = false;
+  let currentSignalIndex = 0;
+  let signalsSentCount = 1;
+  let isHoldingSync = false;
+  let syncStartTime = 0;
+  let syncHeartbeatTimer = null;
+  let syncAnimFrame = null;
+  const SYNC_TOTAL_DURATION = 2400; // ms
+
+  function initCieloDistancia(day) {
+    const mensajes = day.mensajesEstelares || [];
+    const beam = document.getElementById('shooting-star-beam');
+    const beaconNicky = document.getElementById('beacon-nicky');
+    const btnSendSignal = document.getElementById('btn-send-signal');
+    const btnAnotherSignal = document.getElementById('btn-another-signal');
+    const msgCard = document.getElementById('starlight-message-display');
+    const msgIcon = document.getElementById('starlight-msg-icon');
+    const msgBadge = document.getElementById('starlight-msg-badge');
+    const msgTitle = document.getElementById('starlight-msg-title');
+    const msgText = document.getElementById('starlight-msg-text');
+    const distDisplay = document.getElementById('distance-number-display');
+    const signalsCounter = document.getElementById('signals-count');
+    const btnSync = document.getElementById('btn-sync-distance');
+    const syncRing = document.getElementById('sync-progress-circle');
+    const syncStatus = document.getElementById('sync-status-text');
+
+    function displayMessage(msg, triggerAnimation = true) {
+      if (!msg) return;
+      if (msgIcon) msgIcon.textContent = msg.icono || '💫';
+      if (msgBadge) msgBadge.textContent = 'Señal Recibida a 500+ km';
+      if (msgTitle) msgTitle.textContent = msg.titulo || '';
+      if (msgText) msgText.textContent = msg.texto || '';
+
+      if (triggerAnimation && msgCard) {
+        msgCard.style.animation = 'none';
+        void msgCard.offsetWidth; // Reflow
+        msgCard.style.animation = 'starlightSlidePop 0.42s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards';
+      }
+    }
+
+    function sendSignal(userAction = true) {
+      if (mensajes.length === 0) return;
+      currentSignalIndex = (currentSignalIndex + 1) % mensajes.length;
+      const nextMsg = mensajes[currentSignalIndex];
+
+      if (userAction) {
+        // 1. Sonido cósmico y haz de luz
+        playStarlightWhoosh();
+        if (beam) {
+          beam.classList.remove('travelling');
+          void beam.offsetWidth;
+          beam.classList.add('travelling');
+        }
+
+        if (navigator.vibrate) {
+          try { navigator.vibrate(30); } catch(e) {}
+        }
+
+        // 2. Al llegar la señal a destino (~550ms)
+        setTimeout(() => {
+          playCosmicChime();
+          displayMessage(nextMsg, true);
+
+          if (beaconNicky) {
+            const rect = beaconNicky.getBoundingClientRect();
+            spawnStarlightParticles(rect.left + rect.width / 2, rect.top + rect.height / 2);
+          }
+
+          if (navigator.vibrate) {
+            try { navigator.vibrate([40, 30, 70]); } catch(e) {}
+          }
+
+          signalsSentCount++;
+          if (signalsCounter) signalsCounter.textContent = signalsSentCount;
+        }, 550);
+      } else {
+        displayMessage(nextMsg, false);
+      }
+    }
+
+    function spawnStarlightParticles(centerX, centerY) {
+      const symbols = ['🌌', '✨', '💫', '🌠', '❤️', '⭐', '🪐'];
+      for (let i = 0; i < 7; i++) {
+        const p = document.createElement('span');
+        p.className = 'floating-heart-particle';
+        p.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+
+        const dx = (Math.random() - 0.5) * 120;
+        const rot = (Math.random() - 0.5) * 60;
+        const size = 1.1 + Math.random() * 0.7;
+
+        p.style.position = 'fixed';
+        p.style.left = `${centerX}px`;
+        p.style.top = `${centerY}px`;
+        p.style.fontSize = `${size}rem`;
+        p.style.setProperty('--dx', `${dx}px`);
+        p.style.setProperty('--rot', `${rot}deg`);
+
+        document.body.appendChild(p);
+
+        setTimeout(() => {
+          if (p.parentNode) p.parentNode.removeChild(p);
+        }, 1600);
+      }
+    }
+
+    // Inicializar primer mensaje
+    if (!distanciaInitialized && mensajes.length > 0) {
+      displayMessage(mensajes[0], false);
+    }
+
+    if (distanciaInitialized) return;
+    distanciaInitialized = true;
+
+    if (btnSendSignal) btnSendSignal.addEventListener('click', () => sendSignal(true));
+    if (btnAnotherSignal) btnAnotherSignal.addEventListener('click', () => sendSignal(true));
+    if (beaconNicky) beaconNicky.addEventListener('click', () => sendSignal(true));
+
+    // --------------------------------------------------------------------------
+    // LÓGICA DE SINCRONIZACIÓN A LA DISTANCIA (Touch & Hold)
+    // --------------------------------------------------------------------------
+    function updateSyncRing(fraction) {
+      if (!syncRing) return;
+      const offset = 326.72 * (1 - fraction);
+      syncRing.style.strokeDashoffset = offset;
+    }
+
+    function stepSyncAnimation() {
+      if (!isHoldingSync) return;
+      const elapsed = Date.now() - syncStartTime;
+      const progress = Math.min(elapsed / SYNC_TOTAL_DURATION, 1);
+      updateSyncRing(progress);
+
+      // Countdown visual de distancia: 500+ -> 0 km
+      const remainingKm = Math.round(540 * (1 - progress));
+      if (distDisplay) {
+        distDisplay.textContent = remainingKm > 0 ? `${remainingKm} KM` : '¡0 KM! ❤️';
+      }
+
+      if (syncStatus) {
+        if (progress < 0.3) {
+          syncStatus.textContent = 'Conectando almas a 500 km... 📡';
+        } else if (progress < 0.7) {
+          syncStatus.textContent = 'Acortando distancias en el cielo... ✨';
+        } else if (progress < 0.95) {
+          syncStatus.textContent = '¡Sintiendo tu latido acá cerquita!... 💓';
+        }
+      }
+
+      if (progress >= 1) {
+        completeDistanceSync();
+      } else {
+        syncAnimFrame = requestAnimationFrame(stepSyncAnimation);
+      }
+    }
+
+    function startDistanceSync(e) {
+      if (e) e.preventDefault();
+      if (isHoldingSync) return;
+      isHoldingSync = true;
+      syncStartTime = Date.now();
+
+      if (btnSync) btnSync.classList.add('holding');
+
+      playHeartbeatSound();
+      if (navigator.vibrate) {
+        try { navigator.vibrate(35); } catch(e) {}
+      }
+
+      syncHeartbeatTimer = setInterval(() => {
+        playHeartbeatSound();
+        if (navigator.vibrate) {
+          try { navigator.vibrate(35); } catch(e) {}
+        }
+      }, 650);
+
+      syncAnimFrame = requestAnimationFrame(stepSyncAnimation);
+    }
+
+    function cancelDistanceSync() {
+      if (!isHoldingSync) return;
+      isHoldingSync = false;
+
+      if (btnSync) btnSync.classList.remove('holding');
+      if (syncHeartbeatTimer) clearInterval(syncHeartbeatTimer);
+      if (syncAnimFrame) cancelAnimationFrame(syncAnimFrame);
+
+      updateSyncRing(0);
+      if (distDisplay) distDisplay.textContent = '500+ KM';
+
+      if (syncStatus) {
+        syncStatus.textContent = '¡No sueltes! Mantené presionado para conectar 🤗';
+      }
+    }
+
+    function completeDistanceSync() {
+      isHoldingSync = false;
+      if (btnSync) btnSync.classList.remove('holding');
+      if (syncHeartbeatTimer) clearInterval(syncHeartbeatTimer);
+      if (syncAnimFrame) cancelAnimationFrame(syncAnimFrame);
+
+      updateSyncRing(1);
+      if (distDisplay) distDisplay.textContent = '¡0 KM! ❤️';
+
+      playCelebrationChord();
+      setTimeout(playCosmicChime, 250);
+
+      if (navigator.vibrate) {
+        try { navigator.vibrate([60, 40, 80, 40, 100]); } catch(e) {}
+      }
+
+      launchConfettiBurst(['🌌', '✨', '💫', '🌠', '❤️', '⭐', '🚀', '💖']);
+
+      if (syncStatus) {
+        syncStatus.textContent = '¡CERO DISTANCIA! Estamos juntos en el corazón 💕';
+      }
+
+      signalsSentCount++;
+      if (signalsCounter) signalsCounter.textContent = signalsSentCount;
+
+      setTimeout(() => {
+        updateSyncRing(0);
+        if (distDisplay && !isHoldingSync) distDisplay.textContent = '500+ KM';
+        if (syncStatus && !isHoldingSync) {
+          syncStatus.textContent = 'Apoyá tu dedo para conectar nuestras estrellas...';
+        }
+      }, 4500);
+    }
+
+    if (btnSync) {
+      btnSync.addEventListener('pointerdown', startDistanceSync);
+      btnSync.addEventListener('pointerup', cancelDistanceSync);
+      btnSync.addEventListener('pointercancel', cancelDistanceSync);
+      btnSync.addEventListener('pointerleave', cancelDistanceSync);
+    }
+  }
+
   // Partículas táctiles en el lienzo de museo
   const HEART_SYMBOLS = ['❤️', '✨', '💖', '💕', '🌸', '💫'];
 
@@ -1415,6 +1721,7 @@
     const sealBtn3 = document.getElementById('seal-btn-frasco');
     const sealBtn4 = document.getElementById('seal-btn-halloween');
     const sealBtn5 = document.getElementById('seal-btn-aniversario');
+    const sealBtn6 = document.getElementById('seal-btn-distancia');
     const closeLetterBtn = document.getElementById('close-letter-btn');
     const secretModal = document.getElementById('secret-modal');
 
@@ -1423,6 +1730,7 @@
     if (sealBtn3) sealBtn3.addEventListener('click', (e) => { e.stopPropagation(); showSecretModal(); });
     if (sealBtn4) sealBtn4.addEventListener('click', (e) => { e.stopPropagation(); showSecretModal(); });
     if (sealBtn5) sealBtn5.addEventListener('click', (e) => { e.stopPropagation(); showSecretModal(); });
+    if (sealBtn6) sealBtn6.addEventListener('click', (e) => { e.stopPropagation(); showSecretModal(); });
     if (closeLetterBtn) closeLetterBtn.addEventListener('click', hideSecretModal);
 
     if (secretModal) {

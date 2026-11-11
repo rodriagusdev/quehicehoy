@@ -62,6 +62,13 @@ Cada día (o en cada actualización), el usuario le presenta una sorpresa nueva,
 - **Carta Secreta del Día 5:** Mensaje accesible mediante el sello de brindis (`🥂`):
   > *"Felices 2 años y 10 meses, amor de mi vida. No te das una idea de lo feliz que me hace tenerte al lado todos los días. Sos mi compañera de vida, mi refugio y lo más lindo que me pasó en el universo. Gracias por cada beso, por cada charla hasta tarde, por bancarme siempre y por hacerme sentir el tipo más afortunado del planeta. Te amo con todo mi corazón y con toda mi alma, hoy y siempre ❤️🥂"*
 
+### 🌌 Día 6: 500+ KM de Distancia ("El Puente de Estrellas")
+- **Experiencia:** Noche estrellada profunda (en su color favorito: azul oscuro como de noche estrellada `#0b132b` / `#1c2541` con estrellas titilantes). Dedicado a la distancia física (más de 500 kilómetros) recordándole que están bajo el mismo cielo azul noche.
+- **Mecánica 1 (Enviar Señal Cósmica a 500+ km):** Tocar "Enviar Señal de Amor" dispara un haz de luz estelar brillante que viaja zumbando de un extremo al otro uniendo ambos puntos con sonido cósmico (`playStarlightWhoosh`), campanitas celestiales (`playCosmicChime`), vibración háptica suave y mensajes reconfortantes a la distancia (*Beso teledirigido*, *El mismo cielo*, *500 km no son nada*, *Abrazo satelital*, etc.).
+- **Mecánica 2 (Sincronización Cósmica "Touch & Hold"):** Mantener presionado el corazón cósmico reduce la distancia en tiempo real en la pantalla desde 540 km hasta 0 km al ritmo de latidos sintetizados y destellos de luz. Al llegar a 0 km: lluvia de confeti de estrellas fugaces (`🌌`, `✨`, `💫`, `🌠`, `❤️`), acorde triunfal y confirmación de que no hay distancia en el corazón.
+- **Carta Secreta del Día 6:** Mensaje accesible mediante el sello estelar (`🌌`):
+  > *"Che mi amor, sé que hoy nos separan más de 500 kilómetros y que la distancia a veces se hace sentir, pero quiero que te acuerdes siempre de algo: no hay ruta, mapa ni kilómetros en este planeta que puedan alejarte de mí. Cada vez que me extrañes, mirá este cielo azul noche... estamos respirando el mismo aire, compartiendo las mismas estrellas y latiendo al mismo ritmo. Falta menos para vernos y llenarte de besos. Te amo con toda mi alma, hoy más que nunca ❤️🌌"*
+
 ---
 
 ## ⏳ Arquitectura del Sistema de "Rewind" (Rebobinado)

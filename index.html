@@ -43,7 +43,7 @@
   <meta http-equiv="Expires" content="0">
 
   <!-- Estilos propios de textura, marco de museo, raspa y animaciones -->
-  <link rel="stylesheet" href="./styles.css?v=5.0">
+  <link rel="stylesheet" href="./styles.css?v=6.0">
 </head>
 
 <body class="bg-[#141215] text-stone-200 antialiased select-none">
@@ -568,6 +568,150 @@
         </footer>
       </section>
 
+      <!-- ====================================================================== -->
+      <!-- 🌌 ESCENA DÍA 6: 500+ KM DE DISTANCIA (El Puente de Estrellas)         -->
+      <!-- ====================================================================== -->
+      <section id="scene-distancia" class="scene-view hidden" aria-label="El Puente de Estrellas a la Distancia">
+        <div class="starlight-experience-wrapper">
+          
+          <div class="starlight-card">
+            
+            <!-- Encabezado de la Escena -->
+            <div class="starlight-header">
+              <span class="starlight-badge">🌌 500+ KM • EL MISMO CIELO ESTRELLADO</span>
+              <h2 class="starlight-headline">El Puente de Estrellas</h2>
+              <p class="starlight-subtext">Nos separan muchos kilómetros, pero estamos bajo el mismo cielo azul noche.</p>
+            </div>
+
+            <!-- Mapa Estelar Interactivo (500+ km) -->
+            <div class="starlight-sky-box">
+              
+              <!-- Fondo cósmico con estrellas titilantes -->
+              <div class="sky-stars-ambient" aria-hidden="true">
+                <span class="sky-star s-1">✨</span>
+                <span class="sky-star s-2">✦</span>
+                <span class="sky-star s-3">★</span>
+                <span class="sky-star s-4">✦</span>
+                <span class="sky-star s-5">★</span>
+                <span class="sky-star s-6">✨</span>
+                <span class="sky-star s-7">✦</span>
+                <span class="sky-star s-8">★</span>
+              </div>
+
+              <!-- Haz de luz / estrella fugaz que viaja -->
+              <div id="shooting-star-beam" class="shooting-star-beam" aria-hidden="true"></div>
+
+              <!-- Puntos de Baliza a 500+ km -->
+              <div class="sky-beacons-container">
+                <!-- Punto A: Vos -->
+                <div class="sky-beacon beacon-origin">
+                  <div class="beacon-pulse"></div>
+                  <div class="beacon-core">📍</div>
+                  <span class="beacon-label">Acá yo</span>
+                  <span class="beacon-sub">Pensándote</span>
+                </div>
+
+                <!-- Línea conectora cósmica con indicador de distancia -->
+                <div class="sky-distance-bridge">
+                  <svg class="bridge-svg-line" viewBox="0 0 200 40" preserveAspectRatio="none">
+                    <path class="bridge-path-bg" d="M 0,20 Q 100,5 200,20" fill="none" stroke="rgba(56, 189, 248, 0.25)" stroke-width="2" stroke-dasharray="4 4" />
+                    <path id="bridge-path-active" class="bridge-path-active" d="M 0,20 Q 100,5 200,20" fill="none" stroke="#38bdf8" stroke-width="2.5" />
+                  </svg>
+                  <div class="distance-pill">
+                    <span class="distance-icon">⚡</span>
+                    <span id="distance-number-display" class="distance-val">500+ KM</span>
+                  </div>
+                </div>
+
+                <!-- Punto B: Nicky -->
+                <div id="beacon-nicky" class="sky-beacon beacon-dest" role="button" tabindex="0" aria-label="Tocar para recibir la señal estelar">
+                  <div class="beacon-pulse dest-pulse"></div>
+                  <div class="beacon-core dest-core">💖</div>
+                  <span class="beacon-label">Allá vos</span>
+                  <span class="beacon-sub">Nicky</span>
+                </div>
+              </div>
+
+              <!-- Botón Principal: Enviar Señal a través de los 500 km -->
+              <button id="btn-send-signal" class="btn-send-signal" type="button">
+                <span>🚀</span> Enviar Señal de Amor (500+ km)
+              </button>
+
+            </div>
+
+            <!-- Tarjeta donde aparece el Mensaje Estelar Revelado -->
+            <div id="starlight-message-display" class="starlight-message-container" aria-live="polite">
+              <div class="starlight-message-card">
+                <div class="starlight-message-top">
+                  <span id="starlight-msg-icon" class="starlight-msg-icon">💫</span>
+                  <span id="starlight-msg-badge" class="starlight-msg-badge">Señal Recibida a 500+ km</span>
+                </div>
+                <h3 id="starlight-msg-title" class="starlight-msg-title">El Mismo Cielo</h3>
+                <p id="starlight-msg-text" class="starlight-msg-text">
+                  Mirá para arriba un segundo: esa misma luna y las estrellas que ves vos desde allá, las estoy mirando yo acá pensando en vos.
+                </p>
+                <div class="starlight-footer-action">
+                  <button id="btn-another-signal" class="btn-another-signal" type="button">
+                    <span>✨</span> Mandar otra señal estelar
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Mecánica 2: Sincronización Cósmica (Touch & Hold) -->
+            <div class="distance-sync-section">
+              <div class="distance-sync-header">
+                <span class="sync-title">¿Nos sentimos cerquita?</span>
+                <span class="sync-sub">Mantené presionado para reducir la distancia a 0 km</span>
+              </div>
+
+              <div class="sync-button-container">
+                <!-- SVG Anillo de sincronización -->
+                <svg class="sync-progress-ring" viewBox="0 0 120 120" aria-hidden="true">
+                  <circle class="sync-ring-bg" cx="60" cy="60" r="52"></circle>
+                  <circle id="sync-progress-circle" class="sync-ring-fill" cx="60" cy="60" r="52"></circle>
+                </svg>
+
+                <button id="btn-sync-distance" class="sync-hold-btn" type="button" aria-label="Mantener presionado para conectar a la distancia">
+                  <span id="sync-btn-icon" class="sync-btn-icon">🌌</span>
+                  <span class="sync-pulse-aura" aria-hidden="true"></span>
+                </button>
+              </div>
+
+              <div id="sync-status-text" class="sync-status-text">
+                Apoyá tu dedo para conectar nuestras estrellas...
+              </div>
+
+              <!-- Contador de señales enviadas -->
+              <div class="signals-counter-badge">
+                <span class="counter-label">Señales que cruzaron los 500+ km:</span>
+                <span id="signals-count" class="counter-number">1</span>
+                <span class="counter-infinity">de ∞</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Cédula de Museo para el Día 6 -->
+        <footer class="museum-plaque">
+          <div class="plaque-header">
+            <span class="plaque-title">PUENTE ESTELAR • 500+ KM</span>
+            <span class="plaque-date">10 de Noviembre, 2026</span>
+          </div>
+          <div class="plaque-technique">Noche estrellada, amor a la distancia y un mismo corazón</div>
+          
+          <div class="plaque-footer">
+            <span class="plaque-hint">
+              <span>🌌</span> Tocá el sello estelar para tu carta
+            </span>
+            <button id="seal-btn-distancia" class="wax-seal-btn" title="Abrir mensaje secreto" type="button" aria-label="Abrir mensaje secreto">
+              🌌
+            </button>
+          </div>
+        </footer>
+      </section>
+
     </div>
 
     <!-- ======================================================================== -->
@@ -634,8 +778,8 @@
   </aside>
 
   <!-- Configuración de Obras y Lógica de la Galería (con cache-busting) -->
-  <script src="./content.js?v=5.0"></script>
-  <script src="./app.js?v=5.0"></script>
+  <script src="./content.js?v=6.0"></script>
+  <script src="./app.js?v=6.0"></script>
 </body>
 
 </html>
