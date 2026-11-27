@@ -43,7 +43,7 @@
   <meta http-equiv="Expires" content="0">
 
   <!-- Estilos propios de textura, marco de museo, raspa y animaciones -->
-  <link rel="stylesheet" href="./styles.css?v=6.0">
+  <link rel="stylesheet" href="./styles.css?v=7.0">
 </head>
 
 <body class="bg-[#141215] text-stone-200 antialiased select-none">
@@ -712,6 +712,120 @@
         </footer>
       </section>
 
+      <!-- ====================================================================== -->
+      <!-- ⚡ ESCENA DÍA 7: REACTIVANDO EL AMOR (¡Volví!)                          -->
+      <!-- ====================================================================== -->
+      <section id="scene-reactivacion" class="scene-view hidden" aria-label="Reactivando el Amor">
+        <div class="reactivation-experience-wrapper">
+          
+          <div class="reactivation-card">
+            
+            <!-- Encabezado de Reactivación -->
+            <div class="reactivation-header">
+              <span class="reactivation-badge">⚡ ¡VOLVÍ! • AMOR ACUMULADO AL 1000%</span>
+              <h2 class="reactivation-headline">Reactivando el Amor</h2>
+              <p class="reactivation-subtext">Pasaron varios días sin sorpresa acá... ¡pero acumulé ganas de mimarte!</p>
+            </div>
+
+            <!-- Batería / Reactor de Amor Acumulado -->
+            <div class="reactivation-reactor-box">
+              
+              <div class="reactor-header-info">
+                <span class="reactor-status-tag">🔋 ESTADO DEL SISTEMA: SOBRECARGADO DE AMOR</span>
+                <span id="reactor-days-tag" class="reactor-days-tag">Días sin sorpresa: Varios • Ganas de verte: ∞</span>
+              </div>
+
+              <!-- Animación de Batería Cósmica -->
+              <div class="battery-visual-shell">
+                <div class="battery-terminal"></div>
+                <div class="battery-outer-casing">
+                  <div id="battery-fill-level" class="battery-fill-level" style="width: 100%;">
+                    <div class="battery-liquid-glow"></div>
+                  </div>
+                  <span id="battery-percent-label" class="battery-percent-label">1000% CARGADO</span>
+                </div>
+              </div>
+
+              <!-- Botón Principal: Descargar Amor Acumulado -->
+              <button id="btn-discharge-love" class="btn-discharge-love" type="button">
+                <span>⚡</span> Descargar Amor Acumulado
+              </button>
+
+            </div>
+
+            <!-- Tarjeta donde aparece la Compensación / Mensaje Revelado -->
+            <div id="reactivation-message-display" class="reactivation-message-container" aria-live="polite">
+              <div class="reactivation-message-card">
+                <div class="reactivation-message-top">
+                  <span id="reactivation-msg-icon" class="reactivation-msg-icon">🥰</span>
+                  <span id="reactivation-msg-badge" class="reactivation-msg-badge">Compensación Oficial</span>
+                </div>
+                <h3 id="reactivation-msg-title" class="reactivation-msg-title">Perdón por la colgada, che</h3>
+                <p id="reactivation-msg-text" class="reactivation-msg-text">
+                  Pasaron unos días sin sorpresa nueva en la web, ¡pero mirá si me iba a olvidar de mi persona favorita en el universo!
+                </p>
+                <div class="reactivation-footer-action">
+                  <button id="btn-another-discharge" class="btn-another-discharge" type="button">
+                    <span>✨</span> Reclamar otro mimo acumulado
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Mecánica 2: Reactivador Táctil (Touch & Hold) -->
+            <div class="recharge-sync-section">
+              <div class="recharge-sync-header">
+                <span class="recharge-title">¿Reactivamos el sistema?</span>
+                <span class="recharge-sub">Mantené presionado para desatar toda la energía acumulada</span>
+              </div>
+
+              <div class="recharge-button-container">
+                <!-- SVG Anillo de carga -->
+                <svg class="recharge-progress-ring" viewBox="0 0 120 120" aria-hidden="true">
+                  <circle class="recharge-ring-bg" cx="60" cy="60" r="52"></circle>
+                  <circle id="recharge-progress-circle" class="recharge-ring-fill" cx="60" cy="60" r="52"></circle>
+                </svg>
+
+                <button id="btn-recharge-hold" class="recharge-hold-btn" type="button" aria-label="Mantener presionado para reactivar">
+                  <span id="recharge-btn-icon" class="recharge-btn-icon">⚡</span>
+                  <span class="recharge-pulse-aura" aria-hidden="true"></span>
+                </button>
+              </div>
+
+              <div id="recharge-status-text" class="recharge-status-text">
+                Mantené presionado para reactivar los mimos...
+              </div>
+
+              <!-- Contador de descargas de amor -->
+              <div class="recharge-counter-badge">
+                <span class="counter-label">Mimos acumulados reclamados:</span>
+                <span id="recharge-count" class="counter-number">1</span>
+                <span class="counter-infinity">de ∞</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Cédula de Museo para el Día 7 -->
+        <footer class="museum-plaque">
+          <div class="plaque-header">
+            <span class="plaque-title">DÍA 7 • REACTIVACIÓN</span>
+            <span class="plaque-date">26 de Noviembre, 2026</span>
+          </div>
+          <div class="plaque-technique">Cero excusas, ganas acumuladas y amor incondicional</div>
+          
+          <div class="plaque-footer">
+            <span class="plaque-hint">
+              <span>⚡</span> Tocá el sello para leer la carta de disculpas y amor
+            </span>
+            <button id="seal-btn-reactivacion" class="wax-seal-btn" title="Abrir mensaje secreto" type="button" aria-label="Abrir mensaje secreto">
+              ⚡
+            </button>
+          </div>
+        </footer>
+      </section>
+
     </div>
 
     <!-- ======================================================================== -->
@@ -778,8 +892,8 @@
   </aside>
 
   <!-- Configuración de Obras y Lógica de la Galería (con cache-busting) -->
-  <script src="./content.js?v=6.0"></script>
-  <script src="./app.js?v=6.0"></script>
+  <script src="./content.js?v=7.0"></script>
+  <script src="./app.js?v=7.0"></script>
 </body>
 
 </html>

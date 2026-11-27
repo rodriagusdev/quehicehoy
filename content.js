@@ -327,6 +327,57 @@ const HISTORIAL_DIAS = [
     mensajeSecreto: "Che mi amor, sé que hoy nos separan más de 500 kilómetros y que la distancia a veces se hace sentir, pero quiero que te acuerdes siempre de algo: no hay ruta, mapa ni kilómetros en este planeta que puedan alejarte de mí. Cada vez que me extrañes, mirá este cielo azul noche... estamos respirando el mismo aire, compartiendo las mismas estrellas y latiendo al mismo ritmo. Falta menos para vernos y llenarte de besos. Te amo con toda mi alma, hoy más que nunca ❤️🌌",
     efectosSonoros: true,
     temaColor: "midnight-stars"
+  },
+
+  // ----------------------------------------------------------------------------
+  // ⚡ DÍA 7: ¡Volví! Reactivando el Amor Acumulado
+  // ----------------------------------------------------------------------------
+  {
+    id: "dia-7",
+    numero: 7,
+    fecha: "2026-11-26",
+    fechaLegible: "26 de Noviembre, 2026",
+    icono: "⚡",
+    badge: "¡VOLVÍ! • AMOR ACUMULADO",
+    titulo: "Reactivando el Amor",
+    experiencia: "reactivacion-amor", // Interfaz de recarga de batería de amor y compensación de mimos
+    subtitulo: "Pasaron varios días sin sorpresa por acá, ¡pero el amor acumulado está al 1000%!",
+    tecnica: "Cero excusas, ganas acumuladas y amor incondicional",
+    descargas: [
+      {
+        icono: "🥰",
+        titulo: "Perdón por la colgada, che",
+        texto: "Pasaron unos días sin sorpresa nueva en la web, ¡pero mirá si me iba a olvidar de mi persona favorita en el universo!"
+      },
+      {
+        icono: "💭",
+        titulo: "Te pensé todos los días",
+        texto: "La página habrá estado en pausa, pero en mi cabeza y en mi corazón estuviste presente las 24 horas de cada uno de estos días."
+      },
+      {
+        icono: "📈",
+        titulo: "Intereses Acumulados",
+        texto: "Por ley del corazón, cada día que no hubo sorpresa suma el doble de besos, abrazos y mimos para cobrar cuando quieras."
+      },
+      {
+        icono: "🔋",
+        titulo: "Batería al 1000%",
+        texto: "Tengo tantas ganas de verte, de darte un abrazo apretado y de llenarte la cara de besos que ya no me entran en el pecho."
+      },
+      {
+        icono: "💖",
+        titulo: "Compensación Oficial",
+        texto: "Vale por una dosis extra de atención, paciencia infinita y recordarte lo hermosa que sos todo el tiempo."
+      },
+      {
+        icono: "🚀",
+        titulo: "Sistema Reactivado",
+        texto: "Volvimos y no nos frena nadie. Gracias por bancarme siempre con esa sonrisa que me desarma por completo."
+      }
+    ],
+    mensajeSecreto: "Che mi amor, sé que pasaron varios días sin que te prepare una sorpresa nueva por acá y te pido perdón por la colgada. Pero te juro que no hubo un solo día, ni una sola hora, en la que no estuvieras en mi cabeza y en mi corazón. Esta paginita puede haber estado en pausa unos días, pero lo que siento por vos no frena nunca: al revés, cada día que pasa te amo más, te elijo más y tengo más ganas de abrazarte bien fuerte. Gracias por ser tan compañera, por tu paciencia y por hacerme tan feliz. Te amo con locura, hoy y siempre ❤️⚡",
+    efectosSonoros: true,
+    temaColor: "reactivacion-blue"
   }
 ];
 

@@ -3168,6 +3168,470 @@ html, body {
   color: #94a3b8;
 }
 
+/* ==============================================================================
+   ⚡ ESCENA DÍA 7: REACTIVANDO EL AMOR (¡Volví!)
+   ============================================================================== */
+
+.reactivation-experience-wrapper {
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.reactivation-card {
+  width: 100%;
+  background: linear-gradient(165deg, #070d1e 0%, #0c1630 50%, #152244 100%);
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  border-radius: 26px;
+  padding: 1.5rem 1.25rem;
+  box-shadow: 
+    0 20px 45px rgba(0, 0, 0, 0.8),
+    0 0 35px rgba(56, 189, 248, 0.22),
+    0 0 20px rgba(234, 179, 8, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(16px);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.reactivation-card::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 260px;
+  height: 120px;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.25) 0%, rgba(234, 179, 8, 0.18) 50%, transparent 70%);
+  filter: blur(28px);
+  pointer-events: none;
+}
+
+.reactivation-header {
+  margin-bottom: 1.15rem;
+}
+
+.reactivation-badge {
+  display: inline-block;
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.16em;
+  color: #fef08a;
+  background: rgba(234, 179, 8, 0.15);
+  border: 1px solid rgba(234, 179, 8, 0.45);
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  box-shadow: 0 0 12px rgba(234, 179, 8, 0.25);
+}
+
+.reactivation-headline {
+  font-family: 'Cinzel', serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  background: linear-gradient(135deg, #ffffff 0%, #fef08a 35%, #38bdf8 70%, #60a5fa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.35rem;
+}
+
+.reactivation-subtext {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem;
+  font-style: italic;
+  color: #cbd5e1;
+  line-height: 1.35;
+}
+
+/* Reactor de Amor */
+.reactivation-reactor-box {
+  background: radial-gradient(circle at 50% 30%, rgba(14, 165, 233, 0.2) 0%, rgba(12, 22, 48, 0.9) 75%);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  padding: 1.35rem 0.85rem;
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.reactor-header-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.reactor-status-tag {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: #38bdf8;
+  font-weight: 700;
+}
+
+.reactor-days-tag {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.72rem;
+  color: #94a3b8;
+}
+
+/* Batería Cósmica */
+.battery-visual-shell {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 220px;
+  height: 54px;
+  margin: 0.25rem 0;
+}
+
+.battery-outer-casing {
+  width: 205px;
+  height: 46px;
+  border: 2.5px solid rgba(56, 189, 248, 0.65);
+  border-radius: 12px;
+  background: rgba(10, 15, 30, 0.9);
+  position: relative;
+  overflow: hidden;
+  padding: 3px;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.25);
+}
+
+.battery-terminal {
+  position: absolute;
+  right: 2px;
+  width: 8px;
+  height: 20px;
+  background: rgba(56, 189, 248, 0.8);
+  border-radius: 0 4px 4px 0;
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
+}
+
+.battery-fill-level {
+  height: 100%;
+  background: linear-gradient(90deg, #0284c7 0%, #38bdf8 50%, #facc15 100%);
+  border-radius: 7px;
+  transition: width 0.4s ease;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.7);
+  position: relative;
+  overflow: hidden;
+}
+
+.battery-liquid-glow {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  animation: batteryShimmer 2s infinite linear;
+}
+
+@keyframes batteryShimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.battery-percent-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  color: #ffffff;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
+  pointer-events: none;
+}
+
+/* Botón Descargar Amor */
+.btn-discharge-love {
+  background: linear-gradient(135deg, #0284c7 0%, #2563eb 50%, #eab308 100%);
+  color: #ffffff;
+  font-family: 'Cinzel', serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 0.7rem 1.35rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(254, 240, 138, 0.5);
+  box-shadow: 
+    0 8px 20px rgba(2, 132, 199, 0.4),
+    0 0 16px rgba(234, 179, 8, 0.35);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  transition: all 0.25s ease;
+}
+
+.btn-discharge-love:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 12px 24px rgba(2, 132, 199, 0.55),
+    0 0 24px rgba(234, 179, 8, 0.5);
+}
+
+.btn-discharge-love:active {
+  transform: translateY(1px);
+}
+
+/* Tarjeta del Mensaje Revelado */
+.reactivation-message-container {
+  width: 100%;
+  margin: 0.5rem 0 0.85rem;
+  animation: reactivationSlidePop 0.42s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+}
+
+@keyframes reactivationSlidePop {
+  0% {
+    opacity: 0;
+    transform: translateY(16px) scale(0.93);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.reactivation-message-card {
+  background: linear-gradient(175deg, rgba(15, 23, 42, 0.94) 0%, rgba(12, 22, 48, 0.98) 100%);
+  border: 1.5px solid rgba(56, 189, 248, 0.35);
+  border-radius: 18px;
+  padding: 1.15rem 1rem;
+  box-shadow: 
+    0 10px 25px rgba(0, 0, 0, 0.6),
+    0 0 18px rgba(234, 179, 8, 0.15);
+  position: relative;
+  text-align: center;
+}
+
+.reactivation-message-card::after {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border: 1px dashed rgba(234, 179, 8, 0.25);
+  border-radius: 14px;
+  pointer-events: none;
+}
+
+.reactivation-message-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-bottom: 0.35rem;
+}
+
+.reactivation-msg-icon {
+  font-size: 1.4rem;
+  filter: drop-shadow(0 0 6px #facc15);
+}
+
+.reactivation-msg-badge {
+  font-family: 'Cinzel', serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  color: #fef08a;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.reactivation-msg-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #f0f9ff;
+  margin-bottom: 0.45rem;
+}
+
+.reactivation-msg-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem;
+  line-height: 1.45;
+  font-style: italic;
+  color: #e0f2fe;
+  padding: 0 0.4rem;
+  margin-bottom: 0.75rem;
+}
+
+.btn-another-discharge {
+  background: #0f172a;
+  color: #fde047;
+  font-family: 'Cinzel', serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  padding: 0.45rem 1.1rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(234, 179, 8, 0.4);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all 0.2s ease;
+}
+
+.btn-another-discharge:hover {
+  background: #1e293b;
+  border-color: #facc15;
+  color: #ffffff;
+}
+
+/* Sincronización Táctil (Touch & Hold) */
+.recharge-sync-section {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(234, 179, 8, 0.25);
+  border-radius: 20px;
+  padding: 1.15rem 1rem;
+  margin-top: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.recharge-sync-header {
+  margin-bottom: 0.85rem;
+}
+
+.recharge-title {
+  display: block;
+  font-family: 'Cinzel', serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #fef08a;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.2rem;
+}
+
+.recharge-sub {
+  display: block;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.72rem;
+  color: #94a3b8;
+}
+
+.recharge-button-container {
+  position: relative;
+  width: 110px;
+  height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.25rem 0 0.6rem;
+}
+
+.recharge-progress-ring {
+  position: absolute;
+  width: 110px;
+  height: 110px;
+  transform: rotate(-90deg);
+  pointer-events: none;
+}
+
+.recharge-ring-bg {
+  stroke: rgba(255, 255, 255, 0.08);
+  stroke-width: 6;
+  fill: none;
+}
+
+.recharge-ring-fill {
+  stroke: #facc15;
+  stroke-width: 6;
+  fill: none;
+  stroke-linecap: round;
+  stroke-dasharray: 326.72;
+  stroke-dashoffset: 326.72;
+  transition: stroke-dashoffset 0.1s linear, stroke 0.3s ease;
+  filter: drop-shadow(0 0 8px rgba(250, 204, 21, 0.85));
+}
+
+.recharge-hold-btn {
+  width: 78px;
+  height: 78px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #facc15 0%, #eab308 50%, #0284c7 100%);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 
+    0 8px 22px rgba(234, 179, 8, 0.5),
+    inset 0 2px 6px rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  outline: none;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.recharge-hold-btn:active,
+.recharge-hold-btn.holding {
+  transform: scale(0.94);
+  box-shadow: 
+    0 0 35px rgba(250, 204, 21, 0.85),
+    inset 0 2px 8px rgba(255, 255, 255, 0.6);
+}
+
+.recharge-btn-icon {
+  font-size: 2.2rem;
+  transition: transform 0.2s ease;
+}
+
+.recharge-hold-btn.holding .recharge-btn-icon {
+  animation: energyThump 0.5s ease infinite alternate;
+}
+
+@keyframes energyThump {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.22); filter: drop-shadow(0 0 8px #facc15); }
+}
+
+.recharge-pulse-aura {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px solid rgba(250, 204, 21, 0.45);
+  animation: pulseAura 2s ease-out infinite;
+  pointer-events: none;
+}
+
+.recharge-status-text {
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  color: #fef08a;
+  min-height: 1.2rem;
+  transition: all 0.2s ease;
+}
+
+.recharge-counter-badge {
+  margin-top: 0.75rem;
+  padding-top: 0.65rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  font-size: 0.72rem;
+  color: #94a3b8;
+}
+
+
 
 
 

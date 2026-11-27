@@ -69,6 +69,13 @@ Cada día (o en cada actualización), el usuario le presenta una sorpresa nueva,
 - **Carta Secreta del Día 6:** Mensaje accesible mediante el sello estelar (`🌌`):
   > *"Che mi amor, sé que hoy nos separan más de 500 kilómetros y que la distancia a veces se hace sentir, pero quiero que te acuerdes siempre de algo: no hay ruta, mapa ni kilómetros en este planeta que puedan alejarte de mí. Cada vez que me extrañes, mirá este cielo azul noche... estamos respirando el mismo aire, compartiendo las mismas estrellas y latiendo al mismo ritmo. Falta menos para vernos y llenarte de besos. Te amo con toda mi alma, hoy más que nunca ❤️🌌"*
 
+### ⚡ Día 7: Reactivando el Amor Acumulado ("¡Volví! Batería al 1000%")
+- **Experiencia:** Retorno tras varios días sin sorpresas en la página. Reconocimiento sincero de la colgada ("perdón por la colgada, che") con humor tierno y cálculo de "intereses amorosos": acumulación masiva de ganas, besos, abrazos y mimos. Paleta en azul noche estrellada cósmico con toques de chispa eléctrica dorada (`reactivacion-blue`).
+- **Mecánica 1 (Descargar Amor Acumulado):** Botón con pulso eléctrico que descarga tarjetas de compensación oficial (*Perdón por la colgada, che*, *Te pensé todos los días*, *Intereses Acumulados*, *Batería al 1000%*, *Compensación Oficial*, *Sistema Reactivado*) con sonido de sintetizador ascendente (`playRechargeSound`), vibración háptica y lluvia de chispas (`⚡`, `💖`, `🥰`, `✨`, `🔋`, `❤️`, `💫`).
+- **Mecánica 2 (Reactivador Táctil "Touch & Hold"):** Mantener presionado el reactor central de energía carga un anillo SVG de 360° durante 2.2 segundos al compás de latidos rítmicos y mensajes de sobrecarga energética. Al llegar al 100%: explosión de confeti de rayos y corazones, acorde de celebración y confirmación de sistema 1000% reactivado.
+- **Carta Secreta del Día 7:** Mensaje accesible mediante el sello de rayo (`⚡`):
+  > *"Che mi amor, sé que pasaron varios días sin que te prepare una sorpresa nueva por acá y te pido perdón por la colgada. Pero te juro que no hubo un solo día, ni una sola hora, en la que no estuvieras en mi cabeza y en mi corazón. Esta paginita puede haber estado en pausa unos días, pero lo que siento por vos no frena nunca: al revés, cada día que pasa te amo más, te elijo más y tengo más ganas de abrazarte bien fuerte. Gracias por ser tan compañera, por tu paciencia y por hacerme tan feliz. Te amo con locura, hoy y siempre ❤️⚡"*
+
 ---
 
 ## ⏳ Arquitectura del Sistema de "Rewind" (Rebobinado)

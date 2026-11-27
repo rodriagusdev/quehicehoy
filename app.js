@@ -339,6 +339,37 @@
     } catch (e) {}
   }
 
+  // Sonido de descarga / recarga de amor acumulado
+  function playRechargeSound() {
+    if (!audioEnabled) return;
+    initAudio();
+    if (!audioCtx) return;
+
+    try {
+      const now = audioCtx.currentTime;
+      const notes = [440, 554.37, 659.25, 880, 1108.73];
+      notes.forEach((freq, idx) => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        const startTime = now + idx * 0.04;
+
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(freq, startTime);
+        osc.frequency.exponentialRampToValueAtTime(freq * 1.05, startTime + 0.12);
+
+        gain.gain.setValueAtTime(0, startTime);
+        gain.gain.linearRampToValueAtTime(0.06, startTime + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.0001, startTime + 0.35);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.start(startTime);
+        osc.stop(startTime + 0.38);
+      });
+    } catch (e) {}
+  }
+
   // ----------------------------------------------------------------------------
   // GESTOR DE DÍAS Y NAVEGACIÓN (REWIND ENGINE)
   // ----------------------------------------------------------------------------
@@ -359,6 +390,7 @@
     const sceneHalloween = document.getElementById('scene-halloween');
     const sceneAniversario = document.getElementById('scene-aniversario');
     const sceneDistancia = document.getElementById('scene-distancia');
+    const sceneReactivacion = document.getElementById('scene-reactivacion');
 
     if (sceneMuseo) sceneMuseo.classList.add('hidden');
     if (sceneScratch) sceneScratch.classList.add('hidden');
@@ -366,8 +398,14 @@
     if (sceneHalloween) sceneHalloween.classList.add('hidden');
     if (sceneAniversario) sceneAniversario.classList.add('hidden');
     if (sceneDistancia) sceneDistancia.classList.add('hidden');
+    if (sceneReactivacion) sceneReactivacion.classList.add('hidden');
 
-    if (day.experiencia === 'cielo-distancia') {
+    if (day.experiencia === 'reactivacion-amor') {
+      if (sceneReactivacion) {
+        sceneReactivacion.classList.remove('hidden');
+        initReactivacionAmor(day);
+      }
+    } else if (day.experiencia === 'cielo-distancia') {
       if (sceneDistancia) {
         sceneDistancia.classList.remove('hidden');
         initCieloDistancia(day);
@@ -415,7 +453,9 @@
     // 3. Ambient Glow adaptado al color del día
     const ambientGlow = document.getElementById('ambient-glow');
     if (ambientGlow) {
-      if (day.temaColor === 'midnight-stars') {
+      if (day.temaColor === 'reactivacion-blue') {
+        ambientGlow.style.background = 'radial-gradient(circle, rgba(234, 179, 8, 0.22) 0%, rgba(56, 189, 248, 0.25) 35%, rgba(12, 22, 48, 0.8) 75%, transparent 90%)';
+      } else if (day.temaColor === 'midnight-stars') {
         ambientGlow.style.background = 'radial-gradient(circle, rgba(56, 189, 248, 0.25) 0%, rgba(30, 58, 138, 0.3) 40%, rgba(7, 11, 25, 0.75) 75%, transparent 90%)';
       } else if (day.temaColor === 'anniversary') {
         ambientGlow.style.background = 'radial-gradient(circle, rgba(245, 158, 11, 0.24) 0%, rgba(244, 63, 94, 0.16) 45%, transparent 70%)';
@@ -1537,6 +1577,218 @@
     }
   }
 
+  // ----------------------------------------------------------------------------
+  // DÍA 7: REACTIVANDO EL AMOR (Batería y compensación de mimos acumulados)
+  // ----------------------------------------------------------------------------
+  let reactivacionInitialized = false;
+  let currentDischargeIndex = 0;
+  let rechargesClaimedCount = 1;
+  let isHoldingRecharge = false;
+  let rechargeStartTime = 0;
+  let rechargeAnimFrame = null;
+  let rechargeHeartbeatTimer = null;
+  const RECHARGE_TOTAL_DURATION = 2200; // 2.2 segundos para cargar
+
+  function initReactivacionAmor(day) {
+    const btnDischarge = document.getElementById('btn-discharge-love');
+    const btnAnotherDischarge = document.getElementById('btn-another-discharge');
+    const msgIcon = document.getElementById('reactivation-msg-icon');
+    const msgBadge = document.getElementById('reactivation-msg-badge');
+    const msgTitle = document.getElementById('reactivation-msg-title');
+    const msgText = document.getElementById('reactivation-msg-text');
+    const msgDisplay = document.getElementById('reactivation-message-display');
+
+    const btnHoldRecharge = document.getElementById('btn-recharge-hold');
+    const rechargeRing = document.getElementById('recharge-progress-circle');
+    const rechargeStatus = document.getElementById('recharge-status-text');
+    const rechargeCountEl = document.getElementById('recharge-count');
+
+    const descargas = day.descargas || [];
+
+    function triggerDischarge(withSound = true) {
+      if (!descargas.length) return;
+
+      currentDischargeIndex = (currentDischargeIndex + 1) % descargas.length;
+      const item = descargas[currentDischargeIndex];
+
+      if (msgIcon) msgIcon.textContent = item.icono || '⚡';
+      if (msgBadge) msgBadge.textContent = `Compensación #${currentDischargeIndex + 1}`;
+      if (msgTitle) msgTitle.textContent = item.titulo;
+      if (msgText) msgText.textContent = item.texto;
+
+      if (msgDisplay) {
+        msgDisplay.classList.remove('pulse-highlight');
+        void msgDisplay.offsetWidth; // Forzar reflow
+        msgDisplay.classList.add('pulse-highlight');
+      }
+
+      rechargesClaimedCount++;
+      if (rechargeCountEl) rechargeCountEl.textContent = rechargesClaimedCount;
+
+      if (withSound) {
+        playRechargeSound();
+        if (navigator.vibrate) {
+          try { navigator.vibrate([30, 20, 50]); } catch (e) {}
+        }
+      }
+
+      // Generar chispas de energía y corazones
+      const btnRef = btnAnotherDischarge || btnDischarge;
+      if (btnRef) {
+        const rect = btnRef.getBoundingClientRect();
+        spawnRechargeParticles(rect.left + rect.width / 2, rect.top + rect.height / 2);
+      }
+    }
+
+    function spawnRechargeParticles(x, y) {
+      const symbols = ['⚡', '💖', '🥰', '✨', '🔋', '❤️', '💫'];
+      const scene = document.getElementById('scene-reactivacion');
+      if (!scene) return;
+
+      const rect = scene.getBoundingClientRect();
+      const localX = x - rect.left;
+      const localY = y - rect.top;
+
+      for (let i = 0; i < 5; i++) {
+        const p = document.createElement('span');
+        p.className = 'floating-heart-particle';
+        p.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+
+        const dx = (Math.random() - 0.5) * 100;
+        const rot = (Math.random() - 0.5) * 60;
+        const size = 0.9 + Math.random() * 0.7;
+
+        p.style.left = `${localX}px`;
+        p.style.top = `${localY}px`;
+        p.style.fontSize = `${size}rem`;
+        p.style.setProperty('--dx', `${dx}px`);
+        p.style.setProperty('--rot', `${rot}deg`);
+
+        scene.appendChild(p);
+
+        setTimeout(() => {
+          if (p.parentNode) p.parentNode.removeChild(p);
+        }, 1500);
+      }
+    }
+
+    // Touch & Hold Recharger
+    function updateRechargeRing(fraction) {
+      if (!rechargeRing) return;
+      const offset = 326.72 * (1 - fraction);
+      rechargeRing.style.strokeDashoffset = offset;
+    }
+
+    function stepRechargeAnimation() {
+      if (!isHoldingRecharge) return;
+      const elapsed = Date.now() - rechargeStartTime;
+      const progress = Math.min(elapsed / RECHARGE_TOTAL_DURATION, 1);
+      updateRechargeRing(progress);
+
+      if (rechargeStatus) {
+        if (progress < 0.3) {
+          rechargeStatus.textContent = 'Canalizando ganas acumuladas... ⚡';
+        } else if (progress < 0.7) {
+          rechargeStatus.textContent = 'Sobrecargando batería de besos... 🔋';
+        } else if (progress < 0.95) {
+          rechargeStatus.textContent = '¡Energía al 1000%! A punto de estallar... 💥';
+        }
+      }
+
+      if (progress >= 1) {
+        completeRecharge();
+      } else {
+        rechargeAnimFrame = requestAnimationFrame(stepRechargeAnimation);
+      }
+    }
+
+    function startRecharge(e) {
+      if (e) e.preventDefault();
+      if (isHoldingRecharge) return;
+      isHoldingRecharge = true;
+      rechargeStartTime = Date.now();
+
+      if (btnHoldRecharge) btnHoldRecharge.classList.add('holding');
+
+      playHeartbeatSound();
+      if (navigator.vibrate) {
+        try { navigator.vibrate(35); } catch (e) {}
+      }
+
+      rechargeHeartbeatTimer = setInterval(() => {
+        playHeartbeatSound();
+        if (navigator.vibrate) {
+          try { navigator.vibrate(35); } catch (e) {}
+        }
+      }, 340);
+
+      rechargeAnimFrame = requestAnimationFrame(stepRechargeAnimation);
+    }
+
+    function cancelRecharge() {
+      if (!isHoldingRecharge) return;
+      isHoldingRecharge = false;
+
+      if (btnHoldRecharge) btnHoldRecharge.classList.remove('holding');
+      if (rechargeHeartbeatTimer) clearInterval(rechargeHeartbeatTimer);
+      if (rechargeAnimFrame) cancelAnimationFrame(rechargeAnimFrame);
+
+      updateRechargeRing(0);
+      if (rechargeStatus) {
+        rechargeStatus.textContent = 'Mantené presionado para reactivar los mimos...';
+      }
+    }
+
+    function completeRecharge() {
+      isHoldingRecharge = false;
+      if (btnHoldRecharge) btnHoldRecharge.classList.remove('holding');
+      if (rechargeHeartbeatTimer) clearInterval(rechargeHeartbeatTimer);
+      if (rechargeAnimFrame) cancelAnimationFrame(rechargeAnimFrame);
+
+      updateRechargeRing(1);
+      playCelebrationChord();
+      setTimeout(playRechargeSound, 300);
+
+      if (navigator.vibrate) {
+        try { navigator.vibrate([60, 40, 80, 40, 120]); } catch (e) {}
+      }
+
+      launchConfettiBurst(['⚡', '💖', '🥰', '✨', '🔋', '❤️', '🚀', '💫']);
+
+      if (rechargeStatus) {
+        rechargeStatus.textContent = '¡SISTEMA REACTIVADO! Te amo con locura ❤️⚡';
+      }
+
+      rechargesClaimedCount += 5;
+      if (rechargeCountEl) rechargeCountEl.textContent = rechargesClaimedCount;
+
+      setTimeout(() => {
+        updateRechargeRing(0);
+        if (rechargeStatus && !isHoldingRecharge) {
+          rechargeStatus.textContent = 'Mantené presionado para reactivar los mimos...';
+        }
+      }, 4500);
+    }
+
+    if (!reactivacionInitialized) {
+      reactivacionInitialized = true;
+
+      if (btnDischarge) {
+        btnDischarge.addEventListener('click', () => triggerDischarge(true));
+      }
+      if (btnAnotherDischarge) {
+        btnAnotherDischarge.addEventListener('click', () => triggerDischarge(true));
+      }
+
+      if (btnHoldRecharge) {
+        btnHoldRecharge.addEventListener('pointerdown', startRecharge);
+        btnHoldRecharge.addEventListener('pointerup', cancelRecharge);
+        btnHoldRecharge.addEventListener('pointercancel', cancelRecharge);
+        btnHoldRecharge.addEventListener('pointerleave', cancelRecharge);
+      }
+    }
+  }
+
   // Partículas táctiles en el lienzo de museo
   const HEART_SYMBOLS = ['❤️', '✨', '💖', '💕', '🌸', '💫'];
 
@@ -1722,6 +1974,7 @@
     const sealBtn4 = document.getElementById('seal-btn-halloween');
     const sealBtn5 = document.getElementById('seal-btn-aniversario');
     const sealBtn6 = document.getElementById('seal-btn-distancia');
+    const sealBtn7 = document.getElementById('seal-btn-reactivacion');
     const closeLetterBtn = document.getElementById('close-letter-btn');
     const secretModal = document.getElementById('secret-modal');
 
@@ -1731,6 +1984,7 @@
     if (sealBtn4) sealBtn4.addEventListener('click', (e) => { e.stopPropagation(); showSecretModal(); });
     if (sealBtn5) sealBtn5.addEventListener('click', (e) => { e.stopPropagation(); showSecretModal(); });
     if (sealBtn6) sealBtn6.addEventListener('click', (e) => { e.stopPropagation(); showSecretModal(); });
+    if (sealBtn7) sealBtn7.addEventListener('click', (e) => { e.stopPropagation(); showSecretModal(); });
     if (closeLetterBtn) closeLetterBtn.addEventListener('click', hideSecretModal);
 
     if (secretModal) {
