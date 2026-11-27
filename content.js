@@ -352,7 +352,7 @@ const HISTORIAL_DIAS = [
       {
         icono: "💭",
         titulo: "Te pensé todos los días",
-        texto: "La página habrá estado en pausa, pero en mi cabeza y en mi corazón estuviste presente las 24 horas de cada uno de estos días."
+        texto: "La página habrá estado en pausa, pero en mi cabeza y en mi corazón estuviste presente."
       },
       {
         icono: "📈",
